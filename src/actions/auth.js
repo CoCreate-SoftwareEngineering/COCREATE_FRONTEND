@@ -28,18 +28,18 @@ export const loadUser = () => async (dispatch) => {
 			type: USER_LOADED,
 			payload: res.data,
 		});
-		try {
-			const res = await axios.get("http://localhost:8000/api/profile/me");
-			dispatch({
-				type: GET_PROFILE,
-				payload: res.data,
-			});
-		} catch (err) {
-			dispatch({
-				type: PROFILE_ERROR,
-				payload: { msg: err.response.statusText, status: err.response.status },
-			});
-		}
+		// try {
+		// 	const res = await axios.get("http://localhost:8000/api/profile/me");
+		// 	dispatch({
+		// 		type: GET_PROFILE,
+		// 		payload: res.data,
+		// 	});
+		// } catch (err) {
+		// 	dispatch({
+		// 		type: PROFILE_ERROR,
+		// 		payload: { msg: err.response.statusText, status: err.response.status },
+		// 	});
+		// }
 	} catch (err) {
 		console.log("User load error");
 		dispatch({

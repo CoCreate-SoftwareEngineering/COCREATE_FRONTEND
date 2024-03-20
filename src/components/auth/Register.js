@@ -37,9 +37,9 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 	};
 
 	// Navigates if logged in
-	// if (isAuthenticated){
-	//   return <Navigate to="/dashboard"/>
-	// }
+	if (isAuthenticated){
+	  return <Navigate to="/dashboard"/>
+	}
 
 	return (
 		<Container className="form-container">
