@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import "./App.css";
 import Header from "./components/main/Header";
 import Body from "./components/main/Body";
 import Card from "./components/main/Card";
@@ -14,7 +13,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import CanvasPage from "./components/canvas/CanvasPage";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 import { io } from "socket.io-client";
 
