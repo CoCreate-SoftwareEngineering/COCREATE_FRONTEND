@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { addRoom } from "../../../actions/profile";
 import { createRoom } from "../../../actions/profile";
 
+import "./JoinRoomForm.css"
+
 const JoinRoomForm = ({
 	uuid,
 	setUser,
@@ -94,6 +96,7 @@ const JoinRoomForm = ({
 					+
 				</Button>
 			</div>
+			
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Join or Create a Project</Modal.Title>
