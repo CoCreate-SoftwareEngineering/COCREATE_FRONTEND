@@ -21,15 +21,25 @@ const Login = ({login, isAuthenticated}) => {
 
   const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
 
+  //Forgotten password link
+  const forgotPassword = () => {
+    alert("Forgotten password!")
+  }
+
+//Sign up link
+  const signUp = () => {
+    alert("Sign up!")
+  }
+
   const onSubmit = async e => {
     e.preventDefault()
     login(email, password)
   }
 
   // Navigate if logged in
-  if (isAuthenticated){
-    return <Navigate to="/dashboard"/>
-  }
+  // if (isAuthenticated){
+  //   return <Navigate to="/dashboard"/>
+  // }
 
   //sets up passwords verification
   // const[user, usernameVerify] = useState(false);
@@ -85,10 +95,10 @@ const Login = ({login, isAuthenticated}) => {
                 <input className="login-input" type="text" class="user" placeholder='email' value={email} name="email" onChange={e => onChange(e)}/><br/>
                 <label>Password</label><br/>
                 <input className = "login-input" type="password" class="pass" name="password" value={password}  placeholder='*********' onChange={e => onChange(e)}/><br/>
-                {/* <Link onClick={forgotPassword}><p>Forgotten password?</p></Link> */}
+                <p><Link className="link" onClick={forgotPassword}>Forgotten password?</Link> </p>
                 <button className = "login-button" type='submit' >Submit</button>
                 </form>
-                {/* <p>New to CoCreate? <Link class="link" ><b>Register</b></Link></p> */}
+                <p><Link className="link" onClick={signUp}>New to CoCreate? <b>Register</b></Link> </p>
                 
             </div>
             

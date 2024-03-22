@@ -69,7 +69,7 @@ label {
     border: 12px 25px;
 }
 
-input{
+/*input{
     font-family: 'Lato',sans-serif;
     color:gray;
     background-color: white;
@@ -79,7 +79,7 @@ input{
     margin-bottom: 25px;
     margin-left: 25px;
     margin-right: 25px;
-}
+}*/
 
 button{
     font-family: 'Lato',sans-serif;
@@ -93,4 +93,16 @@ button{
     height: 33%;
     display: inline-block;
     margin-top: 40%;
+}
+
+.login-input{
+    font-family: 'Lato',sans-serif;
+    color:gray;
+    background-color: white;
+    font-size: 35pt;
+    border-radius: 15px;
+    margin-top: 25px ;
+    margin-bottom: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
 }

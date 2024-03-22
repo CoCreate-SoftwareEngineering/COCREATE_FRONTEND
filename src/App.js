@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.css";
+// import "./App.css";
 import Header from "./components/main/Header";
 import Body from "./components/main/Body";
 import Card from "./components/main/Card";
