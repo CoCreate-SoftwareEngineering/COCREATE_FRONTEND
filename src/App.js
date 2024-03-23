@@ -27,8 +27,34 @@ if (localStorage.token) {
 	setAuthToken(localStorage.token);
 }
 
+// const useHistory = (initialState) => {
+// 	const [index, setIndex] = useState(0);
+// 	const [history, setHistory] = useState([initialState]);
+
+// 	const setState = (action, overwrite = false) => {
+// 		const newState =
+// 			typeof action === "function" ? action(history[index]) : action;
+// 		if (overwrite) {
+// 			const historyCopy = [...history];
+// 			historyCopy[index] = newState;
+// 			setHistory(historyCopy);
+// 		} else {
+// 			const updatedState = [...history].slice(0, index + 1);
+// 			setHistory([...updatedState, newState]);
+// 			setIndex((prevState) => prevState + 1);
+// 		}
+// 	};
+
+// 	const undo = () => index > 0 && setIndex((prevState) => prevState - 1);
+// 	const redo = () =>
+// 		index < history.length - 1 && setIndex((prevState) => prevState + 1);
+
+// 	return [history[index], setState, undo, redo];
+// };
+
 const App = () => {
 	const [user, setUser] = useState(null);
+	// const [elements, setElements, undo, redo] = useHistory([]);
 	const [elements, setElements] = useState([]);
 
 	const server = "http://localhost:8000";
@@ -51,9 +77,14 @@ const App = () => {
 		console.log("Room Joined");
 	};
 
-	const socketUpdateElements = (elementsCopy) => {
-		setElements(elementsCopy.canvasElementsGlobal);
-		console.log("socketUpdateElements");
+	const socketUpdateElements = (newElement) => {
+		console.log(newElement);
+		if (elements.typeof != "undefined") {
+			// setElements((elements) => [...elements, newElement]);
+			setElements(newElement, true);
+		}
+		console.log("socketUpdateElements: ");
+		console.log(elements);
 	};
 
 	const socketEmitElements = (elements) => {
@@ -64,9 +95,11 @@ const App = () => {
 	useEffect(() => {
 		console.log("getting user data");
 		store.dispatch(loadUser());
-		socket.on("servedElements", (elements) => {
+		socket.on("servedElements", (receivedElements) => {
 			console.log("BEEN SERVERD ELEMENTS");
-			socketUpdateElements(elements);
+			if (elements != receivedElements) {
+				socketUpdateElements(receivedElements);
+			}
 		});
 	}, []);
 
@@ -125,6 +158,9 @@ const App = () => {
 									elements={elements}
 									setElements={setElements}
 									socketEmitElements={socketEmitElements}
+									// undo={undo}
+									// redo={redo}
+									// useHistory={useHistory}
 								/>
 							}
 						/>

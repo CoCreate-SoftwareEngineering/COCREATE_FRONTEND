@@ -20,6 +20,9 @@ const CanvasPage = ({
 	elements,
 	setElements,
 	socketEmitElements,
+	// useHistory,
+	// undo,
+	// redo,
 }) => {
 	useEffect(() => {
 		getCurrentProfile();
@@ -29,6 +32,7 @@ const CanvasPage = ({
 
 	function handleToolChange(newTool) {
 		setTool(newTool);
+		console.log(tool);
 	}
 
 	return loading && profile === null ? (
@@ -46,6 +50,9 @@ const CanvasPage = ({
 				elements={elements}
 				setElements={setElements}
 				socketEmitElements={socketEmitElements}
+				// useHistory={useHistory}
+				// undo={undo}
+				// redo={redo}
 			/>
 			{/* </Container> */}
 		</Fragment>

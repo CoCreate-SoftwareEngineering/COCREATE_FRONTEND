@@ -20,7 +20,6 @@ import "./JoinRoomForm.css";
 
 const JoinRoomForm = ({
 	uuid,
-	setUser,
 	user,
 	setRoomJoined,
 	socket,
@@ -50,7 +49,6 @@ const JoinRoomForm = ({
 			presenter: false,
 		};
 
-		setUser(roomData);
 		socketJoinRoom(roomData);
 		// socket.emit("userJoined", roomData);
 		addRoom({ roomId: roomId, roomName: "roomName" });
@@ -70,7 +68,6 @@ const JoinRoomForm = ({
 			presenter: true,
 		};
 
-		setUser(roomData);
 		// socket.emit("userJoined", roomData);
 		socketJoinRoom(roomData);
 
