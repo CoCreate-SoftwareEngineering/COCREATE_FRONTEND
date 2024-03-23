@@ -95,10 +95,10 @@ const Login = ({login, isAuthenticated}) => {
                 <input className="login-input" type="text" class="user" placeholder='email' value={email} name="email" onChange={e => onChange(e)}/><br/>
                 <label>Password</label><br/>
                 <input className = "login-input" type="password" class="pass" name="password" value={password}  placeholder='*********' onChange={e => onChange(e)}/><br/>
-                <p><Link className="link" onClick={forgotPassword}>Forgotten password?</Link> </p>
+                <p>Forgotten password? <Link className="link" to="/login">Reset password here</Link> </p>
                 <button className = "login-button" type='submit' >Submit</button>
                 </form>
-                <p><Link className="link" onClick={signUp}>New to CoCreate? <b>Register</b></Link> </p>
+                <p>New to CoCreate? <Link className="link" to="/register">Register</Link> </p>
                 
             </div>
             
