@@ -16,15 +16,17 @@ import { useNavigate } from "react-router-dom";
 import { addRoom } from "../../../actions/profile";
 import { createRoom } from "../../../actions/profile";
 
-import "./JoinRoomForm.css"
+import "./JoinRoomForm.css";
 
 const JoinRoomForm = ({
 	uuid,
 	setUser,
+	user,
 	setRoomJoined,
 	socket,
 	createRoom,
 	addRoom,
+	socketJoinRoom,
 }) => {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
@@ -38,7 +40,6 @@ const JoinRoomForm = ({
 
 	const handleJoinSubmit = (e) => {
 		e.preventDefault();
-		if (!roomName) return toast.dark("Please enter your name!");
 
 		const roomData = {
 			roomId,
@@ -50,10 +51,10 @@ const JoinRoomForm = ({
 		};
 
 		setUser(roomData);
-		socket.emit("userJoined", roomData);
+		socketJoinRoom(roomData);
+		// socket.emit("userJoined", roomData);
 		addRoom({ roomId: roomId, roomName: "roomName" });
-		console.log("User Joined");
-		console.log(roomData);
+		console.log("Room form submit");
 		navigate(`/${roomId}`);
 	};
 
@@ -70,10 +71,8 @@ const JoinRoomForm = ({
 		};
 
 		setUser(roomData);
-		socket.emit("userJoined", roomData);
-
-		console.log("User Created Room");
-		console.log(roomData);
+		// socket.emit("userJoined", roomData);
+		socketJoinRoom(roomData);
 
 		await createRoom({
 			roomName: roomName,
@@ -81,7 +80,6 @@ const JoinRoomForm = ({
 			elements: [],
 		});
 		addRoom({ roomId: roomId, roomName: roomName });
-		console.log("Created Room has been actioned");
 		navigate(`/${roomId}`);
 	};
 
@@ -96,7 +94,7 @@ const JoinRoomForm = ({
 					+
 				</Button>
 			</div>
-			
+
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Join or Create a Project</Modal.Title>
@@ -191,10 +189,12 @@ JoinRoomForm.propTypes = {
 	createRoom: PropTypes.func.isRequired,
 	addRoom: PropTypes.func.isRequired,
 	isAuthenticated: PropTypes.bool,
+	user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
+	user: state.user,
 });
 
 export default connect(mapStateToProps, { createRoom, addRoom })(JoinRoomForm);

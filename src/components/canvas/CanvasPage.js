@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import Container from "react-bootstrap/Container";
 
-import CanvasPageHeader from "../main/CanvasPageHeader";
+import CanvasPageHeader from "./CanvasPageHeader";
 import Spinner from "../main/Spinner";
 // import AddModal from './AddModal'
 // import Body from '../main/Body'
@@ -17,6 +17,9 @@ const CanvasPage = ({
 	getCurrentProfile,
 	auth: { user },
 	profile: { profile, loading },
+	elements,
+	setElements,
+	socketEmitElements,
 }) => {
 	useEffect(() => {
 		getCurrentProfile();
@@ -40,17 +43,20 @@ const CanvasPage = ({
 				handleToolChange={handleToolChange}
 				user={userData}
 				socket={socket}
+				elements={elements}
+				setElements={setElements}
+				socketEmitElements={socketEmitElements}
 			/>
 			{/* </Container> */}
 		</Fragment>
 	);
 };
 
-// Dashboard.propTypes = {
-//     getCurrentProfile: PropTypes.func.isRequired,
-//     auth: PropTypes.object.isRequired,
-//     profile: PropTypes.object.isRequired
-// }
+CanvasPage.propTypes = {
+	getCurrentProfile: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+	profile: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
