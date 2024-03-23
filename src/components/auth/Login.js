@@ -36,52 +36,12 @@ const Login = ({login, isAuthenticated}) => {
     login(email, password)
   }
 
-  // Navigate if logged in
-  // if (isAuthenticated){
-  //   return <Navigate to="/dashboard"/>
-  // }
 
-  //sets up passwords verification
-  // const[user, usernameVerify] = useState(false);
-  // const[pass, passwordVerify] = useState(false);
-  // const navigate = useNavigate();
 
-  // //default username and password
-  // let username = "joebloggs123";
-  // let password1 = "password1";
 
-  // //checks username
-  // function checkUser(e){
-  //     let userNameInput = e;
-  //     if (userNameInput === username){
-  //         usernameVerify(true);
-  //     }
-  //     else{
-  //         usernameVerify(false);
-  //     }
-  // }
 
-  // //checks password
-  // function checkPass(e){
-  //     let passWordInput = e;             
-  //     if (passWordInput === password1){
-  //         passwordVerify(true);
-  //     }
-  //     else{
-  //         passwordVerify(false);
-  //     }
-  // }
 
-  // //checks data and redirects to new page
-  // const submitBtn = () => {
-  //     if(user === true && pass=== true){
-  //         alert("Correct");
-  //         navigate('/home');
-  //     }
-  //     else{
-  //         alert("Incorrect details, please re-enter");
-  //     }
-  // }
+
   
   return (
     <div className="main-container">
@@ -95,10 +55,17 @@ const Login = ({login, isAuthenticated}) => {
                 <input className="login-input" type="text" class="user" placeholder='email' value={email} name="email" onChange={e => onChange(e)}/><br/>
                 <label>Password</label><br/>
                 <input className = "login-input" type="password" class="pass" name="password" value={password}  placeholder='*********' onChange={e => onChange(e)}/><br/>
+<<<<<<< Updated upstream
                 <p>Forgotten password? <Link className="link" to="/login">Reset password here</Link> </p>
                 <button className = "login-button" type='submit' >Submit</button>
                 </form>
                 <p>New to CoCreate? <Link className="link" to="/register">Register</Link> </p>
+=======
+                <p className='text-before-link'>Forgotten password?<Link class="link" to="/login"> Set new password</Link> </p>
+                <button className = "login-button" type='submit' >Submit</button>
+                </form>
+                <p className='text-before-link'>New to CoCreate?<Link class="link" to="/register"> Register</Link> </p>
+>>>>>>> Stashed changes
                 
             </div>
             
