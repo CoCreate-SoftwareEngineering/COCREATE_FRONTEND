@@ -7,7 +7,7 @@ import Spinner from "../main/Spinner";
 import Body from "../main/Body";
 import JoinRoomForm from "./room_form/JoinRoomForm";
 import Nav from "../nav/Nav";
-import Help from "./Help/HelpButton"
+import Help from "./Help/HelpButton";
 
 import { Link } from "react-router-dom";
 
@@ -26,6 +26,8 @@ const Dashboard = ({
 	setUser,
 	socket,
 	rooms,
+	socketJoinRoom,
+	elements,
 }) => {
 	useEffect(() => {
 		getCurrentProfile();
@@ -49,33 +51,38 @@ const Dashboard = ({
 						(room, index) => room && <li key={index}>{room.roomName}</li>
 					)} */}
 					<div className="content">
-        
-					<div className="row">
-						<ToggleableHeading
-						uuid={uuid}
-						setRoomJoined={setRoomJoined}
-						setUser={setUser}
-						socket={socket}
-						heading = "Projects"
-						notiAmountCons = {profile.rooms.length} // dynamically set notification amount
-						rowContent={
-							
-							<div className = "projects-container">
-								<JoinRoomForm
-									uuid={uuid}
-									setRoomJoined={setRoomJoined}
-									setUser={setUser}
-									socket={socket}
-								/>
-								{/* add all projects in data structure to projects section */}
-								{profile.rooms.map((room, index) => 
-									<Link key={index} to="/"><div className='item'>{profile.rooms.roomName}</div></Link>
-								)}
-							</div>
-						}/>
+						<div className="row">
+							<ToggleableHeading
+								uuid={uuid}
+								setRoomJoined={setRoomJoined}
+								setUser={setUser}
+								socket={socket}
+								heading="Projects"
+								notiAmountCons={profile.rooms.length} // dynamically set notification amount
+								rowContent={
+									<div className="projects-container">
+										<JoinRoomForm
+											uuid={uuid}
+											setRoomJoined={setRoomJoined}
+											setUser={setUser}
+											socket={socket}
+											socketJoinRoom={socketJoinRoom}
+											elements={elements}
+										/>
+										{/* add all projects in data structure to projects section */}
+										{profile.rooms.map((room, index) => (
+											<Link key={index} to="/">
+												<div className="item">{profile.rooms.roomName}</div>
+											</Link>
+										))}
+									</div>
+								}
+							/>
+						</div>
 					</div>
+					<div>
+						<Help />
 					</div>
-					<div><Help/></div>
 				</Fragment>
 			)}
 		</Fragment>
