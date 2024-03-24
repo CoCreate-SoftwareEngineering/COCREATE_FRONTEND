@@ -20,6 +20,7 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 	//Video chat state
 	const [ myStream, setMyStream ] = useState()
 	const [ peerVideos, setPeerVideos ] = useState()
+	const [ connectionRefs, setConnections ] = useState()
 
 	const myVideo = useRef()
 
@@ -37,7 +38,8 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true}).then((stream) => {
 			setMyStream(stream)
 			myVideo.current.srcObject = stream;
-			addP
+			addPeerVideo(stream)
+			addPeerVideo(stream)
 		})
 		console.log("Useeffect")
 	}, [])
@@ -45,10 +47,9 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 	const addPeerVideo = (videoRef) => {
         setPeerVideos(prevUserVideos => [...prevUserVideos, videoRef]);
     };
-
 	
     const removePeerVideo = (userId) => {
-        const newVideos = userVideos
+        const newVideos = peerVideos
         delete newVideos[userId]
         setPeerVideos(newVideos)
     };
