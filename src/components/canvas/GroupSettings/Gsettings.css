@@ -5,6 +5,7 @@
      display: flex;
      align-items: center;
      font-family: "Inter";
+     padding:5vw;
 }
 
 .options {
@@ -15,6 +16,9 @@
      width: 80vw;
      height: min-content;
      margin: 20px;
+     font-size: 13pt;
+     place-content: center;
+     padding-left: 20px;
 }
 
 .save{
@@ -33,7 +37,9 @@
 
 .tool {
      padding: 10px;
-     text-align: right;
+     text-align: center;
+     color: black;
+     font-size: medium;
 }
 
 .tool:hover {
@@ -41,7 +47,9 @@
 }
 
 .UserPic {
-     border: solid black 3px;
+     border: solid rgb(124, 192, 203, 0.5)  2px;
+     border-radius: 50%;
+     margin: auto;
 }
 
 .UserPic-container {
@@ -82,4 +90,5 @@ h2{
      font-weight: bold !important;
      width: 15vw;
      padding: 10px !important;
+     margin:5px !important;
 }
