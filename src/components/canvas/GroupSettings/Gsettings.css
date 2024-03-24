@@ -1,40 +1,63 @@
-.section{
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap");
+
+.section {
      flex-direction: column;
-     display: flex;  
-     align-items: center;   
+     display: flex;
+     align-items: center;
+     font-family: "Inter";
 }
 
-.options{
+.options {
      display: block;
      color: white;
-     padding: 15px;
+     padding: 10px;
      background-color: #2C4251;
      width: 80vw;
-     height:15px;
-     margin: 20px;          
+     height: min-content;
+     margin: 20px;
 }
 
-.tool{
+.tool {
      padding-top: 20px;
-     text-align:right;
+     text-align: right;
 }
 
 .tool:hover {
      cursor: pointer;
 }
 
-.UserPic {    
+.UserPic {
      border: solid black 3px;
- }
+}
 
-.UserPic-container {      
-     display:grid;
+.UserPic-container {
+     display: grid;
      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-     grid-gap: 1vw; 
-     justify-content: center; 
-     max-width: 80vw; 
- }
- 
-.picitem{
-     text-align: center;  
- }
+     grid-gap: 1vw;
+     justify-content: center;
+     max-width: 80vw;
+}
+
+.picitem {
+     text-align: center;
+}
+
+.closebtn {     
+     border:none;
+     border-radius: 2px;
+     background-color: transparent;
+}
+
+h3{     
+     color:#2C4251;
+}
+
+h2{
+     color:#2C4251;
+     padding: 20px;
+     font-weight: 700;
+}
+
+.Textfield{
+     float:right;
+}

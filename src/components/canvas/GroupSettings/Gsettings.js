@@ -29,7 +29,7 @@ const Gsettings = () =>{
      };
      return (
           <div className="section">
-               <button><Link to = "/canvas"><h3>X</h3></Link></button>
+               <button className="closebtn"><Link to = "/canvas"><h3>x</h3></Link></button>
                <h2>Settings</h2>
                <div className="options">Members</div>
                <div className="UserPic-container"> 
@@ -78,7 +78,7 @@ const Gsettings = () =>{
                     </DialogContent>                    
                </Dialog>
                <button className="tool" >Make admin</button>               
-               <div className="options" >Rename  <span className="Textfield"><input type="text" /></span> </div>
+               <div className="options" >Rename  <span className="Textfield"><input type="text" /><Button type="submit" size="small">Save</Button></span> </div>
                <button className="options">Leave group</button>                              
                <button className="options">Delete group</button>
           </div>
