@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap");
+
+.modal-title {
+     font-family: "Inter";
+     font-weight: 500;
+     color: white;
+}
+
+.modal-header{
+     background-color: #2c4251 !important;
+}
+
+.btn-close {
+     --bs-btn-close-color: white !important;
+}
+
+.border{
+     border:var(--bs-border-width) var(--bs-border-style) #d6cdcd !important;
+     border-radius: 5px;
+}
+
+.btn-dark{
+     --bs-btn-bg:rgb(226, 133, 110);
+     --bs-btn-border-color:rgb(226, 133, 110);
+}
+
+.btn-outline-primary{
+     --bs-btn-color: #2c4251 !important;
+     --bs-btn-hover-bg: #2c4251 !important;
+     --bs-btn-hover-color: white;
+     --bs-btn-active-bg: rgb(124, 192, 203);
+}
+
+.btn-outline-dark{
+     float:right;
+     --bs-btn-hover-color:rgb(226, 133, 110);
+     --bs-btn-hover-bg: transparent;
+     margin-bottom:10px;
+}
+
+.input-group{
+     margin-bottom:0 !important;
+}
+
+.modal-body{
+     background-color: #efe7e7 !important;
+     border-radius: 5px;
+}
+
+.text-primary {
+     color: #2c4251 !important;
+     font-size:large;
+}
+
+.modal-body{
+     min-height:60vh;     
+}
+
+.form-control{
+     border:var(--bs-border-width) solid var(#2c4251);
+}
+
+.form-control:focus{
+     border-color:rgb(124, 192, 203);
+     box-shadow:0 0 0 .25rem rgb(124, 192, 203, 0.25);
+}
+
+.p-5 {
+     padding: 0.5rem !important;
+}
+ 
+.col-md-5{
+     margin-top:15px !important;
+}
+
+*{
+     font-family: "Inter";
+}

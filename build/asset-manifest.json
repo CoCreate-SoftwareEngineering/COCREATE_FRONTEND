@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2be8821b.css",
+    "main.js": "/static/js/main.53ae46f7.js",
+    "static/media/person-icon.jpg": "/static/media/person-icon.a23c0df3e4dfdabc7be6.jpg",
+    "static/media/Co_Create_Logo_blue.png": "/static/media/Co_Create_Logo_blue.98dcbe45cbc1fa0da9b8.png",
+    "static/media/Darwizzy.jpg": "/static/media/Darwizzy.b6da82d64eec697177c4.jpg",
+    "static/media/ProfileImg1.jpg": "/static/media/ProfileImg1.c8bda4cc0cfdb221b57c.jpg",
+    "static/media/Msg_Icon.png": "/static/media/Msg_Icon.c7925c9b8fd2b3c6fccc.png",
+    "index.html": "/index.html",
+    "main.2be8821b.css.map": "/static/css/main.2be8821b.css.map",
+    "main.53ae46f7.js.map": "/static/js/main.53ae46f7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2be8821b.css",
+    "static/js/main.53ae46f7.js"
+  ]
+}
