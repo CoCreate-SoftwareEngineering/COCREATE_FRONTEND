@@ -38,7 +38,6 @@ const JoinRoomForm = ({
 
 	const handleJoinSubmit = (e) => {
 		e.preventDefault();
-		if (!roomName) return toast.dark("Please enter your name!");
 
 		const roomData = {
 			roomId,
@@ -49,11 +48,10 @@ const JoinRoomForm = ({
 			presenter: false,
 		};
 
-		setUser(roomData);
-		socket.emit("userJoined", roomData);
+		socketJoinRoom(roomData);
+		// socket.emit("userJoined", roomData);
 		addRoom({ roomId: roomId, roomName: "roomName" });
-		console.log("User Joined");
-		console.log(roomData);
+		console.log("Room form submit");
 		navigate(`/${roomId}`);
 	};
 
@@ -69,11 +67,8 @@ const JoinRoomForm = ({
 			presenter: true,
 		};
 
-		setUser(roomData);
-		socket.emit("userJoined", roomData);
-
-		console.log("User Created Room");
-		console.log(roomData);
+		// socket.emit("userJoined", roomData);
+		socketJoinRoom(roomData);
 
 		await createRoom({
 			roomName: roomName,
@@ -81,7 +76,6 @@ const JoinRoomForm = ({
 			elements: [],
 		});
 		addRoom({ roomId: roomId, roomName: roomName });
-		console.log("Created Room has been actioned");
 		navigate(`/${roomId}`);
 	};
 
