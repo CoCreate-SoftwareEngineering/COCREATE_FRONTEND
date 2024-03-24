@@ -54,25 +54,35 @@ if (localStorage.token) {
 // 	return [history[index], setState, undo, redo];
 // };
 
-const App = () => {
-	const [user, setUser] = useState(null);
-	// const [elements, setElements, undo, redo] = useHistory([]);
-	const [elements, setElements] = useState([]);
+const server = "http://localhost:8000";
 
-	const server = "http://localhost:8000";
+const io = require("socket.io-client");
 
-	const io = require("socket.io-client");
-
+console.log("pre socket")
 	const socket = io(server, {
 		withCredentials: true,
 		extraHeaders: {
 			"my-custom-header": "abcd",
 		},
 	});
+	console.log("Opening socket id: " + socket.id)
+
+const App = () => {
+	const [user, setUser] = useState(null);
+	// const [elements, setElements, undo, redo] = useHistory([]);
+	const [elements, setElements] = useState([]);
+
+	//Video calling state
+	const [ myStream, setMyStream ] = useState()
+	const [ peerVideos, setPeerVideos ] = useState([])
+	const [ connectionRefs, setConnections ] = useState([])
+	const [ id, setId] = useState()
+
 
 	socket.on("connect", () => {
 		console.log("Connected to Socket.io server");
 	});
+
 
 	const socketJoinRoom = (data) => {
 		socket.emit("userJoined", data);
@@ -103,7 +113,49 @@ const App = () => {
 				socketUpdateElements(receivedElements);
 			}
 		});
+
+		socket.on("me", (id) => {
+			console.log("My socket id is: " + id)
+			setId(id)
+		})
+
+		socket.on("roomSockets", (socketIds) => {
+			console.log("Got list of sockets in room: " + socketIds)
+		})
 	}, []);
+
+	const joinRoomVideo = () => {
+		console.log("My Id is: " + socket.id)
+	}
+
+	const addPeerVideo = (videoRef) => {
+        setPeerVideos(prevUserVideos => [...prevUserVideos, videoRef]);
+    };
+	
+    const removePeerVideo = (userId) => {
+        const newVideos = peerVideos
+        delete newVideos[userId]
+        setPeerVideos(newVideos)
+    };
+
+    const addConnectionRef = (connectionRef) => {
+        setConnections(prevConnections => [...prevConnections, connectionRef]);
+    };
+
+    const destroyAllConnections = () => {
+        connectionRefs.forEach(connectionRef => {
+            if (connectionRef && connectionRef.current) {
+                connectionRef.current.destroy();
+            }
+        });
+    };
+
+    // Example of removing a connection reference from the array
+    const removeConnectionRef = (userId) => {
+        const newRefs = connectionRefs
+        delete connectionRefs[userId]
+        setConnections(newRefs)
+    };
 
 	// UUID Function to be moved
 	const uuid = () => {
@@ -151,6 +203,7 @@ const App = () => {
 								// </PrivateRoute>
 							}
 						/>
+						{console.log("Peervideos1: " + peerVideos)}
 						<Route
 							exact
 							path="/:roomId"
@@ -161,6 +214,13 @@ const App = () => {
 									elements={elements}
 									setElements={setElements}
 									socketEmitElements={socketEmitElements}
+									myStream={myStream}
+									setMyStream={setMyStream}
+									peerVideos={peerVideos}
+									setPeerVideos={setPeerVideos}
+									connectionRefs={connectionRefs}
+									setConnections={setConnections}
+									joinRoomVideo={joinRoomVideo}
 									// undo={undo}
 									// redo={redo}
 									// useHistory={useHistory}

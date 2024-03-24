@@ -10,6 +10,7 @@ import Spinner from "../main/Spinner";
 // import Body from '../main/Body'
 import Canvas from "./Canvas";
 import Example from "./ToolBar";
+import ToolBar from "./ToolBar";
 
 const CanvasPage = ({
 	socket,
@@ -20,6 +21,13 @@ const CanvasPage = ({
 	elements,
 	setElements,
 	socketEmitElements,
+	myStream,
+	setMyStream,
+	peerVideos,
+	setPeerVideos,
+	connectionRefs,
+	setConnections,
+	joinRoomVideo
 	// useHistory,
 	// undo,
 	// redo,
@@ -41,7 +49,18 @@ const CanvasPage = ({
 		<Fragment>
 			{/* <Container className="container"> */}
 			<CanvasPageHeader />
-			<Example tool={tool} handleToolChange={handleToolChange} />
+			{console.log("PeerVideos2: "+ peerVideos)}
+			<Example 
+				tool={tool} 
+				handleToolChange={handleToolChange} 
+				myStream={myStream}
+				setMyStream={setMyStream}
+				peerVideos={peerVideos}
+				setPeerVideos={setPeerVideos}
+				connectionRefs={connectionRefs}
+				setConnections={setConnections}
+				joinRoomVideo={joinRoomVideo}
+			 />
 			<Canvas
 				tool={tool}
 				handleToolChange={handleToolChange}

@@ -14,13 +14,19 @@ const options = [
 	},
 ];
 
-const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
+const ToolBar = ({ handleToolChange, 
+					tool, 
+					name, 
+					myStream, 
+					setMyStream,
+					peerVideos, 
+					setPeerVideos,
+					connectionRefs,
+					setConnections, 
+					joinRoomVideo, 
+					...props }) => {
+	console.log("Peer Videos 3: " + peerVideos)
 	const [show, setShow] = useState(false);
-
-	//Video chat state
-	const [ myStream, setMyStream ] = useState()
-	const [ peerVideos, setPeerVideos ] = useState([])
-	const [ connectionRefs, setConnections ] = useState([])
 
 	const myVideo = useRef()
 
@@ -38,48 +44,14 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true}).then((stream) => {
 			setMyStream(stream)
 			myVideo.current.srcObject = stream;
-			addPeerVideo(stream)
-			addPeerVideo(stream)
-			addPeerVideo(stream)
 		})
-		console.log("Useeffect")
+		console.log("peerVideos: " + peerVideos)
 	}, [])
 
-	const addPeerVideo = (videoRef) => {
-        setPeerVideos(prevUserVideos => [...prevUserVideos, videoRef]);
-    };
-	
-    const removePeerVideo = (userId) => {
-        const newVideos = peerVideos
-        delete newVideos[userId]
-        setPeerVideos(newVideos)
-    };
-
-    const addConnectionRef = (connectionRef) => {
-        setConnections(prevConnections => [...prevConnections, connectionRef]);
-    };
-
-    const destroyAllConnections = () => {
-        connectionRefs.forEach(connectionRef => {
-            if (connectionRef && connectionRef.current) {
-                connectionRef.current.destroy();
-            }
-        });
-    };
-
-    // Example of removing a connection reference from the array
-    const removeConnectionRef = (userId) => {
-        const newRefs = connectionRefs
-        delete connectionRefs[userId]
-        setConnections(newRefs)
-    };
-
-	const joinRoomVideo = () => {
-
-	}
 
 	return (
 		<>
+			{console.log("PeerVideos3: " + peerVideos)}
 			<Button onClick={toggleShow} className="tool-bar-button">
 				{name}
 			</Button>
@@ -135,7 +107,8 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 						/>
 						<label htmlFor="text">Text</label>
 					</div>
-					<Button onClick={joinRoomVideo}>Join Video Call</Button>
+					<Button onClick={() => joinRoomVideo()}>Join Video Call</Button>
+					{console.log("peerVideos3: " + peerVideos)}
 					{myStream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
 					{peerVideos.map((videoSrc, index) => (
                             <video key={index} playsInline ref={videoRef => {
@@ -150,13 +123,20 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 	);
 };
 
-const Example = ({ tool, handleToolChange }) => {
+const Example = ({ tool, handleToolChange, myStream, setMyStream, peerVideos, setPeerVideos, connectionRefs, setConnections, joinRoomVideo }) => {
 	return (
 		<>
 			{options.map((props, idx) => (
 				<ToolBar
 					tool={tool}
 					handleToolChange={handleToolChange}
+					myStream={myStream}
+					setMyStream={setMyStream}
+					peerVideos={peerVideos}
+					setPeerVideos={setPeerVideos}
+					connectionRefs={connectionRefs}
+					setConnections={setConnections}
+					joinRoomVideo={joinRoomVideo}
 					key={idx}
 					{...props}
 					placement={"end"}
