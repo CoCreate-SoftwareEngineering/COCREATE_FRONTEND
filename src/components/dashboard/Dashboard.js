@@ -26,6 +26,7 @@ const Dashboard = ({
 	setUser,
 	socket,
 	rooms,
+	socketJoinRoom
 }) => {
 	useEffect(() => {
 		getCurrentProfile();
@@ -66,6 +67,7 @@ const Dashboard = ({
 									setRoomJoined={setRoomJoined}
 									setUser={setUser}
 									socket={socket}
+									socketJoinRoom={socketJoinRoom}
 								/>
 								{/* add all projects in data structure to projects section */}
 								{profile.rooms.map((room, index) => 

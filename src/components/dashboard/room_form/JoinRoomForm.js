@@ -25,6 +25,7 @@ const JoinRoomForm = ({
 	socket,
 	createRoom,
 	addRoom,
+	socketJoinRoom
 }) => {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
