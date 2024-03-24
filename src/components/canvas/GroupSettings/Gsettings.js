@@ -19,13 +19,22 @@ const Gsettings = () =>{
      const [open, setOpen] = useState(false);
 
      const handleRemoveClick = (event) => {          
+          if (!event.target.classList.contains('admin')) {
                if (window.confirm("Are you sure you want to remove this member?")) {
-                    event.target.parentNode.remove();
-               }          
-     };
+                   event.target.parentNode.remove();
+               }         
+     }
+};
      const handleAddMember = () => {
           console.log('Add Member clicked');
           setOpen(true);
+     };
+     const handleAdmin = (event) => {               
+          console.log('admin clicked');
+          if (window.confirm("Are you sure you want to make this user admin?")) {
+               console.log('admin clicked');
+          }  
+          handleRemoveClick = false;
      };
      return (
           <div className="section">
@@ -35,32 +44,38 @@ const Gsettings = () =>{
                <div className="UserPic-container"> 
               {isRemoveVisible && <div className="picitem" onClick={handleRemoveClick}>
                     <img className="UserPic" src={user1} width="50" height="50" alt=""></img> 
-                    <div className="tool" >Remove</div>
+                    <div className="tool" >Remove</div>                    
+               <Button type="button" size="small" className="admin" onClick={handleAdmin}>Make admin</Button>                     
                </div>
                }               
                {isRemoveVisible && <div className="picitem" onClick={handleRemoveClick}>
                     <img className="UserPic" src={user2} width="50" height="50" alt=""></img> 
-                    <div className="tool" >Remove</div>
+                    <div className="tool" >Remove</div>                    
+                    <Button type="button" size="small" className="admin" onClick={handleAdmin}>Make admin</Button>
                </div>
-               }
+               }                
                {isRemoveVisible && <div className="picitem" onClick={handleRemoveClick}>
                     <img className="UserPic" src={user2} width="50" height="50" alt=""></img> 
                     <div className="tool" >Remove</div>
+               <Button type="button" size="small" className="admin" onClick={handleAdmin}>Make admin</Button>                      
                </div>
                }
                {isRemoveVisible && <div className="picitem" onClick={handleRemoveClick}>
                     <img className="UserPic" src={user1} width="50" height="50" alt=""></img> 
-                    <div className="tool" >Remove</div>
+                    <div className="tool" >Remove</div>                    
+               <Button type="button" size="small" className="admin" onClick={handleAdmin}>Make admin</Button> 
+               </div>
+               }
+               {isRemoveVisible && <div className="picitem" onClick={handleRemoveClick}>
+                    <img className="UserPic" src={user2} width="50" height="50" alt=""></img> 
+                    <div className="tool" >Remove</div>                    
+               <Button type="button" size="small" className="admin" onClick={handleAdmin}>Make admin</Button> 
                </div>
                }
                {isRemoveVisible && <div className="picitem" onClick={handleRemoveClick}>
                     <img className="UserPic" src={user2} width="50" height="50" alt=""></img> 
                     <div className="tool" >Remove</div>
-               </div>
-               }
-               {isRemoveVisible && <div className="picitem" onClick={handleRemoveClick}>
-                    <img className="UserPic" src={user2} width="50" height="50" alt=""></img> 
-                    <div className="tool" >Remove</div>
+               <Button type="button" size="small" className="admin" onClick={handleAdmin}>Make admin</Button> 
                </div>
                }
                </div>                           
@@ -77,10 +92,10 @@ const Gsettings = () =>{
                     </form>
                     </DialogContent>                    
                </Dialog>
-               <button className="tool" >Make admin</button>               
-               <div className="options" >Rename  <span className="Textfield"><input type="text" /><Button type="submit" size="small">Save</Button></span> </div>
-               <button className="options">Leave group</button>                              
-               <button className="options">Delete group</button>
+                             
+               <div className="options" >Rename  <span className="Textfield"><input type="text" /><Button type="submit" size="small" className="save">Save</Button></span> </div>
+               <Button type="button" size="small" className="leavegrp">Leave group</Button>                              
+               <Button type="button" size="small" className="leavegrp">Delete group</Button>
           </div>
      );
 }

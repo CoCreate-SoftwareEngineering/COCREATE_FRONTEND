@@ -17,8 +17,22 @@
      margin: 20px;
 }
 
+.save{
+     width:0 !important;
+     padding:1px !important;
+}
+
+.admin{
+     display: grid !important;
+     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+     grid-gap: 1vw;
+     justify-content: center !important;
+     width: 10vw !important;
+     height: 4vh;
+}
+
 .tool {
-     padding-top: 20px;
+     padding: 10px;
      text-align: right;
 }
 
@@ -60,4 +74,12 @@ h2{
 
 .Textfield{
      float:right;
+}
+
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
+     background-color: #2C4251;
+     color: rgb(124, 192, 203) !important;
+     font-weight: bold !important;
+     width: 15vw;
+     padding: 10px !important;
 }
