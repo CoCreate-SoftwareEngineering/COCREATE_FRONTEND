@@ -33,7 +33,7 @@ const Gsettings = () =>{
           console.log('admin clicked');
           if (window.confirm("Are you sure you want to make this user admin?")) {
                console.log('admin clicked');
-     };
+     }};
      return (
           <div className="section">
                <button className="closebtn"><Link to = "/canvas"><h3>x</h3></Link></button>
