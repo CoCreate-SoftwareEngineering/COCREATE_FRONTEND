@@ -16,16 +16,15 @@ import { useNavigate } from "react-router-dom";
 import { addRoom } from "../../../actions/profile";
 import { createRoom } from "../../../actions/profile";
 
-import "./JoinRoomForm.css";
+import "./JoinRoomForm.css"
 
 const JoinRoomForm = ({
 	uuid,
-	user,
+	setUser,
 	setRoomJoined,
 	socket,
 	createRoom,
 	addRoom,
-	socketJoinRoom,
 }) => {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
@@ -39,6 +38,7 @@ const JoinRoomForm = ({
 
 	const handleJoinSubmit = (e) => {
 		e.preventDefault();
+		if (!roomName) return toast.dark("Please enter your name!");
 
 		const roomData = {
 			roomId,
@@ -49,10 +49,11 @@ const JoinRoomForm = ({
 			presenter: false,
 		};
 
-		socketJoinRoom(roomData);
-		// socket.emit("userJoined", roomData);
+		setUser(roomData);
+		socket.emit("userJoined", roomData);
 		addRoom({ roomId: roomId, roomName: "roomName" });
-		console.log("Room form submit");
+		console.log("User Joined");
+		console.log(roomData);
 		navigate(`/${roomId}`);
 	};
 
@@ -68,8 +69,11 @@ const JoinRoomForm = ({
 			presenter: true,
 		};
 
-		// socket.emit("userJoined", roomData);
-		socketJoinRoom(roomData);
+		setUser(roomData);
+		socket.emit("userJoined", roomData);
+
+		console.log("User Created Room");
+		console.log(roomData);
 
 		await createRoom({
 			roomName: roomName,
@@ -77,6 +81,7 @@ const JoinRoomForm = ({
 			elements: [],
 		});
 		addRoom({ roomId: roomId, roomName: roomName });
+		console.log("Created Room has been actioned");
 		navigate(`/${roomId}`);
 	};
 
@@ -98,8 +103,8 @@ const JoinRoomForm = ({
 				</Modal.Header>
 				<Modal.Body>
 					<div className="join-room-container">
-						<div className="col-md-5 p-5 border mx-auto">
-							<h1 className="text-center text-primary mb-5">Join Room</h1>
+						<div className="col-md-5 p-5 border mx-auto my-auto">
+							<h1 className="text-center text-primary mb-4">Join Room</h1>
 							<form onSubmit={handleJoinSubmit}>
 								<div className="form-group my-2">
 									<input
@@ -113,15 +118,15 @@ const JoinRoomForm = ({
 										}}
 									/>
 								</div>
-								<div className="form-group mt-5">
+								<div className="form-group mt-3">
 									<button type="submit" className="form-control btn btn-dark">
-										Join Room
+										Join
 									</button>
 								</div>
 							</form>
 						</div>
-						<div className="col-md-5 p-5 border mx-auto">
-							<h1 className="text-center text-primary mb-5">Create Room</h1>
+						<div className="col-md-5 p-5 border mx-auto my-auto">
+							<h1 className="text-center text-primary mb-4">Create Room</h1>
 							<form onSubmit={handleCreateSubmit}>
 								<div className="form-group my-2">
 									<input
@@ -136,6 +141,7 @@ const JoinRoomForm = ({
 									<input
 										type="text"
 										className="form-control border-0 outline-0"
+										placeholder="Room ID"
 										value={roomId}
 										readOnly={true}
 										style={{
@@ -151,9 +157,11 @@ const JoinRoomForm = ({
 											onClick={() => setRoomId(uuid())}
 										>
 											Generate
-										</button>
-										&nbsp;&nbsp;
-										<CopyToClipboard
+										</button>										
+									</div>
+									
+								</div>
+								<CopyToClipboard
 											text={roomId}
 											onCopy={() =>
 												toast.success("Room Id Copied To Clipboard!")
@@ -166,9 +174,7 @@ const JoinRoomForm = ({
 												Copy
 											</button>
 										</CopyToClipboard>
-									</div>
-								</div>
-								<div className="form-group mt-5">
+								<div className="form-group mt-3">
 									<button type="submit" className="form-control btn btn-dark">
 										Create Room
 									</button>
@@ -186,12 +192,10 @@ JoinRoomForm.propTypes = {
 	createRoom: PropTypes.func.isRequired,
 	addRoom: PropTypes.func.isRequired,
 	isAuthenticated: PropTypes.bool,
-	user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
-	user: state.user,
 });
 
 export default connect(mapStateToProps, { createRoom, addRoom })(JoinRoomForm);

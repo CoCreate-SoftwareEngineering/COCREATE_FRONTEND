@@ -1,68 +1,143 @@
+import "./Nav.css";
+import NotificationBox from "../notification_box/NotificationBox.js";
+import logoImg from "../../media/Co_Create_Logo_blue.png";
+import msgImg from "../../media/Msg_Icon.png";
+import profileImg from "../../media/Darwizzy.jpg";
+import userImg1 from "../../media/ProfileImg1.jpg";
+import { Link } from "react-router-dom";
 
-import './Nav.css'
-import NotificationBox from '../notification_box/NotificationBox.js';
-import logoImg from '../../media/Co_Create_Logo_blue.png';
-import msgImg from '../../media/Msg_Icon.png';
-import profileImg from '../../media/Darwizzy.jpg';
-import userImg1 from '../../media/ProfileImg1.jpg';
-import { Link } from 'react-router-dom'
+const OurNav = () => {
+  //Lambda style of return, is more compact and cleaner
 
-
-
-const OurNav = () => { //Lambda style of return, is more compact and cleaner
-
-    return (
-      
-            <div className="Outside">
-              <div>
-                <ul>
-                  <li><Link to="/home"><img src={logoImg} width="50" height="50"></img></Link></li>
-                  <li>
-                    <Link to="/profile">
-                      <img className="ProfilePic" src={profileImg} width="47" height="47"></img>
-                    </Link>
-                  </li>
-                  <li><Link to="/home"><div className="Username">Username</div></Link></li>
-                </ul>
-              </div>
-              <div>
-                
-              </div>
-              <div>
-                <ul>
-                  <li>
-                    <form className="SearchBar">
-                      <input className = "nav-input" type="search" placeholder="Search" aria-label="Search"></input>
-                    </form>
-                  </li>
-                  <li>
-                  <div class="dropdown">
-                    <button class="btn btn-secondary DropBtn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src={msgImg} alt="CoCreate" width="50" height="50"></img>
-                    </button>
-                    <div class="dropdown-menu MsgGrid dropdown-menu-end">
-                      <div>
-                        <h2 class="DropdownHeader">
-                          Messages
-                          <span class="AddSymbols">+ &#x1F4DE; &#128249;</span>
-                        </h2>
-                        <ul class="DropdownLinks">
-                        <li class="Message"><Link to = "/home"><img className="ProfilePic" src={userImg1} width="50" height="50"></img></Link></li>
-                        <li class="Message"><Link to = "/home"><img className="ProfilePic" src={userImg1} width="50" height="50"></img></Link></li>
-                        <li class="Message"><Link to = "/home"><img className="ProfilePic" src={userImg1} width="50" height="50"></img></Link></li>
-                        <li class="Message"><Link to = "/home"><img className="ProfilePic" src={userImg1} width="50" height="50"></img></Link></li>
-                        <li class="Message"><Link to = "/home"><img className="ProfilePic" src={userImg1} width="50" height="50"></img></Link></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  </li>
-                  <li className="NotificationBox"><NotificationBox num = {5}/></li>
-                </ul>
+  return (
+    <div className="Outside">
+      <div>
+        <ul>
+          <li>
+            <Link to="/home">
+              <img
+                className="Logoimg"
+                src={logoImg}
+                width="50"
+                height="50"
+              ></img>
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile">
+              <img
+                className="Userpic"
+                src={profileImg}
+                width="47"
+                height="47"
+              ></img>
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile">
+              <div className="Username">Username</div>
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div></div>
+      <div>
+        <ul>
+          <li>
+            <form className="SearchBar">
+              <input
+                className="nav-input"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              ></input>
+            </form>
+          </li>
+          <li style={{marginRight:0, width:50}}>
+            <div className="dropdown">
+              <button
+                className="btn btn-secondary DropBtn"
+                type="button"
+                id="dropdownMenuButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src={msgImg}
+                  alt="CoCreate"
+                  width="50"
+                  height="30"
+                ></img>
+              </button>
+              <div className="dropdown-menu MsgGrid dropdown-menu-end">
+                <div>
+                  <h2 className="DropdownHeader">
+                    Messages
+                    <span className="AddSymbols">+ &#x1F4DE; &#128249;</span>
+                  </h2>
+                  <ul className="DropdownLinks">
+                    <li className="Message">
+                      <Link to="/home">
+                        <img
+                          className="ProfilePic"
+                          src={userImg1}
+                          width="50"
+                          height="50"
+                        ></img>
+                      </Link>
+                    </li>
+                    <li className="Message">
+                      <Link to="/home">
+                        <img
+                          className="ProfilePic"
+                          src={userImg1}
+                          width="50"
+                          height="50"
+                        ></img>
+                      </Link>
+                    </li>
+                    <li className="Message">
+                      <Link to="/home">
+                        <img
+                          className="ProfilePic"
+                          src={userImg1}
+                          width="50"
+                          height="50"
+                        ></img>
+                      </Link>
+                    </li>
+                    <li className="Message">
+                      <Link to="/home">
+                        <img
+                          className="ProfilePic"
+                          src={userImg1}
+                          width="50"
+                          height="50"
+                        ></img>
+                      </Link>
+                    </li>
+                    <li className="Message">
+                      <Link to="/home">
+                        <img
+                          className="ProfilePic"
+                          src={userImg1}
+                          width="50"
+                          height="50"
+                        ></img>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-
-        );
-    };
+          </li>
+          <li className="NotificationBox">
+            <NotificationBox num={5} />
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
 
 export default OurNav;

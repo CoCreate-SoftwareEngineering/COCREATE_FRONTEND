@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import Container from "react-bootstrap/Container";
 
-import CanvasPageHeader from "./CanvasPageHeader";
+import CanvasPageHeader from "../main/CanvasPageHeader";
 import Spinner from "../main/Spinner";
 // import AddModal from './AddModal'
 // import Body from '../main/Body'
@@ -17,12 +17,6 @@ const CanvasPage = ({
 	getCurrentProfile,
 	auth: { user },
 	profile: { profile, loading },
-	elements,
-	setElements,
-	socketEmitElements,
-	// useHistory,
-	// undo,
-	// redo,
 }) => {
 	useEffect(() => {
 		getCurrentProfile();
@@ -32,7 +26,6 @@ const CanvasPage = ({
 
 	function handleToolChange(newTool) {
 		setTool(newTool);
-		console.log(tool);
 	}
 
 	return loading && profile === null ? (
@@ -47,23 +40,17 @@ const CanvasPage = ({
 				handleToolChange={handleToolChange}
 				user={userData}
 				socket={socket}
-				elements={elements}
-				setElements={setElements}
-				socketEmitElements={socketEmitElements}
-				// useHistory={useHistory}
-				// undo={undo}
-				// redo={redo}
 			/>
 			{/* </Container> */}
 		</Fragment>
 	);
 };
 
-CanvasPage.propTypes = {
-	getCurrentProfile: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired,
-	profile: PropTypes.object.isRequired,
-};
+// Dashboard.propTypes = {
+//     getCurrentProfile: PropTypes.func.isRequired,
+//     auth: PropTypes.object.isRequired,
+//     profile: PropTypes.object.isRequired
+// }
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
