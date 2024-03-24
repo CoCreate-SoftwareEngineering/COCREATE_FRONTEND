@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import settingsIcon from '../../media/button-images/icon_settings.png'
@@ -17,6 +17,13 @@ const options = [
 const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 	const [show, setShow] = useState(false);
 
+	//Video chat state
+	const [ myStream, setMyStream ] = useState()
+	const [ peerVideos, setPeerVideos ] = useState([])
+	const [ connectionRefs, setConnections ] = useState([])
+
+	const myVideo = useRef()
+
 	const handleClose = () => setShow(false);
 	const toggleShow = () => setShow((s) => !s);
 
@@ -25,6 +32,50 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 		let value = event.target.value;
 		setNewValue(value);
 		handleToolChange(value);
+	}
+
+	useEffect(() => {
+		navigator.mediaDevices.getUserMedia({ video: true, audio: true}).then((stream) => {
+			setMyStream(stream)
+			myVideo.current.srcObject = stream;
+			addPeerVideo(stream)
+			addPeerVideo(stream)
+			addPeerVideo(stream)
+		})
+		console.log("Useeffect")
+	}, [])
+
+	const addPeerVideo = (videoRef) => {
+        setPeerVideos(prevUserVideos => [...prevUserVideos, videoRef]);
+    };
+	
+    const removePeerVideo = (userId) => {
+        const newVideos = peerVideos
+        delete newVideos[userId]
+        setPeerVideos(newVideos)
+    };
+
+    const addConnectionRef = (connectionRef) => {
+        setConnections(prevConnections => [...prevConnections, connectionRef]);
+    };
+
+    const destroyAllConnections = () => {
+        connectionRefs.forEach(connectionRef => {
+            if (connectionRef && connectionRef.current) {
+                connectionRef.current.destroy();
+            }
+        });
+    };
+
+    // Example of removing a connection reference from the array
+    const removeConnectionRef = (userId) => {
+        const newRefs = connectionRefs
+        delete connectionRefs[userId]
+        setConnections(newRefs)
+    };
+
+	const joinRoomVideo = () => {
+
 	}
 
 	return (
@@ -84,6 +135,15 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 						/>
 						<label htmlFor="text">Text</label>
 					</div>
+					<Button onClick={joinRoomVideo}>Join Video Call</Button>
+					{myStream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+					{peerVideos.map((videoSrc, index) => (
+                            <video key={index} playsInline ref={videoRef => {
+                                if (videoRef) {
+                                    videoRef.srcObject = videoSrc;
+                                }
+                            }} autoPlay style={{ width: "300px" }} />
+                        ))}
 				</Offcanvas.Body>
 			</Offcanvas>
 		</>
