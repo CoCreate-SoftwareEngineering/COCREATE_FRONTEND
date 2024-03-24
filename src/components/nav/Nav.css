@@ -1,11 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap");
+
 .Outside {
     background-color: #7CC0CB;
     display: flex;
     justify-content: space-between;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    max-height: 80px;
+    padding: 0px 20px 0 20px;
+    max-height: 70px;
     overflow: visible;
 }
 
@@ -22,19 +22,18 @@
 
 .NotificationBox {
     margin-left: 0px;
-    margin-right: 3px;
+    margin-right: 20px;
+    padding-top: 10px;
 }
 
 .LastPic {
     border-radius: 50%;
 }
 
-.UserPic {
+.Userpic {
     border-radius: 50%;
-    margin-right: -25px;
-    box-sizing: content-box;
-    max-width: 55px;
-    padding-left: 5px;
+    margin: auto;
+    margin-top: 20%;
 }
 
 .ProjectName {
@@ -44,48 +43,73 @@
 }
 
 .SearchBar {
-    margin-top: 14px;
-    margin-right: 13px;
+    margin-top: 8%;
+    margin-right: 50px;
 }
 
 .SearchBar input {
-    width: 200px; /* Adjust the width as needed */
+    width: 250px; 
+    height: 33px;
     font-size: 14pt;
+    font-family: "Inter";
+    text-align: center;
+    letter-spacing: 2px;
     display: block;
-    margin-bottom: 4%;
+    margin-bottom: 4%;    
+    border: #2C4251 2px;
+    border-radius: 7px;
+}
+
+.Logoimg{
+    margin: auto;
+    margin-top: 20%;
+    padding: 2px;
 }
 
 .ProfilePic {
     border-radius: 50%;
-    margin-top: 5px;
+    padding:5px;
 }
 
-.Username {
-    font-family: "Lato";
-    margin-top: 33px;
-    margin-left: -11px;
+.Username {    
+    font-family: "Inter";
+    font-weight: 600;
     color:#2C4251;
+    margin: 50%;    
+    margin-left: -10%;
 }
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    max-height: 70px;
   }
 
 .DropBtn {
-    background: none;
-    border: none;
-    text-decoration: none;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
     cursor: pointer;
-    padding: 0;
-    margin-right: 30px;
-	margin-left: -50px;
+    background-color:transparent;
+    border: none;
+    --bs-btn-active-bg: transparent;
+    padding-right:0;
+}
+.DropBtn:hover {
+    background-color:transparent;
+}
+.DropBtn:focus {
+    background-color:transparent;
+}
+.DropBtn:focus-visible {
+    background-color:transparent;
 }
 
 .dropdown {
-	position: relative;
-	width: 0px;
+    display: flex;
+    justify-content: flex-end;        
+    margin-top:30%;
 }
 
 .dropdown-menu {
@@ -98,7 +122,7 @@ ul {
     top: 10px;
     bottom: 0;
     background-color: #E2856E;
-    padding: 5px;
+    padding: 10px;
     border-radius: .25rem;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
     opacity: 0;
@@ -106,12 +130,13 @@ ul {
     transform: translateY(-10px);
     pointer-events: none;
     z-index: 1000;
+    min-height:40vh;
+    min-width:fit-content;
 }
 
 .dropdown-menu ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: 10px; 
     display: block;
 }
 
@@ -124,12 +149,12 @@ ul {
 .dropdown-menu.active {
     opacity: 1;
     transform: translateY(0);
-    pointer-events: auto;
+    pointer-events: auto; 
 }
 
 .Message {
-    width: 340px;
-    height: 130px;
+    width: 300px;
+    height: 90px;
     background-color: #2c4251;
     color: black;
     border-radius: .25rem;
@@ -139,7 +164,7 @@ ul {
 
 .Message img {
     margin-top: 25px;
-	
+    padding:10px;	
 }
 
 .Message a {
@@ -148,4 +173,12 @@ ul {
 
 .AddSymbols {
     float:right;
+}
+
+.DropdownHeader{
+    color: white;
+    font-size: 22px;
+    font-family: "Inter";
+    font-weight: bold;
+    margin: 10px;
 }

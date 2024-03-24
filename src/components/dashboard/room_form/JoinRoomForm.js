@@ -98,8 +98,8 @@ const JoinRoomForm = ({
 				</Modal.Header>
 				<Modal.Body>
 					<div className="join-room-container">
-						<div className="col-md-5 p-5 border mx-auto">
-							<h1 className="text-center text-primary mb-5">Join Room</h1>
+						<div className="col-md-5 p-5 border mx-auto my-auto">
+							<h1 className="text-center text-primary mb-4">Join Room</h1>
 							<form onSubmit={handleJoinSubmit}>
 								<div className="form-group my-2">
 									<input
@@ -113,15 +113,15 @@ const JoinRoomForm = ({
 										}}
 									/>
 								</div>
-								<div className="form-group mt-5">
+								<div className="form-group mt-3">
 									<button type="submit" className="form-control btn btn-dark">
-										Join Room
+										Join
 									</button>
 								</div>
 							</form>
 						</div>
-						<div className="col-md-5 p-5 border mx-auto">
-							<h1 className="text-center text-primary mb-5">Create Room</h1>
+						<div className="col-md-5 p-5 border mx-auto my-auto">
+							<h1 className="text-center text-primary mb-4">Create Room</h1>
 							<form onSubmit={handleCreateSubmit}>
 								<div className="form-group my-2">
 									<input
@@ -136,6 +136,7 @@ const JoinRoomForm = ({
 									<input
 										type="text"
 										className="form-control border-0 outline-0"
+										placeholder="Room ID"
 										value={roomId}
 										readOnly={true}
 										style={{
@@ -151,9 +152,11 @@ const JoinRoomForm = ({
 											onClick={() => setRoomId(uuid())}
 										>
 											Generate
-										</button>
-										&nbsp;&nbsp;
-										<CopyToClipboard
+										</button>										
+									</div>
+									
+								</div>
+								<CopyToClipboard
 											text={roomId}
 											onCopy={() =>
 												toast.success("Room Id Copied To Clipboard!")
@@ -166,9 +169,7 @@ const JoinRoomForm = ({
 												Copy
 											</button>
 										</CopyToClipboard>
-									</div>
-								</div>
-								<div className="form-group mt-5">
+								<div className="form-group mt-3">
 									<button type="submit" className="form-control btn btn-dark">
 										Create Room
 									</button>

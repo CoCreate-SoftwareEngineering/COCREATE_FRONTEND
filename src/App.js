@@ -13,6 +13,8 @@ import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import CanvasPage from "./components/canvas/CanvasPage";
 
+import Gsettings from './components/canvas/GroupSettings/Gsettings'; 
+
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 // import { io } from "socket.io-client";
@@ -134,6 +136,7 @@ const App = () => {
 						<Route exact path="/" element={<Landing />}></Route>
 						<Route exact path="/login" element={<Login />} />
 						<Route exact path="/register" element={<Register />} />
+						<Route exact path="/gsettings" element={<Gsettings />} />
 						<Route
 							exact
 							path="/dashboard"
