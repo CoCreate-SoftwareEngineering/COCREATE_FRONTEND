@@ -5,6 +5,7 @@ import settingsIcon from '../../media/button-images/icon_settings.png'
 import { Link } from 'react-router-dom';
 import IconButton from './IconButton';
 import './GroupSettings/Gsettings.js';
+import './ToolBar.css';
 
 const options = [
 	{
