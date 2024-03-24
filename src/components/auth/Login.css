@@ -10,7 +10,7 @@ html, body {
 h1{
     font-family: 'Lato', sans-serif;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 100px;
     margin-bottom: 15px;
 }
 
@@ -20,8 +20,8 @@ h1{
 
 .logo-left-container {
     background-color: rgb(124, 192, 203);
-    width:50%;
-    height: 150vh;
+    width: 45vw;
+    height: 100vh;
     text-align: center;
     float:left;
 }
@@ -29,32 +29,43 @@ h1{
 p{
     color: #E2856E;
     font-family:'Inter', sans-serif;
-    font-size: 12.5pt;
+    font-size: 30px;
 }
 
+.link{
+    font-family:'Inter', sans-serif;
+    font-weight: bold;
+    color: #E2856E;
+    font-size: 30px;
+    
+}
 
+placeholder{
+    font-style: italic;
+}
 
 .right-container{
-    float:left;
-    padding:45px;
-    margin-top:100px;
-    margin-left:100px;
-    text-align: center;
     font-family: 'Lato', sans-serif;
     border-radius: 15px;
+    margin-left: 175px;
+    margin-top: 50px;
+    margin-top: 50px;
     background-color :#2C4251;
-    font-size: 15pt;
+    font-size: 35pt;
     color:#7CC0CB;
+    height: 95vh;
+    text-align: center;
+    float:left;
     font-family: 'Lato';
 }
 
 label {
     font-family: 'Lato', sans-serif;
     color:white;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
     border: 12px 25px;
 }
 
@@ -70,15 +81,12 @@ label {
     margin-right: 25px;
 }*/
 
-.login-button{
-    border-radius: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding: 5px;
+button{
     font-family: 'Lato',sans-serif;
     background-color: #7CC0CB;
     color: white;
-    font-size:12.5pt;
+    font-size:35pt;
+    border-radius: 15px;
 }
 
 .logo {
@@ -87,38 +95,14 @@ label {
     margin-top: 40%;
 }
 
-.user{
-    font-size: 15pt;
-    border-radius: 15px;
-    font-style: italic;
-    font-family: 'Lato',sans-serif;
-    margin-top: 25px ;
-    margin-bottom: 25px;
-    margin-left: 25px;
-    margin-right: 25px;
-}
-
-.pass{
-    font-size: 15pt;
-    border-radius: 15px;
-    font-style: italic;
+.login-input{
     font-family: 'Lato',sans-serif;
     color:gray;
+    background-color: white;
+    font-size: 35pt;
+    border-radius: 15px;
     margin-top: 25px ;
     margin-bottom: 25px;
     margin-left: 25px;
     margin-right: 25px;
-}
-
-
-
-.link{
-    font-family:'Inter', sans-serif;
-    font-weight: bold;
-    color: #E2856E;
-    font-size: 12.5pt;
-}
-
-.text-before-link{
-    font-size:12.5pt;
 }

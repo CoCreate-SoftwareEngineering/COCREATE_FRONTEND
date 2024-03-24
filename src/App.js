@@ -13,11 +13,9 @@ import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import CanvasPage from "./components/canvas/CanvasPage";
 
-import Gsettings from './components/canvas/GroupSettings/Gsettings'; 
-
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
 // Redux
 import { Provider } from "react-redux";
@@ -29,22 +27,80 @@ if (localStorage.token) {
 	setAuthToken(localStorage.token);
 }
 
-const App = () => {
-	// SocketIO
-	const server = "http://localhost:8000";
-	const connectionOptions = {
-		"force new connection": true,
-		reconnectionAttempts: "Infinity",
-		timeout: 10000,
-		transports: ["websocket"],
-	};
-	const socket = io(server, connectionOptions);
+// const useHistory = (initialState) => {
+// 	const [index, setIndex] = useState(0);
+// 	const [history, setHistory] = useState([initialState]);
 
-	console.log(socket.connected);
+// 	const setState = (action, overwrite = false) => {
+// 		const newState =
+// 			typeof action === "function" ? action(history[index]) : action;
+// 		if (overwrite) {
+// 			const historyCopy = [...history];
+// 			historyCopy[index] = newState;
+// 			setHistory(historyCopy);
+// 		} else {
+// 			const updatedState = [...history].slice(0, index + 1);
+// 			setHistory([...updatedState, newState]);
+// 			setIndex((prevState) => prevState + 1);
+// 		}
+// 	};
+
+// 	const undo = () => index > 0 && setIndex((prevState) => prevState - 1);
+// 	const redo = () =>
+// 		index < history.length - 1 && setIndex((prevState) => prevState + 1);
+
+// 	return [history[index], setState, undo, redo];
+// };
+
+const App = () => {
+	const [user, setUser] = useState(null);
+	// const [elements, setElements, undo, redo] = useHistory([]);
+	const [elements, setElements] = useState([]);
+
+	const server = "http://localhost:8000";
+
+	const io = require("socket.io-client");
+
+	const socket = io(server, {
+		withCredentials: true,
+		extraHeaders: {
+			"my-custom-header": "abcd",
+		},
+	});
+
+	socket.on("connect", () => {
+		console.log("Connected to Socket.io server");
+	});
+
+	const socketJoinRoom = (data) => {
+		socket.emit("userJoined", data);
+		console.log("Room Joined");
+	};
+
+	const socketUpdateElements = (newElement) => {
+		console.log(newElement);
+		if (elements.typeof != "undefined") {
+			// setElements((elements) => [...elements, newElement]);
+			setElements(newElement, true);
+		}
+		console.log("socketUpdateElements: ");
+		console.log(elements);
+	};
+
+	const socketEmitElements = (elements) => {
+		socket.emit("elements", elements);
+		console.log("socketEmitElements");
+	};
 
 	useEffect(() => {
 		console.log("getting user data");
 		store.dispatch(loadUser());
+		socket.on("servedElements", (receivedElements) => {
+			console.log("BEEN SERVERD ELEMENTS");
+			if (elements != receivedElements) {
+				socketUpdateElements(receivedElements);
+			}
+		});
 	}, []);
 
 	// UUID Function to be moved
@@ -68,11 +124,6 @@ const App = () => {
 		);
 	};
 
-	const [userNo, setUserNo] = useState(0);
-	const [roomJoined, setRoomJoined] = useState(false);
-	const [user, setUser] = useState(null);
-	const [users, setUsers] = useState([]);
-
 	return (
 		<Provider store={store}>
 			<Router>
@@ -83,25 +134,35 @@ const App = () => {
 						<Route exact path="/" element={<Landing />}></Route>
 						<Route exact path="/login" element={<Login />} />
 						<Route exact path="/register" element={<Register />} />
-						<Route exact path="/gsettings" element={<Gsettings />} />
 						<Route
 							exact
 							path="/dashboard"
 							element={
-								<PrivateRoute>
-									<Dashboard
-										uuid={uuid}
-										setRoomJoined={setRoomJoined}
-										setUser={setUser}
-										socket={socket}
-									/>
-								</PrivateRoute>
+								// <PrivateRoute>
+								<Dashboard
+									uuid={uuid}
+									socket={socket}
+									socketJoinRoom={socketJoinRoom}
+									elements={elements}
+								/>
+								// </PrivateRoute>
 							}
 						/>
 						<Route
 							exact
 							path="/:roomId"
-							element={<CanvasPage userData={user} socket={socket} />}
+							element={
+								<CanvasPage
+									userData={user}
+									socket={socket}
+									elements={elements}
+									setElements={setElements}
+									socketEmitElements={socketEmitElements}
+									// undo={undo}
+									// redo={redo}
+									// useHistory={useHistory}
+								/>
+							}
 						/>
 						{/* <Route exact path="/canvas" element={<CanvasPage userData={user} socket={socket}/>} /> */}
 					</Routes>

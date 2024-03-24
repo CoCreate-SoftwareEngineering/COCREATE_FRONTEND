@@ -166,8 +166,6 @@ export const addRoom =
 				body,
 				config
 			);
-			console.log("Room has been PUT");
-			console.log(res.data);
 			dispatch({
 				type: ADD_ROOM_SUCCESS,
 				payload: res.data,
