@@ -1,0 +1,55 @@
+.event{
+     padding-top: 10px;
+     padding-left: 20px;
+     color: black;
+     display: grid;     
+     width: 20vw !important;
+}
+.event-item {
+     display: flex;
+     align-items: center; 
+}
+
+p{
+     color: black !important;
+     font-size:medium !important;     
+     margin-top: 0;
+     margin-bottom: 0;
+     margin-right: 5vw;
+     padding-left:10px;
+     margin-left: auto;
+}
+
+h4{
+     margin-top: 5px;
+     margin-bottom: 5px;
+     margin-right: 5vw;
+}
+
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root {
+     color: #2C4251 !important;
+     width:10vw !important;
+     margin-left: 15vw !important;
+}
+
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root:hover {
+     background-color: #2C4251 !important;
+     border-radius: 5px;
+     color:white !important;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
+     padding: 10px !important;
+}
+
+label{
+     margin: 10px !important;
+}
+
+.tag{
+     align-items: center;
+}
+
+.tag:hover{
+     cursor:pointer;
+}
