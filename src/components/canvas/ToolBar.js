@@ -19,8 +19,8 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 
 	//Video chat state
 	const [ myStream, setMyStream ] = useState()
-	const [ peerVideos, setPeerVideos ] = useState()
-	const [ connectionRefs, setConnections ] = useState()
+	const [ peerVideos, setPeerVideos ] = useState([])
+	const [ connectionRefs, setConnections ] = useState([])
 
 	const myVideo = useRef()
 
@@ -38,6 +38,7 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true}).then((stream) => {
 			setMyStream(stream)
 			myVideo.current.srcObject = stream;
+			addPeerVideo(stream)
 			addPeerVideo(stream)
 			addPeerVideo(stream)
 		})
