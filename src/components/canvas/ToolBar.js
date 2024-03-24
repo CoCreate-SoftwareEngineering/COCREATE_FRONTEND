@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import settingsIcon from '../../media/button-images/icon_settings.png'
-import { Link } from 'react-router-dom';
-import IconButton from './IconButton';
-import './GroupSettings/Gsettings.js';
 
 const options = [
 	{
@@ -43,9 +39,6 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<div className="tool-menu">
-						<Link to='/gsettings'>           
-                        			<IconButton image={settingsIcon} />    
-                    		</Link> 
 						<input
 							type="radio"
 							id="selection"
