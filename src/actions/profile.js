@@ -183,42 +183,66 @@ export const addRoom =
 	};
 
 // Add Room to room database (on creating a room)
-export const createRoom =
-	({ roomName, roomId, elements }) =>
-	async (dispatch) => {
-		console.log("CREATE ROOM FUNCTION");
-		const config = {
-			headers: {
-				"Content-Type": "application/json",
-			},
-		};
-		console.log("trying");
+// export const createRoom =
+// 	({ roomName, roomId, elements }) =>
+// 	async (dispatch) => {
+// 		console.log("CREATE ROOM FUNCTION");
+// 		const config = {
+// 			headers: {
+// 				"Content-Type": "application/json",
+// 			},
+// 		};
+// 		console.log("trying");
 
-		const body = JSON.stringify({
-			roomId: roomId,
-			roomName: roomName,
-			elements: elements,
-		});
+// 		const body = JSON.stringify({
+// 			roomId: roomId,
+// 			roomName: roomName,
+// 			elements: elements,
+// 		});
 
-		try {
-			console.log("Sending ROOM");
-			const res = await axios.post(
-				"http://localhost:8000/api/rooms",
-				body,
-				config
-			);
-			console.log("Room has been POST");
-			console.log(res.data);
-			dispatch({
-				type: CREATE_ROOM_SUCCESS,
-				payload: res.data,
-			});
-		} catch (err) {
-			const errors = err.respone.data.errors;
-			console.log("Room POST Fail");
-			dispatch({
-				type: CREATE_ROOM_FAIL,
-				payload: { msg: err.response.statusText, status: err.response.status },
-			});
-		}
-	};
+// 		try {
+// 			console.log("Sending ROOM");
+// 			const res = await axios.post(
+// 				"http://localhost:8000/api/rooms",
+// 				body,
+// 				config
+// 			);
+// 			console.log("Room has been POST");
+// 			console.log(res.data);
+// 			dispatch({
+// 				type: CREATE_ROOM_SUCCESS,
+// 				payload: res.data,
+// 			});
+// 			console.log("Room created successfully");
+// 		} catch (err) {
+// 			const errors = err.respone.data.errors;
+// 			console.log("Room POST Fail");
+// 			dispatch({
+// 				type: CREATE_ROOM_FAIL,
+// 				payload: { msg: err.response.statusText, status: err.response.status },
+// 			});
+// 		}
+// 	};
+
+// export const getRoom =
+// 	({ roomId }) =>
+// 	async (dispatch) => {
+// 		try {
+// 			console.log("TRY ROOMID");
+// 			console.log(roomId);
+// 			if (typeof roomId != "undefined") {
+// 				const res = await axios.get(
+// 					`http://localhost:8000/api/rooms/${roomId}`
+// 				);
+// 				console.log("Get Elements: ");
+// 				console.log(res.data);
+// 				dispatch({
+// 					type: LOADING,
+// 					payload: res.data,
+// 				});
+// 				return res.data;
+// 			}
+// 		} catch (err) {
+// 			console.log("Failed get room elements");
+// 		}
+// 	};

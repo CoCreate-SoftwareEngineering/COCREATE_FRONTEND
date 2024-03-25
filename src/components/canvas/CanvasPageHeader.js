@@ -12,6 +12,7 @@ const CanvasPageHeader = ({
 	auth: { user },
 	profile: { profile, loading },
 	logout,
+	roomId,
 }) => {
 	useEffect(() => {
 		getCurrentProfile();
@@ -27,10 +28,12 @@ const CanvasPageHeader = ({
 				</h2>
 			</div>
 			<div className="title">
-				<h2 className="fs-28">Room Name</h2>
+				<h2 className="">{}</h2>
 			</div>
 			<div className="menu">
-				{/* <a className="logOut" onClick={logout}>Log Out</a> */}
+				{/* <a className="logOut" onClick={logout}>
+					Log Out
+				</a> */}
 				<a className="mail">Messages</a>
 				{/* <i className="menu-icon fa-solid fa-bars fa-2xl"></i> */}
 			</div>
