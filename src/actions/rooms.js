@@ -10,6 +10,9 @@ import {
 	CREATE_ROOM_SUCCESS,
 	CREATE_ROOM_FAIL,
 	CLEAR_ROOM,
+	RENAME_ROOM_SUCCESS,
+	RENAME_ROOM_FAIL,
+	GET_ROOM_NAMES,
 } from "./types";
 
 export const dataBase_saveElements = (elements, roomId) => async (dispatch) => {
@@ -127,6 +130,57 @@ export const clearRoom = () => (dispatch) => {
 	dispatch({
 		type: CLEAR_ROOM,
 	});
+};
+
+export const updateRoomName = (roomId, rename) => async (dispatch) => {
+	console.log("RENAME ROOM FUNCTION");
+	const config = {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	};
+	console.log("trying");
+
+	const body = JSON.stringify({
+		roomId: roomId,
+		roomName: rename,
+	});
+
+	try {
+		console.log("Sending ROOM");
+		const res = await axios.put(
+			"http://localhost:8000/api/rooms/name",
+			body,
+			config
+		);
+		dispatch({
+			type: RENAME_ROOM_SUCCESS,
+			payload: rename,
+		});
+		console.log("Room created successfully");
+	} catch (err) {
+		const errors = err.respone.data.errors;
+		console.log("Room POST Fail" + errors);
+		dispatch({
+			type: RENAME_ROOM_FAIL,
+			payload: { msg: err.response.statusText, status: err.response.status },
+		});
+	}
+};
+
+export const getAllRoomNames = () => async (dispatch) => {
+	console.log("THIS");
+	try {
+		console.log("GETTING ALL ROOM NAMES");
+		const res = await axios.get("http://localhost:8000/api/rooms/");
+		console.log(res.data);
+		dispatch({
+			type: GET_ROOM_NAMES,
+			payload: res.data,
+		});
+	} catch (err) {
+		console.log("ERROR GETTING ROOM NAMES");
+	}
 };
 
 // export function dataBase_saveElements

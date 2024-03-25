@@ -61,7 +61,7 @@ const JoinRoomForm = ({
 		setRoomId(roomId);
 		socketJoinRoom(roomId);
 		// socket.emit("userJoined", roomData);
-		addRoom({ roomId: roomId, roomName: "roomName" });
+		addRoom(roomId);
 		getRoom(roomId);
 		console.log("Room form submit");
 		navigate(`/${roomId}`);
@@ -89,7 +89,7 @@ const JoinRoomForm = ({
 			roomId: roomId,
 			elements: [],
 		});
-		addRoom({ roomId: roomId, roomName: roomName });
+		addRoom(roomId);
 		getRoom(roomId);
 		navigate(`/${roomId}`);
 	};
