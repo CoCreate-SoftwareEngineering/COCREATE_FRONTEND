@@ -95,7 +95,7 @@ const Dashboard = ({
 								setUser={setUser}
 								socket={socket}
 								heading="Projects"
-								notiAmountCons={profile.roomIds.length} // dynamically set notification amount
+								notiAmountCons={profile?.roomIds?.length ?? 0} // dynamically set notification amount
 								rowContent={
 									<div className="projects-container">
 										<JoinRoomForm
@@ -107,19 +107,14 @@ const Dashboard = ({
 											// roomId={roomId}
 										/>
 										{/* add all projects in data structure to projects section */}
-										{roomNames.map((room, index) => (
-											<Link
-												key={index}
-												to={`/${room}`}
-												onClick={() => {
-													handleChooseRoom(room);
-												}}
-											>
+										{roomNames?.map((room, index) => (
+											<Link key={index} to={`/${room}`} onClick={() => { handleChooseRoom(room); }}>
 												<div className="item">
-													<p>{room}</p>
+												<p>{room}</p>
 												</div>
 											</Link>
-										))}
+											))}
+
 									</div>
 								}
 							/>

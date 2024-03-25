@@ -2,6 +2,10 @@ import React, { Fragment, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth as firebaseAuth } from './FireBase-config'
+
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -10,7 +14,6 @@ import { register } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
 import { createProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
-import'./Login.css';
 
 const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 	const [formData, setFormData] = useState({
@@ -32,10 +35,26 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 		if (password !== passwordConfirmation) {
 			setAlert("Passwords do not match", "danger");
 		} else {
+
+			// link account to firebase
+			try{
+				const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password)
+				console.log("IMPORTANT: Firebase user registered", userCredential.user);
+								
+			} catch (error) {
+				console.log('Firebase registration error: ', error)
+				setAlert(error.message, 'danger')
+			}
+			// Original register code
 			await register({ firstName, lastName, email, password });
-			createProfile();
+			createProfile();			
 		}
 	};
+
+	// user already linked to firebase
+	if (isAuthenticated){
+		console.log("already signed in")
+	}
 
 	// Navigates if logged in
 	if (isAuthenticated){

@@ -7,6 +7,10 @@ import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
+
+import { auth } from './FireBase-config'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+
 import "./Login.css";
 import logoImg from "../../media/Co_Create_Logo_blue.png";
 
@@ -21,6 +25,28 @@ const Login = ({ login, isAuthenticated }) => {
 	const onChange = (e) =>
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 
+	// Link user with their firebase account or make them on
+	const handleFireBaseLoginOrCreateAccount = async () => {
+		try {
+			// Attempt to signin with firebase
+			const userCredential = await signInWithEmailAndPassword(auth, email, password);
+			console.log("USER LOGGED IN WITH FIREBASE: ", userCredential.user);
+		}catch(error) {
+			console.error('FIREBASE ERROR: ', error.message);
+			// If the user does not exist, create their account
+			if(error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential'){
+				try {
+					const newUserCredential = await createUserWithEmailAndPassword(auth, email, password);
+					console.log("NEW USER MADE: ", newUserCredential.user)
+				}catch (registrationError){
+					console.error("REGISTER ERROR: ", registrationError.message)
+				}
+			}
+		}
+	}
+
+
+
 	//Forgotten password link
 	const forgotPassword = () => {
 		alert("Forgotten password!");
@@ -33,6 +59,7 @@ const Login = ({ login, isAuthenticated }) => {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		await handleFireBaseLoginOrCreateAccount();
 		login(email, password);
 	};
 

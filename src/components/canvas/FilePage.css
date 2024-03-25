@@ -1,0 +1,25 @@
+.refresh-button {    
+    margin-top: auto;
+    display: inline;
+    position: absolute;    
+    background-color: white;
+    border: none;
+    background-position: center;
+    background-size: cover;
+    background-image: url('../../../public/refresh.ico');    
+    height: .7em;
+    width: .7em;
+    background-size: 85%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(25deg);    
+    transition: transform 0.5s ease;
+}
+
+.refresh-button:hover {
+    background-color: white;
+    transform: rotate(0deg);
+    height: .7em;
+    width: .7em;
+    cursor:pointer
+}
