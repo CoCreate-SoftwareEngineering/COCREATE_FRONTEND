@@ -1,5 +1,6 @@
 import React from 'react';
 import { Channel } from './Channel';
+import './chat.css';
 
 export class ChannelList extends React.Component {
 

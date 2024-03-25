@@ -1,4 +1,5 @@
 import React from 'react';
+import './chat.css';
 
 
 export class Message extends React.Component {
