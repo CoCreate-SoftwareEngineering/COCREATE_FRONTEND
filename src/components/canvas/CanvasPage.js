@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, useState } from "react";
+import React, { useEffect, useLayoutEffect, Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
@@ -10,6 +10,7 @@ import Spinner from "../main/Spinner";
 // import Body from '../main/Body'
 import Canvas from "./Canvas";
 import Example from "./ToolBar";
+import { getRoom } from "../../actions/rooms";
 
 const CanvasPage = ({
 	socket,
@@ -20,22 +21,35 @@ const CanvasPage = ({
 	elements,
 	setElements,
 	socketEmitElements,
+	// roomId,
+	socketDisconnect,
+	getRoom,
+	room: { roomLoading, room },
 	// useHistory,
 	// undo,
 	// redo,
 }) => {
+	const [tool, setTool] = useState("line");
+	// const [room, setRoom] = useState(null);
+
 	useEffect(() => {
 		getCurrentProfile();
 	}, [loading]);
 
-	const [tool, setTool] = useState("line");
+	useEffect(() => {
+		// // getRoom(room.roomId);
+		// setElements(room.elements);
+		// console.log("CANVAS PAGE: GET ROOM");
+		// console.log(room.elements);
+		// console.log(elements);
+	}, [roomLoading]);
 
 	function handleToolChange(newTool) {
 		setTool(newTool);
 		console.log(tool);
 	}
 
-	return loading && profile === null ? (
+	return room === null ? (
 		<Spinner />
 	) : (
 		<Fragment>
@@ -50,6 +64,8 @@ const CanvasPage = ({
 				elements={elements}
 				setElements={setElements}
 				socketEmitElements={socketEmitElements}
+				socketDisconnect={socketDisconnect}
+
 				// useHistory={useHistory}
 				// undo={undo}
 				// redo={redo}
@@ -63,11 +79,16 @@ CanvasPage.propTypes = {
 	getCurrentProfile: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
 	profile: PropTypes.object.isRequired,
+	getRoom: PropTypes.func.isRequired,
+	room: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 	profile: state.profile,
+	room: state.room,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(CanvasPage);
+export default connect(mapStateToProps, { getCurrentProfile, getRoom })(
+	CanvasPage
+);

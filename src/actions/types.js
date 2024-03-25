@@ -24,3 +24,17 @@ export const CREATE_ROOM_FAIL = "CREATE_ROOM_FAIL";
 
 export const CREATE_PROFILE = "CREATE_PROFILE";
 export const CREATE_PROFILE_ERROR = "CREATE_PROFILE_ERROR";
+
+export const GET_ROOM = "GET_ROOM";
+export const GET_ROOM_ERROR = "GET_ROOM_ERROR";
+export const SAVE_ROOM = "SAVE_ROOM";
+export const SAVE_ROOM_ERROR = "SAVE_ROOM_ERROR";
+export const ROOM_LOADED = "ROOM_LOADED";
+
+export const UPDATE_ELEMENTS = "UPDATE_ELEMENTS";
+export const UPDATE_ROOMID = "UPDATE_ROOMID";
+export const CLEAR_ROOM = "CLEAR_ROOM";
+export const RENAME_ROOM_SUCCESS = "RENANE_ROOM_SUCCESS";
+export const RENAME_ROOM_FAIL = "RENANE_ROOM_FAIL";
+
+export const GET_ROOM_NAMES = "GET_ROOM_NAMES";

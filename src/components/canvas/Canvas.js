@@ -1,6 +1,12 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
+import Spinner from "../main/Spinner";
+
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getCurrentProfile } from "../../actions/profile";
+import { getRoom, dataBase_saveElements } from "../../actions/rooms";
 
 const generator = rough.generator();
 
@@ -223,6 +229,10 @@ const Canvas = ({
 	socketEmitElements,
 	tool,
 	setTool,
+	roomId,
+	socketDisconnect,
+	room: { roomLoading, room },
+	dataBase_saveElements,
 	// undo,
 	// redo,
 	// useHistory,
@@ -239,6 +249,17 @@ const Canvas = ({
 	const textAreaRef = useRef();
 	const pressedKeys = usePressedKeys();
 
+	useEffect(() => {
+		console.log("SETTING INITIAL CANVAS ELEMENS");
+		console.log(room.elements);
+		setElements(room.elements);
+		console.log(elements);
+	}, []);
+
+	useEffect(() => {
+		return socketDisconnect();
+	}, []);
+
 	useLayoutEffect(() => {
 		const canvas = document.getElementById("canvas");
 		const context = canvas.getContext("2d");
@@ -249,8 +270,8 @@ const Canvas = ({
 		context.save();
 		context.translate(panOffset.x, panOffset.y);
 
-		console.log("CANVAS ELEMENTS: ");
-		console.log(elements);
+		// console.log("CANVAS ELEMENTS: ");
+		// console.log(elements);
 
 		if (elements != "undefined") {
 			elements.forEach((element) => {
@@ -483,6 +504,7 @@ const Canvas = ({
 		const elementsCopy = [...elements];
 		// socketEmitElements(elementsCopy[elementsCopy.length - 1]);
 		socketEmitElements(elementsCopy);
+		dataBase_saveElements(elementsCopy, room.roomId);
 	};
 
 	const handleBlur = (event) => {
@@ -534,4 +556,23 @@ const Canvas = ({
 	);
 };
 
-export default Canvas;
+Canvas.propTypes = {
+	getCurrentProfile: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+	profile: PropTypes.object.isRequired,
+	getRoom: PropTypes.func.isRequired,
+	room: PropTypes.object.isRequired,
+	dataBase_saveElements: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	auth: state.auth,
+	profile: state.profile,
+	room: state.room,
+});
+
+export default connect(mapStateToProps, {
+	getCurrentProfile,
+	getRoom,
+	dataBase_saveElements,
+})(Canvas);
