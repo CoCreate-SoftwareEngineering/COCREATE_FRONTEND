@@ -38,3 +38,4 @@ export const RENAME_ROOM_SUCCESS = "RENANE_ROOM_SUCCESS";
 export const RENAME_ROOM_FAIL = "RENANE_ROOM_FAIL";
 
 export const GET_ROOM_NAMES = "GET_ROOM_NAMES";
+export const ADD_MEMBER = "ADD_MEMBER";

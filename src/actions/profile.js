@@ -16,6 +16,7 @@ import {
 	CREATE_ROOM_FAIL,
 	CREATE_PROFILE,
 	CREATE_PROFILE_ERROR,
+	ADD_MEMBER,
 	// GET_ROOM_NAMES,
 } from "./types";
 
@@ -196,10 +197,10 @@ export const addMember = (roomId, email) => async (dispatch) => {
 			body,
 			config
 		);
-		// dispatch({
-		// 	type: ADD_MEMBER_SUCCESS,
-		// 	payload: res.data,
-		// });
+		dispatch({
+			type: ADD_MEMBER,
+			payload: res.data,
+		});
 	} catch (err) {
 		// const errors = err.respone.data.errors;
 		console.log("Member put Fail");

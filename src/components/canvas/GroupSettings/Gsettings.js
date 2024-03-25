@@ -16,10 +16,20 @@ import TextField from "@mui/material/TextField";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getRoom, updateRoomName } from "../../../actions/rooms";
+import {
+	getRoom,
+	updateRoomName,
+	addMemberToRoomFromSettings,
+} from "../../../actions/rooms";
 import { addMember } from "../../../actions/profile";
 
-const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
+const Gsettings = ({
+	room: { room },
+	updateRoomName,
+	getRoom,
+	addMember,
+	addMemberToRoomFromSettings,
+}) => {
 	const [isRemoveVisible] = useState(true);
 	const [open, setOpen] = useState(false);
 	const [rename, setRename] = useState("");
@@ -35,7 +45,9 @@ const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
 	const handleAddMember = (e) => {
 		e.preventDefault();
 		console.log("Add Member clicked");
+		console.log(member);
 		addMember(room.roomId, member);
+		// addMemberToRoomFromSettings(room.roomId, member);
 		setOpen(true);
 	};
 	const handleAdmin = (event) => {
@@ -63,7 +75,28 @@ const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
 			<h2>Settings</h2>
 			<div className="options">Members</div>
 			<div className="UserPic-container">
-				{isRemoveVisible && (
+				{room.members.map((member, index) => (
+					<div className="picitem" onClick={handleRemoveClick} key={index}>
+						<img
+							className="UserPic"
+							src={user1}
+							width="50"
+							height="50"
+							alt=""
+						></img>
+						<p>{member}</p>
+						<div className="tool">Remove</div>
+						<Button
+							type="button"
+							size="small"
+							className="admin"
+							onClick={handleAdmin}
+						>
+							Make admin
+						</Button>
+					</div>
+				))}
+				{/* {isRemoveVisible && (
 					<div className="picitem" onClick={handleRemoveClick}>
 						<img
 							className="UserPic"
@@ -182,7 +215,7 @@ const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
 							Make admin
 						</Button>
 					</div>
-				)}
+				)} */}
 			</div>
 			<Button
 				type="button"
@@ -259,6 +292,7 @@ Gsettings.propTypes = {
 	room: PropTypes.object.isRequired,
 	updateRoomName: PropTypes.func.isRequired,
 	addMember: PropTypes.func.isRequired,
+	addMemberToRoomFromSettings: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -271,5 +305,5 @@ export default connect(mapStateToProps, {
 	updateRoomName,
 	getRoom,
 	addMember,
+	addMemberToRoomFromSettings,
 })(Gsettings);
-

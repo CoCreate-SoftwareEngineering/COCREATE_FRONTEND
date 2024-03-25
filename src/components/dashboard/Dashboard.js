@@ -77,11 +77,7 @@ const Dashboard = ({
 			<Nav user={user} />
 
 			{profile == null ? (
-				<Fragment>
-					<div>
-						<h1>ERROR GETTING PROFILE</h1>
-					</div>
-				</Fragment>
+				<Fragment></Fragment>
 			) : (
 				<Fragment>
 					{/* {profile.rooms.map(
