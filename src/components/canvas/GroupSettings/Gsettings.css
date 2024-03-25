@@ -1,63 +1,94 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap");
 
 .section {
-     flex-direction: column;
-     display: flex;
-     align-items: center;
-     font-family: "Inter";
+	flex-direction: column;
+	display: flex;
+	align-items: center;
+	font-family: "Inter";
+	padding: 5vw;
 }
 
 .options {
-     display: block;
-     color: white;
-     padding: 10px;
-     background-color: #2C4251;
-     width: 80vw;
-     height: min-content;
-     margin: 20px;
+	display: block;
+	color: white;
+	padding: 10px;
+	background-color: #2c4251;
+	width: 80vw;
+	height: min-content;
+	margin: 20px;
+	font-size: 13pt;
+	place-content: center;
+	padding-left: 20px;
+}
+
+.save {
+	width: 0 !important;
+	padding: 1px !important;
+}
+
+.admin {
+	display: grid !important;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	grid-gap: 1vw;
+	justify-content: center !important;
+	width: 10vw !important;
+	height: 4vh;
 }
 
 .tool {
-     padding-top: 20px;
-     text-align: right;
+	padding: 10px;
+	text-align: center;
+	color: black;
+	font-size: medium;
 }
 
 .tool:hover {
-     cursor: pointer;
+	cursor: pointer;
 }
 
 .UserPic {
-     border: solid black 3px;
+	border: solid rgb(124, 192, 203, 0.5) 2px;
+	border-radius: 50%;
+	margin: auto;
 }
 
 .UserPic-container {
-     display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-     grid-gap: 1vw;
-     justify-content: center;
-     max-width: 80vw;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	grid-gap: 1vw;
+	justify-content: center;
+	max-width: 80vw;
 }
 
 .picitem {
-     text-align: center;
+	text-align: center;
 }
 
-.closebtn {     
-     border:none;
-     border-radius: 2px;
-     background-color: transparent;
+.closebtn {
+	border: none;
+	border-radius: 2px;
+	background-color: transparent;
 }
 
-h3{     
-     color:#2C4251;
+h3 {
+	color: #2c4251;
 }
 
-h2{
-     color:#2C4251;
-     padding: 20px;
-     font-weight: 700;
+h2 {
+	color: #2c4251;
+	padding: 20px;
+	font-weight: 700;
 }
 
-.Textfield{
-     float:right;
+.Textfield {
+	float: right;
+}
+
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root {
+	background-color: #2c4251;
+	color: rgb(124, 192, 203) !important;
+	font-weight: bold !important;
+	width: 15vw;
+	padding: 10px !important;
+	margin: 5px !important;
 }

@@ -7,6 +7,8 @@ import {
 	UPDATE_ELEMENTS,
 	UPDATE_ROOMID,
 	CLEAR_ROOM,
+	RENAME_ROOM_SUCCESS,
+	RENAME_ROOM_FAIL,
 } from "../actions/types";
 
 const initialState = {
@@ -28,6 +30,7 @@ export default function (state = initialState, action) {
 			};
 		case SAVE_ROOM_ERROR:
 		case GET_ROOM_ERROR:
+		case RENAME_ROOM_FAIL:
 			return {
 				...state,
 				error: payload,
@@ -52,6 +55,15 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				room: null,
+				roomLoading: false,
+			};
+		case RENAME_ROOM_SUCCESS:
+			return {
+				...state,
+				room: {
+					...state.room,
+					roomName: payload,
+				},
 				roomLoading: false,
 			};
 		// case

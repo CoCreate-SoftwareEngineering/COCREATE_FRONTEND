@@ -13,6 +13,7 @@ const CanvasPageHeader = ({
 	profile: { profile, loading },
 	logout,
 	roomId,
+	room: { room },
 }) => {
 	useEffect(() => {
 		getCurrentProfile();
@@ -23,19 +24,17 @@ const CanvasPageHeader = ({
 			<div className="profile flex">
 				{/* <img src={profilePicture} className="profile-img" alt="Picture" width="500" height="600"></img> */}
 				{/* Have to add to backend */}
-				<h2 className="fs-24">
+				<h2 className="fs-24" style={{ color: "white" }}>
 					{user && user.firstName} {user && user.lastName}
 				</h2>
 			</div>
 			<div className="title">
-				<h2 className="">{}</h2>
+				<h2 className="" style={{ color: "white" }}>
+					{room.roomName}
+				</h2>
 			</div>
 			<div className="menu">
-				{/* <a className="logOut" onClick={logout}>
-					Log Out
-				</a> */}
-				<a className="mail">Messages</a>
-				{/* <i className="menu-icon fa-solid fa-bars fa-2xl"></i> */}
+				<Link to="/dashboard">Dashboard</Link>
 			</div>
 		</header>
 	);
@@ -45,11 +44,13 @@ CanvasPageHeader.propTypes = {
 	getCurrentProfile: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
 	profile: PropTypes.object.isRequired,
+	room: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 	profile: state.profile,
+	room: state.room,
 });
 
 export default connect(mapStateToProps, { getCurrentProfile, logout })(

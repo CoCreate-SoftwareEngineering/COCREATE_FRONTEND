@@ -1,8 +1,13 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
-import { getRoom, updateRoomId, clearRoom } from "../../actions/rooms";
+import {
+	getRoom,
+	updateRoomId,
+	clearRoom,
+	getAllRoomNames,
+} from "../../actions/rooms";
 
 import Spinner from "../main/Spinner";
 import Body from "../main/Body";
@@ -21,7 +26,7 @@ import io from "socket.io-client";
 const Dashboard = ({
 	getCurrentProfile,
 	auth: { user },
-	profile: { profile, loading },
+	profile: { profile, loading, roomNames },
 	uuid,
 	setRoomJoined,
 	setUser,
@@ -30,6 +35,7 @@ const Dashboard = ({
 	socketJoinRoom,
 	getRoom,
 	clearRoom,
+	getAllRoomNames,
 	// setRoomId,
 	// roomId,
 	// room: {
@@ -37,6 +43,8 @@ const Dashboard = ({
 	// 	room: { roomId },
 	// },
 }) => {
+	// const [roomNames, setRoomNames] = useState([]);
+
 	useEffect(() => {
 		getCurrentProfile();
 		console.log("GETTING PROFILE");
@@ -46,6 +54,10 @@ const Dashboard = ({
 		clearRoom();
 	}, []);
 	console.log(profile);
+
+	useEffect(() => {
+		getAllRoomNames();
+	}, []);
 
 	const handleChooseRoom = (room) => {
 		console.log("0.INTIAL ROOM ID");
@@ -58,7 +70,7 @@ const Dashboard = ({
 		// console.log(roomId);
 	};
 
-	return loading && profile === null ? (
+	return loading && profile && profile.roomNames === null ? (
 		<Spinner />
 	) : (
 		<Fragment>
@@ -83,7 +95,7 @@ const Dashboard = ({
 								setUser={setUser}
 								socket={socket}
 								heading="Projects"
-								notiAmountCons={profile.rooms.length} // dynamically set notification amount
+								notiAmountCons={profile.roomIds.length} // dynamically set notification amount
 								rowContent={
 									<div className="projects-container">
 										<JoinRoomForm
@@ -95,16 +107,16 @@ const Dashboard = ({
 											// roomId={roomId}
 										/>
 										{/* add all projects in data structure to projects section */}
-										{profile.rooms.map((room, index) => (
+										{roomNames.map((room, index) => (
 											<Link
 												key={index}
-												to={`/${room.roomId}`}
+												to={`/${room}`}
 												onClick={() => {
 													handleChooseRoom(room);
 												}}
 											>
 												<div className="item">
-													<p>{room.roomName}</p>
+													<p>{room}</p>
 												</div>
 											</Link>
 										))}
@@ -129,6 +141,7 @@ Dashboard.propTypes = {
 	getRoom: PropTypes.func.isRequired,
 	updateRoomId: PropTypes.func.isRequired,
 	clearRoom: PropTypes.func.isRequired,
+	getAllRoomNames: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -142,4 +155,5 @@ export default connect(mapStateToProps, {
 	getRoom,
 	updateRoomId,
 	clearRoom,
+	getAllRoomNames,
 })(Dashboard);
