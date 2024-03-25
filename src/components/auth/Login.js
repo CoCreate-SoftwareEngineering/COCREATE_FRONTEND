@@ -19,7 +19,8 @@ const Login = ({login, isAuthenticated}) => {
 
   const {email, password} = formData
 
-  const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
+  const onChange = e => 
+      setFormData({...formData, [e.target.name]: e.target.value})
 
   //Forgotten password link
   const forgotPassword = () => {
@@ -76,4 +77,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, {login})(Login)
+export default connect(mapStateToProps, {login})(Login);

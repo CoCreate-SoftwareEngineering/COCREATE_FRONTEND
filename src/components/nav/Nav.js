@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import "./Nav.css";
 import NotificationBox from "../notification_box/NotificationBox.js";
 import logoImg from "../../media/Co_Create_Logo_blue.png";
@@ -8,6 +9,39 @@ import { Link } from "react-router-dom";
 
 const OurNav = () => {
   //Lambda style of return, is more compact and cleaner
+
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    // Fetch user data from backend when component mounts
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      // Fetch user data from your API endpoint
+      //Apparently the below line needs to replace "/api/users/me" with the correct endpoint to fetch the user's data in your backend API
+      //IDK what that means doe
+      const response = await fetch("/api/users/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any necessary authentication headers
+          // such as authorization token
+          //This is some shitty GPT code. God knows what this does
+        },
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+      } else {
+        console.error("Failed to fetch user data");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };  
 
   return (
     <div className="Outside">
@@ -35,7 +69,7 @@ const OurNav = () => {
           </li>
           <li>
             <Link to="/profile">
-              <div className="Username">Username</div>
+              <div className="Username">{user ? `${user.firstName} ${user.lastName}` : "Loading..."}</div>
             </Link>
           </li>
         </ul>
@@ -77,7 +111,7 @@ const OurNav = () => {
                   </h2>
                   <ul className="DropdownLinks">
                     <li className="Message">
-                      <Link to="/home">
+                      <Link to="/chat">
                         <img
                           className="ProfilePic"
                           src={userImg1}
