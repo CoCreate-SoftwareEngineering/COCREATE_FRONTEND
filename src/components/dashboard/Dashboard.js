@@ -70,6 +70,7 @@ const Dashboard = ({
 		// console.log(roomId);
 	};
 
+
 	return profile && roomNames === null ? (
 		<Spinner />
 	) : (
