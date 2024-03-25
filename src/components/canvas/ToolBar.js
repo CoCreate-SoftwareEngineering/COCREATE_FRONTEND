@@ -171,11 +171,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import settingsIcon from "../../media/button-images/icon_settings.png";
-import { Link } from "react-router-dom";
-import IconButton from "./IconButton";
-import "./GroupSettings/Gsettings.js";
-import "./ToolBar.css";
+
+import settingsIcon from '../../media/button-images/icon_settings.png'
+import { Link } from 'react-router-dom';
+import IconButton from './IconButton';
+import './GroupSettings/Gsettings.js';
+import './ToolBar.css';
+
 
 const options = [
 	{

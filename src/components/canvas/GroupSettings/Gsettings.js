@@ -272,3 +272,4 @@ export default connect(mapStateToProps, {
 	getRoom,
 	addMember,
 })(Gsettings);
+
