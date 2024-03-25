@@ -70,7 +70,7 @@ const Dashboard = ({
 		// console.log(roomId);
 	};
 
-	return loading && profile && profile.roomNames === null ? (
+	return loading && profile && roomNames === null ? (
 		<Spinner />
 	) : (
 		<Fragment>
