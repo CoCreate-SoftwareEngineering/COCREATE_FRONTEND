@@ -27,7 +27,9 @@ const CanvasPage = ({
 	setPeerVideos,
 	connectionRefs,
 	setConnections,
-	joinRoomVideo
+	joinRoomVideo,
+	peerSockets,
+	setPeerSockets
 	// useHistory,
 	// undo,
 	// redo,
@@ -49,7 +51,6 @@ const CanvasPage = ({
 		<Fragment>
 			{/* <Container className="container"> */}
 			<CanvasPageHeader />
-			{console.log("PeerVideos2: "+ peerVideos)}
 			<Example 
 				tool={tool} 
 				handleToolChange={handleToolChange} 
@@ -60,6 +61,8 @@ const CanvasPage = ({
 				connectionRefs={connectionRefs}
 				setConnections={setConnections}
 				joinRoomVideo={joinRoomVideo}
+				peerSockets={peerSockets}
+				setPeerSockets={setPeerSockets}
 			 />
 			<Canvas
 				tool={tool}

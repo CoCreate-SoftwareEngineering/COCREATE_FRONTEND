@@ -1,19 +1,18 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import "./App.css";
-import Header from "./components/main/Header";
-import Body from "./components/main/Body";
-import Card from "./components/main/Card";
 import Landing from "./components/main/Landing";
 
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Alert from "./components/main/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
-import PrivateRoute from "./components/routing/PrivateRoute";
 import CanvasPage from "./components/canvas/CanvasPage";
 
 import Gsettings from './components/canvas/GroupSettings/Gsettings'; 
+
+//import SimplePeer from './libs/simplepeer.min.js'
+//import Peer from './libs/simple-peer/';
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -73,15 +72,70 @@ const App = () => {
 	const [elements, setElements] = useState([]);
 
 	//Video calling state
-	const [ myStream, setMyStream ] = useState()
+	const [ myStream, setMyStream ] = useState(null)
 	const [ peerVideos, setPeerVideos ] = useState([])
 	const [ connectionRefs, setConnections ] = useState([])
-	const [ id, setId] = useState()
-
+	const [ peerSockets, setPeerSockets ] = useState([])
+	const [ calling, setCalling ] = useState(false)
 
 	socket.on("connect", () => {
 		console.log("Connected to Socket.io server");
 	});
+
+	socket.on("roomUsers", (socketIds) => {
+		//console.log("RECEIVED ROOM USERS")
+		console.log("Got list of sockets in room: " + socketIds)
+		socketIds.forEach((id) => {
+			callUser(id)
+		})
+
+	})
+
+	socket.on("callUser", (data) => {
+		answerCall(data)
+	})
+
+	const callUser = (socketId) => {
+		console.log("Making peer object")
+		const peer = new Peer ({
+			initiator: true,
+			trickle: false,
+			stream: myStream
+		})
+		peer.on("signal", (data) => {
+			socket.emit("callUser", {
+				userToCall: socketId,
+				signalData: data,
+				from: socket.id,
+			})
+		})
+		peer.on("stream", (stream) => {
+			addPeerVideo(stream)
+		})
+		socket.on("callAccepted", (signal) => {
+			setCalling(true)
+			peer.signal(signal)
+		})
+		addConnectionRef(peer)
+	}
+
+	const answerCall = (callData) => {
+		setCalling(true)
+		console.log("Making peer object")
+		const peer = new Peer({
+			initiator: false,
+			trickle: false,
+			stream: myStream
+		})
+		peer.on("signal", (data) => {
+			socket.emit("answerCall", { signal: data, to: callData.from, from: socket.id })
+		})
+		peer.on("stream", (stream) => {
+			addPeerVideo(stream)
+		})
+		peer.signal(callData.signal)
+		addConnectionRef(peer)
+	}
 
 
 	const socketJoinRoom = (data) => {
@@ -105,6 +159,7 @@ const App = () => {
 	};
 
 	useEffect(() => {
+
 		console.log("getting user data");
 		store.dispatch(loadUser());
 		socket.on("servedElements", (receivedElements) => {
@@ -113,19 +168,18 @@ const App = () => {
 				socketUpdateElements(receivedElements);
 			}
 		});
-
-		socket.on("me", (id) => {
-			console.log("My socket id is: " + id)
-			setId(id)
-		})
-
-		socket.on("roomSockets", (socketIds) => {
-			console.log("Got list of sockets in room: " + socketIds)
-		})
 	}, []);
 
 	const joinRoomVideo = () => {
-		console.log("My Id is: " + socket.id)
+		console.log("My id: " + socket.id)
+	}
+
+	const addPeerSocket = (socketId) => {
+		setPeerSockets(prevPeerSockets => [... prevPeerSockets, socketId])
+	}
+
+	const removePeerSocket = (socketId) => {
+		setPeerSockets(prevPeerSockets => [... prevPeerSockets, socketId])
 	}
 
 	const addPeerVideo = (videoRef) => {
@@ -203,7 +257,6 @@ const App = () => {
 								// </PrivateRoute>
 							}
 						/>
-						{console.log("Peervideos1: " + peerVideos)}
 						<Route
 							exact
 							path="/:roomId"
@@ -221,6 +274,8 @@ const App = () => {
 									connectionRefs={connectionRefs}
 									setConnections={setConnections}
 									joinRoomVideo={joinRoomVideo}
+									peerSockets={peerSockets}
+									setPeerSockets={setPeerSockets}
 									// undo={undo}
 									// redo={redo}
 									// useHistory={useHistory}

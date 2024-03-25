@@ -23,9 +23,10 @@ const ToolBar = ({ handleToolChange,
 					setPeerVideos,
 					connectionRefs,
 					setConnections, 
-					joinRoomVideo, 
+					joinRoomVideo,
+					peerSockets,
+					setPeerSockets, 
 					...props }) => {
-	console.log("Peer Videos 3: " + peerVideos)
 	const [show, setShow] = useState(false);
 
 	const myVideo = useRef()
@@ -43,15 +44,17 @@ const ToolBar = ({ handleToolChange,
 	useEffect(() => {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true}).then((stream) => {
 			setMyStream(stream)
-			myVideo.current.srcObject = stream;
+			if(myVideo.current) {
+				myVideo.current.srcObject = stream;
+			} else {
+				console.log("myVideo.current undefined/null, cant set video feed")
+			}
 		})
-		console.log("peerVideos: " + peerVideos)
 	}, [])
 
 
 	return (
 		<>
-			{console.log("PeerVideos3: " + peerVideos)}
 			<Button onClick={toggleShow} className="tool-bar-button">
 				{name}
 			</Button>
@@ -108,7 +111,6 @@ const ToolBar = ({ handleToolChange,
 						<label htmlFor="text">Text</label>
 					</div>
 					<Button onClick={() => joinRoomVideo()}>Join Video Call</Button>
-					{console.log("peerVideos3: " + peerVideos)}
 					{myStream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
 					{peerVideos.map((videoSrc, index) => (
                             <video key={index} playsInline ref={videoRef => {
@@ -123,7 +125,7 @@ const ToolBar = ({ handleToolChange,
 	);
 };
 
-const Example = ({ tool, handleToolChange, myStream, setMyStream, peerVideos, setPeerVideos, connectionRefs, setConnections, joinRoomVideo }) => {
+const Example = ({ tool, handleToolChange, myStream, setMyStream, peerVideos, setPeerVideos, connectionRefs, setConnections, joinRoomVideo, peerSockets, setPeerSockets }) => {
 	return (
 		<>
 			{options.map((props, idx) => (
@@ -137,6 +139,8 @@ const Example = ({ tool, handleToolChange, myStream, setMyStream, peerVideos, se
 					connectionRefs={connectionRefs}
 					setConnections={setConnections}
 					joinRoomVideo={joinRoomVideo}
+					peerSockets={peerSockets}
+					setPeerSockets={setPeerSockets}
 					key={idx}
 					{...props}
 					placement={"end"}

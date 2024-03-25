@@ -249,8 +249,8 @@ const Canvas = ({
 		context.save();
 		context.translate(panOffset.x, panOffset.y);
 
-		console.log("CANVAS ELEMENTS: ");
-		console.log(elements);
+		// console.log("CANVAS ELEMENTS: ");
+		// console.log(elements);
 
 		if (elements != "undefined") {
 			elements.forEach((element) => {
