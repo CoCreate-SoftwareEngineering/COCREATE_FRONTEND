@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { logout } from "../../actions/auth";
 import { signOut } from "firebase/auth";
-
+import Button from "react-bootstrap/Button";
 
 const OurNav = ({ user, logout }) => {
 	//Lambda style of return, is more compact and cleaner
