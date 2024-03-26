@@ -165,9 +165,10 @@ const createGroupFolder = async () => {
       <div className="modal-header-file">
       <div className="header-content-file"> {/* New wrapper using Flexbox */}
         <h4 className="modal-title-file">
-          {!folderExists && (
+          {/* Ignore This */}
+          {/* {!folderExists && (
               <div>Folder Does Not Exist</div>              
-            )}
+            )} */}
           {roomName}
         </h4>
         <button className='refresh-button' onClick={refreshContent} style={{ marginLeft: '10px', padding: '0 5px', width: '30px', height: '30px', backgroundColor: 'none'}}>
