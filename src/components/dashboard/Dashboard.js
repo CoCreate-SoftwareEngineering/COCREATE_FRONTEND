@@ -22,7 +22,7 @@ import ToggleableHeading from "./ToggleableHeading/ToggleableHeading.js";
 import "./Dashboard.css";
 
 import io from "socket.io-client";
-import EventCalendar from '../dashboard/calendar/EventCalendar.js';
+import EventCalendar from './calendar/EventCalendar.js';
 
 const Dashboard = ({
 	getCurrentProfile,
