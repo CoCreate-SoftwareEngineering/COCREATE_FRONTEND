@@ -12,7 +12,7 @@ import CanvasPage from "./components/canvas/CanvasPage";
 import Gsettings from './components/canvas/GroupSettings/Gsettings'; 
 
 //import SimplePeer from './libs/simplepeer.min.js'
-//import Peer from './libs/simple-peer/';
+import Peer from 'simple-peer';
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -86,7 +86,7 @@ const App = () => {
 		//console.log("RECEIVED ROOM USERS")
 		console.log("Got list of sockets in room: " + socketIds)
 		socketIds.forEach((id) => {
-			callUser(id)
+			addPeerSocket(id)
 		})
 
 	})
@@ -171,7 +171,12 @@ const App = () => {
 	}, []);
 
 	const joinRoomVideo = () => {
-		console.log("My id: " + socket.id)
+		console.log("Call button clicked")
+		peerSockets.forEach((id) => {
+			console.log("Calling " + id)
+			callUser(id)
+		})
+		//console.log("My id: " + socket.id)
 	}
 
 	const addPeerSocket = (socketId) => {

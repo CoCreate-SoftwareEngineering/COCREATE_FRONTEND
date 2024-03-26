@@ -52,6 +52,10 @@ const ToolBar = ({ handleToolChange,
 		})
 	}, [])
 
+	const callUser = (id) => {
+		console.log("tEST 55 " + id)
+	}
+
 
 	return (
 		<>
@@ -112,6 +116,13 @@ const ToolBar = ({ handleToolChange,
 					</div>
 					<Button onClick={() => joinRoomVideo()}>Join Video Call</Button>
 					{myStream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+					{console.log(peerSockets)}
+					{peerSockets.map((socketId, index) => (
+						<div key={index}>
+							{console.log(socketId + " ya")}
+							<Button onClick={() => callUser(socketId)}>{`Call ${socketId}`}</Button>
+						</div>
+					))}
 					{peerVideos.map((videoSrc, index) => (
                             <video key={index} playsInline ref={videoRef => {
                                 if (videoRef) {
