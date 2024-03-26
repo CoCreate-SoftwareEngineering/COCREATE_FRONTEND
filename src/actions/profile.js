@@ -226,10 +226,9 @@ export const leaveRoom = (roomId) => async (dispatch) => {
 	// });
 
 	try {
-		const res = await axios.put(
+		const res = await axios.delete(
 			`http://localhost:8000/api/profile/rooms/leaveRoom/${roomId}`
 		);
-		console.log(res.data);
 		dispatch({
 			type: LEAVE_ROOM,
 			payload: res.data.rooms,
