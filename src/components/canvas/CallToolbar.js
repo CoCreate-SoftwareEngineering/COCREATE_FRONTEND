@@ -33,11 +33,9 @@ const CallToolbar = ({ name, ...props }) => {
 		navigator.mediaDevices
 			.getUserMedia({ video: true, audio: true })
 			.then((stream) => {
-                if(myVideo.current) {
-                    setMyStream(stream);
-                    console.log(stream)
-                    myVideo.current.srcObject = stream;
-                }	
+				setMyStream(stream);
+				console.log(stream)
+				myVideo.current.srcObject = stream;
 			});
 		console.log("Useeffect");
 	}, [myVideo.current]);
