@@ -1,7 +1,7 @@
 import React from "react";
 import "../ToolBar.js";
 import "./Gsettings.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import user1 from "../../../media/ProfileImg1.jpg";
 import user2 from "../../../media/Darwizzy.jpg";
 import { useState } from "react";
@@ -21,7 +21,7 @@ import {
 	updateRoomName,
 	addMemberToRoomFromSettings,
 } from "../../../actions/rooms";
-import { addMember } from "../../../actions/profile";
+import { addMember, leaveRoom } from "../../../actions/profile";
 
 const Gsettings = ({
 	room: { room },
@@ -29,6 +29,7 @@ const Gsettings = ({
 	getRoom,
 	addMember,
 	addMemberToRoomFromSettings,
+	leaveRoom,
 }) => {
 	const [isRemoveVisible] = useState(true);
 	const [open, setOpen] = useState(false);
@@ -64,6 +65,13 @@ const Gsettings = ({
 		updateRoomName(room.roomId, rename);
 		// setRename("");
 		getRoom(room.roomId);
+	};
+
+	const handleLeaveRoom = (e) => {
+		e.preventDefault();
+		console.log("Leaving room");
+		leaveRoom(room.roomId);
+		// navigate("/dashboard");
 	};
 	return (
 		<div className="section">
@@ -272,8 +280,15 @@ const Gsettings = ({
 					</span>{" "}
 				</form>
 			</div>
-			<Button type="button" size="small" className="leavegrp">
-				Leave group
+			<Button
+				type="button"
+				size="small"
+				className="leavegrp"
+				onClick={(e) => {
+					handleLeaveRoom(e);
+				}}
+			>
+				<Link to="/dashboard">Leave group</Link>
 			</Button>
 			<Button type="button" size="small" className="leavegrp">
 				Delete group
@@ -293,6 +308,7 @@ Gsettings.propTypes = {
 	updateRoomName: PropTypes.func.isRequired,
 	addMember: PropTypes.func.isRequired,
 	addMemberToRoomFromSettings: PropTypes.func.isRequired,
+	leaveRoom: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -306,4 +322,5 @@ export default connect(mapStateToProps, {
 	getRoom,
 	addMember,
 	addMemberToRoomFromSettings,
+	leaveRoom,
 })(Gsettings);

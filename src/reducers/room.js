@@ -10,6 +10,7 @@ import {
 	RENAME_ROOM_SUCCESS,
 	RENAME_ROOM_FAIL,
 	ADD_MEMBER,
+	REMOVE_MEMBER,
 } from "../actions/types";
 
 const initialState = {
@@ -69,6 +70,16 @@ export default function (state = initialState, action) {
 			};
 		case ADD_MEMBER:
 			console.log("ADD MEMBER DISPATCH");
+			return {
+				...state,
+				room: {
+					...state.room,
+					members: payload,
+				},
+				roomLoading: false,
+			};
+		case REMOVE_MEMBER:
+			console.log("REMOVE MEMBER DISPATCH");
 			return {
 				...state,
 				room: {

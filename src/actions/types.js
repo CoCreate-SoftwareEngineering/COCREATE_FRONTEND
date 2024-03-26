@@ -39,3 +39,6 @@ export const RENAME_ROOM_FAIL = "RENANE_ROOM_FAIL";
 
 export const GET_ROOM_NAMES = "GET_ROOM_NAMES";
 export const ADD_MEMBER = "ADD_MEMBER";
+
+export const LEAVE_ROOM = "LEAVE_ROOM";
+export const REMOVE_MEMBER = "REMOVE_MEMBER";

@@ -14,6 +14,7 @@ import {
 	RENAME_ROOM_FAIL,
 	GET_ROOM_NAMES,
 	ADD_MEMBER,
+	REMOVE_MEMBER,
 } from "./types";
 
 export const dataBase_saveElements = (elements, roomId) => async (dispatch) => {
