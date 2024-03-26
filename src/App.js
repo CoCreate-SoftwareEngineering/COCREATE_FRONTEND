@@ -87,6 +87,16 @@ const App = () => {
 		console.log("Connected to Socket.io server");
 	});
 
+	socket.on("roomUsers", (socketIds) => {
+		//console.log("RECEIVED ROOM USERS")
+		console.log("my id: " + socket.id)
+		console.log("Got list of sockets in room: " + socketIds)
+		// socketIds.forEach((id) => {
+		// 	addPeerSocket(id)
+		// })
+
+	})
+
 	const socketJoinRoom = (roomId) => {
 		socket.emit("userJoined", roomId);
 		setRoomId(roomId);
