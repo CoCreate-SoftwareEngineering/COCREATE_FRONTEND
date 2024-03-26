@@ -10,7 +10,7 @@ import { register } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
 import { createProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
-import'./Login.css';
+import "./Register.css";
 
 const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 	const [formData, setFormData] = useState({
@@ -38,8 +38,8 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 	};
 
 	// Navigates if logged in
-	if (isAuthenticated){
-	  return <Navigate to="/dashboard"/>
+	if (isAuthenticated) {
+		return <Navigate to="/dashboard" />;
 	}
 
 	return (

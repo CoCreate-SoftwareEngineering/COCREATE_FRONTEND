@@ -13,6 +13,8 @@ import {
 	RENAME_ROOM_SUCCESS,
 	RENAME_ROOM_FAIL,
 	GET_ROOM_NAMES,
+	ADD_MEMBER,
+	REMOVE_MEMBER,
 } from "./types";
 
 export const dataBase_saveElements = (elements, roomId) => async (dispatch) => {
@@ -182,5 +184,65 @@ export const getAllRoomNames = () => async (dispatch) => {
 		console.log("ERROR GETTING ROOM NAMES");
 	}
 };
+export const addMemberToRoom = (roomId) => async (dispatch) => {
+	console.log("ADDING MEMBER");
 
-// export function dataBase_saveElements
+	const config = {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	};
+	console.log("trying");
+
+	const body = JSON.stringify({
+		roomId: roomId,
+	});
+	try {
+		console.log("ADDING MEMBER");
+		const res = await axios.put(
+			"http://localhost:8000/api/rooms/addMember",
+			body,
+			config
+		);
+		console.log("Response data");
+		console.log(res.data);
+		dispatch({
+			type: ADD_MEMBER,
+			payload: res.data,
+		});
+	} catch (err) {
+		console.log("ERROR ADDING MEMBERS");
+	}
+};
+export const addMemberToRoomFromSettings =
+	(roomId, email) => async (dispatch) => {
+		console.log("ADDING MEMBER");
+
+		const config = {
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		console.log("trying");
+
+		const body = JSON.stringify({
+			roomId: roomId,
+			email: email,
+		});
+		try {
+			console.log("ADDING MEMBER");
+			const res = await axios.put(
+				"http://localhost:8000/api/profile/rooms/addMember",
+				body,
+				config
+			);
+			console.log("Response data");
+			console.log(res.data);
+			dispatch({
+				type: ADD_MEMBER,
+				payload: res.data,
+			});
+		} catch (err) {
+			console.log("ERROR ADDING MEMBERS");
+		}
+	};

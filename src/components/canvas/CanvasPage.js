@@ -37,7 +37,9 @@ const CanvasPage = ({
 	}, [loading]);
 
 	useEffect(() => {
-		// // getRoom(room.roomId);
+		// console.log("CP Room Id");
+		// console.log(roomId);
+		// getRoom(roomId);
 		// setElements(room.elements);
 		// console.log("CANVAS PAGE: GET ROOM");
 		// console.log(room.elements);
