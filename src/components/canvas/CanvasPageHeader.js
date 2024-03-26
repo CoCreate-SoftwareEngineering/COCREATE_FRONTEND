@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { logout } from "../../actions/auth";
 import profilePicture from "../../person-icon.jpg";
+import FilesList from "./FileSharing/FilePage";
+
 // import logo from "../../../public/person-icon.jpg"
 
 const CanvasPageHeader = ({
@@ -19,6 +21,19 @@ const CanvasPageHeader = ({
 		getCurrentProfile();
 	}, []);
 
+	const [showFilesModal, setShowFilesModal] = useState(false);
+
+	const handleFilesModalShow = () => {
+		console.log("Opening Files Modal");
+		setShowFilesModal(true);
+	  };
+	  
+	  // Debug: Log when modal is being closed to track unexpected triggers
+	  const handleFilesModalClose = () => {
+		console.log("Closing Files Modal");
+		setShowFilesModal(false);
+	  };
+
 	return (
 		<header className="canvas-header flex text-white">
 			<div className="profile flex">
@@ -30,12 +45,18 @@ const CanvasPageHeader = ({
 			</div>
 			<div className="title">
 				<h2 className="" style={{ color: "white" }}>
-					{room.roomName}
+					{room.roomName}					
 				</h2>
 			</div>
 			<div className="menu">
 				<Link to="/dashboard">Dashboard</Link>
 			</div>
+
+			<div>
+				<button onClick={handleFilesModalShow}>Files</button>
+				<FilesList show = {showFilesModal} onClose={handleFilesModalClose} roomId={room.roomId} roomName={room.roomName} />
+			</div>
+
 		</header>
 	);
 };

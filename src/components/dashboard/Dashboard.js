@@ -14,7 +14,7 @@ import Body from "../main/Body";
 import JoinRoomForm from "./room_form/JoinRoomForm";
 import Nav from "../nav/Nav";
 import Help from "./Help/HelpButton";
-
+import Footer from "./Footer.js";
 import { Link } from "react-router-dom";
 
 import ToggleableHeading from "./ToggleableHeading/ToggleableHeading.js";
@@ -75,6 +75,8 @@ const Dashboard = ({
 	return profile && roomNames === null ? (
 		<Spinner />
 	) : (
+		<div className="body-flex-container">
+			<div className="content-wrapper">
 		<Fragment>
 			<Nav user={user} />
 
@@ -94,7 +96,7 @@ const Dashboard = ({
 								setUser={setUser}
 								socket={socket}
 								heading="Projects"
-								notiAmountCons={profile.roomIds.length} // dynamically set notification amount
+								notiAmountCons={profile?.roomIds?.length ?? 0} // dynamically set notification amount
 								rowContent={
 									<div className="projects-container">
 										<JoinRoomForm
@@ -106,7 +108,7 @@ const Dashboard = ({
 											// roomId={roomId}
 										/>
 										{/* add all projects in data structure to projects section */}
-										{roomNames.map((room, index) => (
+                    {roomNames.map((room, index) => (
 											<Link
 												key={index}
 												to={`/${profile.roomIds[index]}`}
@@ -115,21 +117,27 @@ const Dashboard = ({
 												}}
 											>
 												<div className="item">
-													<p>{room}</p>
+												<p>{room}</p>
 												</div>
 											</Link>
-										))}
+											))}
+
 									</div>
 								}
 							/>
 						</div>
 					</div>
-					<div>
-						<Help />
-					</div>
+					
 				</Fragment>
 			)}
 		</Fragment>
+		
+		</div>
+		<div className="footer">			
+			<Footer />
+		</div>
+		</div>
+		
 	);
 };
 

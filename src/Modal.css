@@ -1,0 +1,201 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+  
+.textarea-min-size {    
+    min-height: 210px; /* Adjust the size as needed */
+  }
+  
+  .modal-content {
+    background-color: #ededed;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%; 
+    display: flex; /* Enables flexbox */
+    flex-direction: column; /* Stacks children vertically */
+    max-width: 800px; 
+    height: 600px; /* Fixed height */
+    overflow-y: auto; /* Allows internal scrolling */
+    position: relative; /* For positioning elements inside */
+    overflow: hidden;
+}
+
+
+
+
+    
+  .form-row {
+    display: flex;
+    align-items: center; /* Aligns items vertically in the center */
+    margin-bottom: 20px; /* Space between rows */
+  }
+  
+  .form-row label {
+    margin-right: 10px; /* Space between label and input */
+  }
+  
+  .form-row input,
+  .form-row textarea {
+    flex-grow: 1; /* Allows input and textarea to fill the available space */
+  }
+    
+button:hover {
+    background-color: orange;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space between title and FileUpload */
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+}
+
+.refresh-button {
+  padding: 0 5px;
+  margin-right: 10px;
+  right: 1px;
+  border: none  ;
+  padding-right: 5px;
+  background-color: #ededed;
+}
+
+.modal-title {
+  margin: 0; /* Remove default margins */
+  padding-right: 10px;
+  font-family: 'calibri';
+  font-size: 35px;
+  padding-bottom: 35px;
+  padding-right: 55px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end; /* Aligns items to the left */
+  padding-top: 10px;
+  border-top: 1px solid #ccc; /* adds a line above the footer */
+}
+
+.modal-body {
+  overflow-y: auto; /* Allows scrolling within this element */
+  flex-grow: 1; /* Takes up all available space, pushing footer down */
+}
+
+
+
+
+/* for folders and files */
+
+.content-file, .content-folder {
+  border-bottom: 1px solid #ccc; /* Soft grey line */
+  padding-bottom: 0.5em; /* Adds some space between the content and the line */
+  margin-bottom: 0.5em; /* Adds some space after the line to the next item */
+  padding-top: 0.5em;
+}
+
+
+.content-folder:hover, .content-file a:hover {
+  text-decoration: underline; /* Visual feedback for hover */
+}
+
+.content-file a {
+  color: black; /* Style for file links */
+
+}
+.content-file {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.content-file img, .content-folder img {
+  height: 1.5em; /* Sets the height relative to the current font size */
+  width: 1.5em; /* Sets the width relative to the current font size */
+  margin-right: 0.5em; /* Adds some space between the icon and the text */
+  vertical-align: middle; /* Aligns the icon with the middle of the text */
+  
+}
+
+.del-button {
+  font-size: 1em;
+  padding: 0.5em; /* Uniform padding */
+  margin-left: auto;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  color: black; /* Removed quotes around the color value */
+  background-color: rgba(192, 188, 188, 0.164);
+  border-radius: 0.3em;
+
+  /* Set both width and height to the same value */
+  width: 25px;
+  height: 25px;
+
+  /* Ensure the content is centered */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Override default button padding for icons or single characters */
+  padding: 0; /* Adjust or remove padding if you're aiming for a square button */
+
+  /* If your button contains text and you still want it square, consider using 'min-width' and 'min-height' */
+  min-width: 25px;
+  min-height: 25px;
+}
+
+
+.del-button:hover {
+  background-color: #e0e0e0; 
+}
+
+.del-button::after {
+  background-image: url('../../public/refresh.ico');    
+}
+
+.spacer {
+  flex-grow: 1; /* Takes up any available space */
+}
+
+
+
+/* Loading spinner */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: #7CC0CB;
+  border-radius: 50%;
+  display: block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  position: relative;
+  top: 50%;
+  margin: 0 auto;  
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
