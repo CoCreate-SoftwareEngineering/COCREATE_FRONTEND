@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useLocation } from 'react-router';
 import { ref, uploadBytes } from 'firebase/storage';
-import { storage, auth } from '../auth/FireBase-config'; 
+import { storage, auth } from '../../auth/FireBase-config'; 
 import './FileUpload.css';
 
 

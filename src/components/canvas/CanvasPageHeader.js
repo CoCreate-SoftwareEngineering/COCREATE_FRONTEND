@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { logout } from "../../actions/auth";
 import profilePicture from "../../person-icon.jpg";
-import FilesList from "./FilePage";
+import FilesList from "./FileSharing/FilePage";
 // import logo from "../../../public/person-icon.jpg"
 
 const CanvasPageHeader = ({

@@ -5,7 +5,7 @@
     border: none;
     background-position: center;
     background-size: cover;
-    background-image: url('../../../public/refresh.ico');    
+    background-image: url('../../../../public/refresh.ico');    
     background-color: transparent !important;
     margin-right: 55px;
     height: .7em;

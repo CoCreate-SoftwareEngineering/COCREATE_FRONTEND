@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { storage, auth } from '../auth/FireBase-config';
+import { storage, auth } from '../../auth/FireBase-config';
 import ImageButton from './DeleteButton';
-import './Modal.css';
-import AuthComponent from '../auth/FireBase-auth';
+import '../Modal.css';
+import AuthComponent from '../../auth/FireBase-auth';
 
 
 const ContentView = ({ currentPath, navigateIntoFolder, navigateBack, refreshTrigger, onClickedFilesChange }) => {

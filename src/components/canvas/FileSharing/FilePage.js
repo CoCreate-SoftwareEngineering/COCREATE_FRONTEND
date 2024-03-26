@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import ContentView from './ContentView';
 import FileUpload from './FileUpload';
 import './FilePage.css'
-import './Modal.css'
+import '../Modal.css'
 import { useLocation } from 'react-router';
 import { ref, deleteObject, listAll, uploadBytes } from 'firebase/storage';
-import { storage, auth } from '../auth/FireBase-config'
+import { storage, auth } from '../../auth/FireBase-config'
 
 const FilesList = ({ onClose, show, clickedFiles, onUploadSuccess, roomId, roomName }) => {
   const [currentPath, setCurrentPath] = useState(roomId);  
