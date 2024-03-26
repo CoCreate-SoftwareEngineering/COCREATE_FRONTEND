@@ -67,6 +67,7 @@ const OurNav = ({ user, logout }) => {
 					</li>
 					<li>
 						<Button
+							className="logoutbtn"
 							onClick={async () => {
 								logout();
 								// disconnect from firebase
