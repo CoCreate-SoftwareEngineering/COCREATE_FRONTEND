@@ -13,7 +13,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import CanvasPage from "./components/canvas/CanvasPage";
 
-import Gsettings from './components/canvas/GroupSettings/Gsettings'; 
+import Gsettings from "./components/canvas/GroupSettings/Gsettings";
 
 //KACPER WUZ HEER
 import Chat from './components/messaging/Chat';
@@ -62,6 +62,7 @@ const App = () => {
 	const [user, setUser] = useState(null);
 	// const [elements, setElements, undo, redo] = useHistory([]);
 	const [elements, setElements] = useState([]);
+	const [roomId, setRoomId] = useState("");
 
 	const server = "http://localhost:8000";
 
@@ -84,8 +85,9 @@ const App = () => {
 		console.log("Connected to Socket.io server");
 	});
 
-	const socketJoinRoom = (data) => {
-		socket.emit("userJoined", data);
+	const socketJoinRoom = (roomId) => {
+		socket.emit("userJoined", roomId);
+		setRoomId(roomId);
 		console.log("Room Joined");
 	};
 
@@ -102,6 +104,10 @@ const App = () => {
 	const socketEmitElements = (elements) => {
 		socket.emit("elements", elements);
 		console.log("socketEmitElements");
+	};
+
+	const socketDisconnect = () => {
+		socket.disconnect();
 	};
 
 	useEffect(() => {
@@ -152,30 +158,36 @@ const App = () => {
 							exact
 							path="/dashboard"
 							element={
-								// <PrivateRoute>
-								<Dashboard
-									uuid={uuid}
-									socket={socket}
-									socketJoinRoom={socketJoinRoom}
-									elements={elements}
-								/>
-								// </PrivateRoute>
+								<PrivateRoute>
+									<Dashboard
+										uuid={uuid}
+										socket={socket}
+										socketJoinRoom={socketJoinRoom}
+										elements={elements}
+										setRoomId={setRoomId}
+										roomId={roomId}
+									/>
+								</PrivateRoute>
 							}
 						/>
 						<Route
 							exact
 							path="/:roomId"
 							element={
-								<CanvasPage
-									userData={user}
-									socket={socket}
-									elements={elements}
-									setElements={setElements}
-									socketEmitElements={socketEmitElements}
-									// undo={undo}
-									// redo={redo}
-									// useHistory={useHistory}
-								/>
+								<PrivateRoute>
+									<CanvasPage
+										userData={user}
+										socket={socket}
+										elements={elements}
+										setElements={setElements}
+										socketEmitElements={socketEmitElements}
+										// roomId={roomId}
+										socketDisconnect={socketDisconnect}
+										// undo={undo}
+										// redo={redo}
+										// useHistory={useHistory}
+									/>
+								</PrivateRoute>
 							}
 						/>
 						{/* <Route exact path="/canvas" element={<CanvasPage userData={user} socket={socket}/>} /> */}
