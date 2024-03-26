@@ -196,7 +196,6 @@ select {
 
 .canvas-header {
 	align-items: center;
-	padding: 1.5em;
 	margin: auto;
 	color: white;
 	grid-template-columns: auto auto auto;
