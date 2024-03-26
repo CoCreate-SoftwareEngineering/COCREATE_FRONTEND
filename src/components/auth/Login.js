@@ -4,6 +4,7 @@ import axios from "axios";
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
 // import Container from 'react-bootstrap/Container'
+
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
@@ -99,5 +100,6 @@ Login.propTypes = {
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
 });
+
 
 export default connect(mapStateToProps, { login })(Login);
