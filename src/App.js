@@ -12,6 +12,7 @@ import Alert from "./components/main/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import CanvasPage from "./components/canvas/CanvasPage";
+import Faq from "./components/main/Faq";
 
 import Gsettings from "./components/canvas/GroupSettings/Gsettings";
 
@@ -143,6 +144,8 @@ const App = () => {
 						<Route exact path="/login" element={<Login />} />
 						<Route exact path="/register" element={<Register />} />
 						<Route exact path="/gsettings" element={<Gsettings />} />
+						<Route exact path="/faq" element = {<Faq/>}/>
+
 						<Route
 							exact
 							path="/dashboard"

@@ -7,6 +7,9 @@ html, body {
     padding: 0;
 }
 
+Link{
+    float:right;
+}
 h1{
     font-family: 'Lato', sans-serif;
     font-weight: bold;
