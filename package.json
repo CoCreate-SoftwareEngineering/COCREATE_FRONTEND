@@ -34,6 +34,7 @@
     "redux-thunk": "^2.4.1",
     "roughjs": "^4.6.6",
     "socket.io-client": "^4.7.4",
+    "styled-components": "^6.1.8",
     "uuid": "^8.3.2",
     "uuidv4": "^5.0.1",
     "web-vitals": "^2.1.4"

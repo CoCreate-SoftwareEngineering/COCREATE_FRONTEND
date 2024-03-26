@@ -14,7 +14,7 @@ import Body from "../main/Body";
 import JoinRoomForm from "./room_form/JoinRoomForm";
 import Nav from "../nav/Nav";
 import Help from "./Help/HelpButton";
-
+import Footer from "./Footer.js";
 import { Link } from "react-router-dom";
 
 import ToggleableHeading from "./ToggleableHeading/ToggleableHeading.js";
@@ -73,6 +73,8 @@ const Dashboard = ({
 	return loading && profile && roomNames === null ? (
 		<Spinner />
 	) : (
+		<div className="body-flex-container">
+			<div className="content-wrapper">
 		<Fragment>
 			<Nav user={user} />
 
@@ -120,12 +122,17 @@ const Dashboard = ({
 							/>
 						</div>
 					</div>
-					<div>
-						<Help />
-					</div>
+					
 				</Fragment>
 			)}
 		</Fragment>
+		
+		</div>
+		<div className="footer">			
+			<Footer />
+		</div>
+		</div>
+		
 	);
 };
 
