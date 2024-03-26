@@ -66,8 +66,7 @@ const OurNav = ({ user, logout }) => {
 						</form>
 					</li>
 					<li>
-						<button
-							className=""
+						<Button
 							onClick={async () => {
 								logout();
 								// disconnect from firebase
@@ -75,7 +74,7 @@ const OurNav = ({ user, logout }) => {
 							}}
 						>
 							Logout
-						</button>
+						</Button>
 					</li>
 					<li style={{ marginRight: 0, width: 50 }}>
 						<div className="dropdown">
