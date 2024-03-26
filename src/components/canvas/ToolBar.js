@@ -325,7 +325,7 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
                         ))}
 				    <Button  className= "vbtn">Share File</Button>
 					</div>					
-					</div>
+					{/* </div> KACPER WUZ HEER */}
 					<Button onClick={joinRoomVideo}>Join Video Call</Button>
 					{myStream && (
 						<video
