@@ -66,6 +66,12 @@ const App = () => {
 	const [elements, setElements] = useState([]);
 	const [roomId, setRoomId] = useState("");
 
+	const [peerSockets, setPeerSockets ] = useState([])
+
+	const addPeerSocket = (peerSocketId) => {
+		setPeerSockets((prevPeerSockets) => [...prevPeerSockets, peerSocketId]);
+	  };
+
 	const server = "http://localhost:8000";
 
 	const io = require("socket.io-client");
@@ -90,7 +96,10 @@ const App = () => {
 	socket.on("roomUsers", (socketIds) => {
 		//console.log("RECEIVED ROOM USERS")
 		console.log("my id: " + socket.id)
-		console.log("Got list of sockets in room: " + socketIds)
+		console.log("got list of people in: " + socketIds)
+
+		setPeerSockets(socketIds)
+		console.log("Local list: " + peerSockets)
 		// socketIds.forEach((id) => {
 		// 	addPeerSocket(id)
 		// })
