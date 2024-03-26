@@ -22,6 +22,7 @@ import ToggleableHeading from "./ToggleableHeading/ToggleableHeading.js";
 import "./Dashboard.css";
 
 import io from "socket.io-client";
+import EventCalendar from '../dashboard/calendar/EventCalendar.js';
 
 const Dashboard = ({
 	getCurrentProfile,
@@ -85,7 +86,8 @@ const Dashboard = ({
 						(room, index) => room && <li key={index}>{room.roomName}</li>
 					)} */}
 					<div className="content">
-						<div className="row">
+						  <span> <EventCalendar/> </span>
+              <div className="row">
 							<ToggleableHeading
 								uuid={uuid}
 								setRoomJoined={setRoomJoined}
