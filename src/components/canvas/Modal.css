@@ -12,11 +12,11 @@
     overflow-y: auto;    
   }
   
-.textarea-min-size {    
-    min-height: 210px; /* Adjust the size as needed */
-  }
+.textarea-min-size-file {    
+    min-height: 210px;
+}
   
-  .modal-content-custom {
+  .modal-content-file {
     background-color: #efe7e7;
     padding: 20px;
     border-radius: 25px;
@@ -30,18 +30,18 @@
     overflow: hidden;
 }
     
-  .form-row-custom {
+  .form-row-file {
     display: flex;
     align-items: center; /* Aligns items vertically in the center */
     margin-bottom: 20px; /* Space between rows */
   }
   
-  .form-row label {
+  .form-row-file label {
     margin-right: 10px; /* Space between label and input */
   }
   
-  .form-row input,
-  .form-row textarea {
+  .form-row-file input,
+  .form-row-file textarea {
     flex-grow: 1; /* Allows input and textarea to fill the available space */
   }
     
@@ -49,7 +49,7 @@ button:hover {
     background-color: orange;
 }
 
-.modal-header-custom {
+.modal-header-file {
   display: flex;
   align-items: center; /* Center items vertically */
   justify-content: space-between; /* Space between title and FileUpload */
@@ -61,7 +61,7 @@ button:hover {
   border-radius: 15px;
 }
 
-.header-content-custom {
+.header-content-file {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -69,11 +69,12 @@ button:hover {
 }
 
 .refresh-button {
-  padding: 0 5px;
-  margin-right: 10px;
+  padding: 0 5px;  
+  position: absolute;
   right: 1px;
   border: none  ;
-  padding-right: 5px;    
+  display: flex;
+  padding-left: 10px;  
 }
 
 .modal-title-custom {
@@ -88,14 +89,14 @@ button:hover {
   max-width: 12ch; /* Set the maximum width to 12 characters */
 }
 
-.modal-footer {
+.modal-footer-file {
   display: flex;
   justify-content: flex-end; /* Aligns items to the left */
   padding-top: 10px;
   border-top: 1px solid #ccc; /* adds a line above the footer */
 }
 
-.modal-body-custom {
+.modal-body-file {
   overflow-y: auto; /* Allows scrolling within this element */
   flex-grow: 1; /* Takes up all available space, pushing footer down */
 }

@@ -161,10 +161,10 @@ const createGroupFolder = async () => {
 
   return (
     <div className="modal" onClick={onClose}>
-      <div className="modal-content-custom" onClick={e => e.stopPropagation()}>
-      <div className="modal-header-custom">
-      <div className="header-content-custom"> {/* New wrapper using Flexbox */}
-        <h4 className="modal-title-custom">
+      <div className="modal-content-file" onClick={e => e.stopPropagation()}>
+      <div className="modal-header-file">
+      <div className="header-content-file"> {/* New wrapper using Flexbox */}
+        <h4 className="modal-title-file">
           {!folderExists && (
               <div>Folder Does Not Exist</div>              
             )}
@@ -178,7 +178,7 @@ const createGroupFolder = async () => {
       
     </div>
 
-        <div className="modal-body-custom">
+        <div className="modal-body-file">
         <ContentView
           currentPath={currentPath}
           navigateIntoFolder={navigateIntoFolder}
@@ -187,7 +187,7 @@ const createGroupFolder = async () => {
           onClickedFilesChange ={handleClickedFilesChange}
         />
         </div>
-        <div className="modal-footer">          
+        <div className="modal-footer-file">          
           {currentPath !== initialPath && (
             <button onClick={navigateBack} style={{ marginRight: 'auto', height: '30px', width: '85px', fontSize: '18px' }}>Back</button>
           )}
