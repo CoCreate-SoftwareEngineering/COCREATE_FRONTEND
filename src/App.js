@@ -99,18 +99,26 @@ const App = () => {
 		console.log("got list of people in: " + socketIds)
 
 		setPeerSockets(socketIds)
-		console.log("Local list: " + peerSockets)
+		
 		// socketIds.forEach((id) => {
 		// 	addPeerSocket(id)
 		// })
 
 	})
 
+	useEffect(() => {
+		console.log("peerSockets updated to: " + peerSockets)
+	}, [peerSockets])
+
 	const socketJoinRoom = (roomId) => {
 		socket.emit("userJoined", roomId);
 		setRoomId(roomId);
 		console.log("Room Joined");
 	};
+
+	const callUser = (id) => {
+		console.log("calling user " + id)
+	}
 
 	const socketUpdateElements = (newElement) => {
 		console.log(newElement);
@@ -202,6 +210,8 @@ const App = () => {
 										elements={elements}
 										setElements={setElements}
 										socketEmitElements={socketEmitElements}
+										peerSockets={peerSockets}
+										callUser={callUser}
 										// roomId={roomId}
 										socketDisconnect={socketDisconnect}
 										// undo={undo}

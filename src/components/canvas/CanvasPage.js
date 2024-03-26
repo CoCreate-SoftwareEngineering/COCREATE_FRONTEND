@@ -22,6 +22,8 @@ const CanvasPage = ({
 	elements,
 	setElements,
 	socketEmitElements,
+	peerSockets,
+	callUser,
 	// roomId,
 	socketDisconnect,
 	getRoom,
@@ -59,7 +61,7 @@ const CanvasPage = ({
 			{/* <Container className="container"> */}
 			<CanvasPageHeader />
 			<Example tool={tool} handleToolChange={handleToolChange} />
-			<CallToolbarWrapper/>
+			<CallToolbarWrapper peerSockets={peerSockets} callUser={callUser}/>
 			<p1>test</p1>
 			<Canvas
 				tool={tool}

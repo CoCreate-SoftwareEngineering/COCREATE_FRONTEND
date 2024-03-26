@@ -16,7 +16,7 @@ const options = [
 	},
 ];
 
-const CallToolbar = ({ name, ...props }) => {
+const CallToolbar = ({ name, peerSockets, callUser, ...props }) => {
 
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
@@ -62,9 +62,12 @@ const CallToolbar = ({ name, ...props }) => {
 					<div className="call-tool-menu">
                         <Button onClick={() => {console.log("join video button")}}>Join Video Call</Button>
                         {myStream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
-                        <p1>Text</p1>
-                        <p1>Text2</p1>
-                        <p1>Text3</p1>
+                        {peerSockets.map((socketId, index) => (
+                        <span key={index}>
+                            <Button onClick={() => callUser(socketId)}>{"Call " + socketId}</Button>
+                            {console.log("BING BONG " + socketId)}
+                        </span>
+                        ))}
                         {/* {peerVideos.map((videoSrc, index) => (
                             <video key={index} playsInline ref={videoRef => {
                                 if (videoRef) {
@@ -101,13 +104,15 @@ const CallToolbar = ({ name, ...props }) => {
 	);
 };
 
-const CallToolbarWrapper = ({ tool, handleToolChange }) => {
+const CallToolbarWrapper = ({ tool, handleToolChange, peerSockets, callUser }) => {
 	return (
 		<>
 			{options.map((props, idx) => (
 				<CallToolbar
 					tool={tool}
 					handleToolChange={handleToolChange}
+                    peerSockets={peerSockets}
+                    callUser={callUser}
 					key={idx}
 					{...props}
 					placement={"end"}
