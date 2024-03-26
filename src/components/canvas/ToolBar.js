@@ -171,7 +171,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-
 import settingsIcon from '../../media/button-images/icon_settings.png'
 import line from '../../media/button-images/icon_line.png'
 import rectangle from '../../media/button-images/icon_rectangle.png'
@@ -278,6 +277,12 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 						<Link to="/gsettings">
 							<IconButton image={settingsIcon} />
 						</Link>
+						<input
+							type="color"
+							// value={color}
+							// onChange={}
+							style={{ margin: "10px" }}
+						/>
 						<input
 							type="radio"
 							id="selection"

@@ -1,7 +1,7 @@
 import React from "react";
 import "../ToolBar.js";
 import "./Gsettings.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import user1 from "../../../media/ProfileImg1.jpg";
 import user2 from "../../../media/Darwizzy.jpg";
 import { useState } from "react";
@@ -16,10 +16,21 @@ import TextField from "@mui/material/TextField";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getRoom, updateRoomName } from "../../../actions/rooms";
-import { addMember } from "../../../actions/profile";
+import {
+	getRoom,
+	updateRoomName,
+	addMemberToRoomFromSettings,
+} from "../../../actions/rooms";
+import { addMember, leaveRoom } from "../../../actions/profile";
 
-const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
+const Gsettings = ({
+	room: { room },
+	updateRoomName,
+	getRoom,
+	addMember,
+	addMemberToRoomFromSettings,
+	leaveRoom,
+}) => {
 	const [isRemoveVisible] = useState(true);
 	const [open, setOpen] = useState(false);
 	const [rename, setRename] = useState("");
@@ -35,7 +46,9 @@ const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
 	const handleAddMember = (e) => {
 		e.preventDefault();
 		console.log("Add Member clicked");
+		console.log(member);
 		addMember(room.roomId, member);
+		// addMemberToRoomFromSettings(room.roomId, member);
 		setOpen(true);
 	};
 	const handleAdmin = (event) => {
@@ -53,6 +66,13 @@ const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
 		// setRename("");
 		getRoom(room.roomId);
 	};
+
+	const handleLeaveRoom = (e) => {
+		e.preventDefault();
+		console.log("Leaving room");
+		leaveRoom(room.roomId);
+		// navigate("/dashboard");
+	};
 	return (
 		<div className="section">
 			<button className="closebtn">
@@ -63,7 +83,28 @@ const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
 			<h2>Settings</h2>
 			<div className="options">Members</div>
 			<div className="UserPic-container">
-				{isRemoveVisible && (
+				{room.members.map((member, index) => (
+					<div className="picitem" onClick={handleRemoveClick} key={index}>
+						<img
+							className="UserPic"
+							src={user1}
+							width="50"
+							height="50"
+							alt=""
+						></img>
+						<p>{member}</p>
+						<div className="tool">Remove</div>
+						<Button
+							type="button"
+							size="small"
+							className="admin"
+							onClick={handleAdmin}
+						>
+							Make admin
+						</Button>
+					</div>
+				))}
+				{/* {isRemoveVisible && (
 					<div className="picitem" onClick={handleRemoveClick}>
 						<img
 							className="UserPic"
@@ -182,7 +223,7 @@ const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
 							Make admin
 						</Button>
 					</div>
-				)}
+				)} */}
 			</div>
 			<Button
 				type="button"
@@ -239,8 +280,15 @@ const Gsettings = ({ room: { room }, updateRoomName, getRoom, addMember }) => {
 					</span>{" "}
 				</form>
 			</div>
-			<Button type="button" size="small" className="leavegrp">
-				Leave group
+			<Button
+				type="button"
+				size="small"
+				className="leavegrp"
+				onClick={(e) => {
+					handleLeaveRoom(e);
+				}}
+			>
+				<Link to="/dashboard">Leave group</Link>
 			</Button>
 			<Button type="button" size="small" className="leavegrp">
 				Delete group
@@ -259,6 +307,8 @@ Gsettings.propTypes = {
 	room: PropTypes.object.isRequired,
 	updateRoomName: PropTypes.func.isRequired,
 	addMember: PropTypes.func.isRequired,
+	addMemberToRoomFromSettings: PropTypes.func.isRequired,
+	leaveRoom: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -271,5 +321,6 @@ export default connect(mapStateToProps, {
 	updateRoomName,
 	getRoom,
 	addMember,
+	addMemberToRoomFromSettings,
+	leaveRoom,
 })(Gsettings);
-

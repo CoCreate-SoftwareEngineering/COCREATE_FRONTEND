@@ -13,6 +13,7 @@ import {
 	CREATE_PROFILE,
 	CREATE_PROFILE_ERROR,
 	GET_ROOM_NAMES,
+	LEAVE_ROOM,
 } from "../actions/types";
 
 const initialState = {
@@ -66,6 +67,18 @@ export default function (state = initialState, action) {
 				loading: false,
 			};
 		case GET_ROOM_NAMES:
+			return {
+				...state,
+				roomNames: payload,
+				loading: false,
+			};
+		case LEAVE_ROOM:
+			return {
+				...state,
+				roomNames: payload,
+				loading: false,
+			};
+		case LEAVE_ROOM:
 			return {
 				...state,
 				roomNames: payload,
