@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from "react";
 import "./Nav.css";
-import React, { useEffect, Fragment } from "react";
 import NotificationBox from "../notification_box/NotificationBox.js";
 import logoImg from "../../media/Co_Create_Logo_blue.png";
 import msgImg from "../../media/Msg_Icon.png";
@@ -8,10 +8,14 @@ import userImg1 from "../../media/ProfileImg1.jpg";
 import { Link } from "react-router-dom";
 import profile from "../../reducers/profile.js";
 
+import { auth } from '../auth/FireBase-config.js'
+
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { logout } from "../../actions/auth";
+import { signOut } from "firebase/auth";
+
 
 const OurNav = ({ user, logout }) => {
 	//Lambda style of return, is more compact and cleaner
@@ -64,8 +68,10 @@ const OurNav = ({ user, logout }) => {
 					<li>
 						<button
 							className=""
-							onClick={() => {
+							onClick={async () => {
 								logout();
+								// disconnect from firebase
+								await signOut(auth);
 							}}
 						>
 							Logout
@@ -90,7 +96,7 @@ const OurNav = ({ user, logout }) => {
 									</h2>
 									<ul className="DropdownLinks">
 										<li className="Message">
-											<Link to="/home">
+											<Link to="/chat">
 												<img
 													className="ProfilePic"
 													src={userImg1}
@@ -100,7 +106,7 @@ const OurNav = ({ user, logout }) => {
 											</Link>
 										</li>
 										<li className="Message">
-											<Link to="/home">
+											<Link to="/chat">
 												<img
 													className="ProfilePic"
 													src={userImg1}
@@ -110,7 +116,7 @@ const OurNav = ({ user, logout }) => {
 											</Link>
 										</li>
 										<li className="Message">
-											<Link to="/home">
+											<Link to="/chat">
 												<img
 													className="ProfilePic"
 													src={userImg1}
@@ -120,7 +126,7 @@ const OurNav = ({ user, logout }) => {
 											</Link>
 										</li>
 										<li className="Message">
-											<Link to="/home">
+											<Link to="/chat">
 												<img
 													className="ProfilePic"
 													src={userImg1}
@@ -130,7 +136,7 @@ const OurNav = ({ user, logout }) => {
 											</Link>
 										</li>
 										<li className="Message">
-											<Link to="/home">
+											<Link to="/chat">
 												<img
 													className="ProfilePic"
 													src={userImg1}

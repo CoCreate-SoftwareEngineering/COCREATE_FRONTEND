@@ -1,0 +1,100 @@
+.calendar {
+     width: 20%;
+     margin-right: 3vw;
+     margin-top: 20px;  
+}
+.cal{
+     float: right;
+     display: flex;
+     flex-direction: column;
+}
+Events{
+     display: flex;
+     flex-direction: column;
+}
+.css-4pax7l-MuiPickersLayout-root{
+     border-radius: 5px !important;
+}
+
+.css-1q04gal-MuiDateCalendar-root{
+     background-color:  rgb(226, 133, 110) !important;
+}
+
+.css-cyfsxc-MuiPickersCalendarHeader-labelContainer {
+     color: white !important;
+     font-weight: 600;
+}
+
+.css-1hbyad5-MuiTypography-root{
+     display: none !important;
+     padding: 0%;
+}
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
+     display: none !important;
+     padding: 0%;
+}
+
+.css-1eurbeq-MuiPickersToolbar-root-MuiDatePickerToolbar-root{
+     display: none !important;
+}
+
+.css-14iq4xa-MuiDayCalendar-root{
+     background-color: white;
+}
+
+.css-i5q14k-MuiDayCalendar-header{
+     background-color:  rgb(226, 133, 110);
+     color: white !important;
+     margin-bottom:  10px;
+}
+
+.css-1aqny2q-MuiPickersCalendarHeader-root{
+     background-color:  rgb(226, 133, 110);
+     padding-top:12px;
+     padding-bottom:4px;
+     margin-bottom:0 !important;
+     margin-top:0 !important;
+}
+
+.css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel{
+     color: white !important;
+     font-weight: 600 !important;
+}
+
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+     will-change: background-color;
+     background-color:  rgb(226, 133, 110) !important;
+     border-radius: 5px;
+}
+
+.css-innj4t-MuiPickersYear-yearButton.Mui-selected{
+     background-color: #2C4251 !important;
+}
+
+.css-jgls56-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected){
+     border: 1px solid #7CC0CB !important;
+     border-radius: 5px;
+     color:  rgb(226, 133, 110) !important;
+     font-weight: 700 !important;
+}
+
+.css-jgls56-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+     will-change: background-color;
+     background-color:  rgb(226, 133, 110) !important;
+     border-radius: 5px;
+     font-weight: 700 !important;
+}
+
+.css-1vs7z2v-MuiYearCalendar-root{
+     background-color: #7CC0CB !important;
+     color: white !important;
+}
+
+.css-4pax7l-MuiPickersLayout-root .MuiPickersLayout-actionBar{
+     display: none !important;
+}
+
+.css-1rtg91x-MuiDateCalendar-root{
+     height:auto !important;
+}
