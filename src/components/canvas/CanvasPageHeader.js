@@ -44,8 +44,7 @@ const CanvasPageHeader = ({
 			</div>
 			<div className="title">
 				<h2 className="" style={{ color: "white" }}>
-					{room.roomName}
-					{room.roomId}
+					{room.roomName}					
 				</h2>
 			</div>
 			<div className="menu">
@@ -54,7 +53,7 @@ const CanvasPageHeader = ({
 
 			<div>
 				<button onClick={handleFilesModalShow}>Files</button>
-				<FilesList show = {showFilesModal} onClose={handleFilesModalClose} />
+				<FilesList show = {showFilesModal} onClose={handleFilesModalClose} roomId={room.roomId} roomName={room.roomName} />
 			</div>
 
 		</header>

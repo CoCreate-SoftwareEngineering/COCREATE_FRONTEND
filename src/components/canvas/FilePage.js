@@ -7,8 +7,8 @@ import { useLocation } from 'react-router';
 import { ref, deleteObject, listAll, uploadBytes } from 'firebase/storage';
 import { storage, auth } from '../auth/FireBase-config'
 
-const FilesList = ({ onClose, show, clickedFiles, onUploadSuccess, roomId }) => {
-  const [currentPath, setCurrentPath] = useState('project');  
+const FilesList = ({ onClose, show, clickedFiles, onUploadSuccess, roomId, roomName }) => {
+  const [currentPath, setCurrentPath] = useState(roomId);  
   const [pathStack, setPathStack] = useState([]);  
   const [refresh, setRefresh] = useState(false) // state to trigger refresh
   const [markedFiles, setMarkedFiles] = useState(false)
@@ -18,7 +18,7 @@ const FilesList = ({ onClose, show, clickedFiles, onUploadSuccess, roomId }) => 
   // get url "gives /project"
   let location = useLocation();
   // sets initial path to group url
-  const [initialPath] = useState(location.pathname.slice(1))
+  const [initialPath] = useState(roomId)
   console.log(initialPath)
 
   const checkForGroupFolder = async (path) => {
@@ -176,9 +176,9 @@ const createGroupFolder = async () => {
           {!folderExists && (
               <div>Folder Does Not Exist</div>              
             )}
-          {currentPath}
+          {roomName}
         </h4>
-        <button className='refresh-button' onClick={refreshContent} style={{ marginLeft: '10px', padding: '0 5px'}}>
+        <button className='refresh-button' onClick={refreshContent} style={{ marginLeft: '10px', padding: '0 5px', width: '30px', height: '30px', backgroundColor: 'none'}}>
           
         </button>
         <FileUpload onUploadSuccess={refreshContent} currentPath={currentPath} />
@@ -186,7 +186,7 @@ const createGroupFolder = async () => {
       
     </div>
 
-        <div className="modal-body">
+        <div className="modal-body-custom">
         <ContentView
           currentPath={currentPath}
           navigateIntoFolder={navigateIntoFolder}

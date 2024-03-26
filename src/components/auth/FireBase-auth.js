@@ -50,17 +50,17 @@ const AuthComponent = ({ onClose, show }) => {
     }
 
     return (
-        <div className="modal" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <div className="modal-header">
-                    <h4 className="modal-title">Login / Register</h4>
+        <div className="reg-modal" onClick={onClose}>
+            <div className="reg-modal-content" onClick={e => e.stopPropagation()}>
+                <div className="reg-modal-header">
+                    <h4 className="reg-modal-title">Sorry! Your account fell out of sync with our files, please login again</h4>
                 </div>
-                <div className="modal-body">
+                <div className="reg-modal-body">
                     <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <button onClick={handleLoginOrCreateAccount}>Login / Register</button>
                 </div>
-                <div className="modal-footer">
+                <div className="reg-modal-footer">
                     <button onClick={handleLogout}>Logout</button>
                     <button onClick={onClose}>Close</button>
                 </div>

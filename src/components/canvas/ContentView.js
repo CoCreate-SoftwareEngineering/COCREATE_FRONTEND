@@ -138,10 +138,10 @@ const ContentView = ({ currentPath, navigateIntoFolder, navigateBack, refreshTri
         {folders.map((folder, index) => (            
             <div key={`folder-${index}`} className='content-folder' style={{ cursor: 'pointer' }}>                
                 <div onClick={() => navigateIntoFolder(folder.name)}>
-                <span>
+                
                     <img src="folder.png" alt="Folder" />
-                    {folder.name}
-                </span>
+                    <span className='folder-name'>{folder.name}</span>
+                
                 </div>                
                 <ImageButton onClick={() => handleFileClick(folder.fullPath, folder)} />
                 
