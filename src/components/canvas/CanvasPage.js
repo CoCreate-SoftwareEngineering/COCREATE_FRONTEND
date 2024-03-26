@@ -11,6 +11,7 @@ import Spinner from "../main/Spinner";
 import Canvas from "./Canvas";
 import Example from "./ToolBar";
 import { getRoom } from "../../actions/rooms";
+import CallToolbarWrapper from "./CallToolbar";
 
 const CanvasPage = ({
 	socket,
@@ -58,6 +59,8 @@ const CanvasPage = ({
 			{/* <Container className="container"> */}
 			<CanvasPageHeader />
 			<Example tool={tool} handleToolChange={handleToolChange} />
+			<CallToolbarWrapper/>
+			<p1>test</p1>
 			<Canvas
 				tool={tool}
 				handleToolChange={handleToolChange}
