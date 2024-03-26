@@ -67,15 +67,7 @@ const createGroupFolder = async () => {
     if (initialPath && !folderExists) {      
       checkForGroupFolder(initialPath)
       createGroupFolder(initialPath)      
-    }    
-
-    // Interval to refresh Modal 
-    // const intervalId = setInterval(() => {
-    //   setRefresh(prev => !prev);
-    // }, 120000)
-
-    // // Clean up the interval when component is unmounted or when show changes
-    // return () => clearInterval(intervalId)
+    }        
 
   }, [show, initialPath, folderExists]);
 

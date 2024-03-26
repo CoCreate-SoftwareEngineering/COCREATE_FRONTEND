@@ -14,25 +14,26 @@ const ContentView = ({ currentPath, navigateIntoFolder, navigateBack, refreshTri
     const [userLoggedIn, setUserLoggedIn] = useState(false);
     const [selectedFileUrl, setSelectedFileUrl] = useState(null); // Track the selected file URL for viewing    
     const [clickedFiles, setClickedFiles] = useState([]) // store files for deletion
-    const [authModal, showAuthModal] = useState(false)
+    const [authModal, showAuthModal] = useState(false)    
     
 
     useEffect(() => {
         const auth = getAuth();
-
+        
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUserLoggedIn(!!user);
             if (user) {
                 fetchFilesAndFolders();
             } else {
                 showAuthModal(true)
+                console.log("SHOWING")
             }
         });
 
         return () => {
             unsubscribe();
         };
-    }, [currentPath, refreshTrigger]);
+    }, [refreshTrigger]);    
 
     const handleFileClick = (filePath, name) => {
         setClickedFiles(prevFiles => {
