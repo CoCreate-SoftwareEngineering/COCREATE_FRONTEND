@@ -22,6 +22,7 @@ import ToggleableHeading from "./ToggleableHeading/ToggleableHeading.js";
 import "./Dashboard.css";
 
 import io from "socket.io-client";
+import EventCalendar from './calendar/EventCalendar.js';
 
 const Dashboard = ({
 	getCurrentProfile,
@@ -62,15 +63,16 @@ const Dashboard = ({
 	const handleChooseRoom = (room) => {
 		console.log("0.INTIAL ROOM ID");
 		// console.log(roomId);
-		socketJoinRoom(room.roomId);
+		socketJoinRoom(room);
 		// setRoomId(room.roomId);
-		updateRoomId(room.roomId);
-		getRoom(room.roomId);
-		console.log("1.DASHBOARD HANDLER: CREATED FOR: " + room.roomId);
+		updateRoomId(room);
+		getRoom(room);
+		console.log("1.DASHBOARD HANDLER: CREATED FOR: " + room);
 		// console.log(roomId);
 	};
 
-	return loading && profile && roomNames === null ? (
+
+	return profile && roomNames === null ? (
 		<Spinner />
 	) : (
 		<div className="body-flex-container">
@@ -79,18 +81,15 @@ const Dashboard = ({
 			<Nav user={user} />
 
 			{profile == null ? (
-				<Fragment>
-					<div>
-						<h1>ERROR GETTING PROFILE</h1>
-					</div>
-				</Fragment>
+				<Fragment></Fragment>
 			) : (
 				<Fragment>
 					{/* {profile.rooms.map(
 						(room, index) => room && <li key={index}>{room.roomName}</li>
 					)} */}
 					<div className="content">
-						<div className="row">
+						  <span> <EventCalendar/> </span>
+              <div className="row">
 							<ToggleableHeading
 								uuid={uuid}
 								setRoomJoined={setRoomJoined}
@@ -109,8 +108,14 @@ const Dashboard = ({
 											// roomId={roomId}
 										/>
 										{/* add all projects in data structure to projects section */}
-										{roomNames?.map((room, index) => (
-											<Link key={index} to={`/${room}`} onClick={() => { handleChooseRoom(room); }}>
+                    {roomNames.map((room, index) => (
+											<Link
+												key={index}
+												to={`/${profile.roomIds[index]}`}
+												onClick={() => {
+													handleChooseRoom(profile.roomIds[index]);
+												}}
+											>
 												<div className="item">
 												<p>{room}</p>
 												</div>

@@ -17,6 +17,7 @@
     "https-browserify": "~0.0.0",
     "moment": "^2.29.1",
     "perfect-freehand": "^1.2.0",
+    "randombytes": "^2.1.0",
     "react": "^18.0.0",
     "react-bootstrap": "^2.10.0",
     "react-copy-to-clipboard": "^5.1.0",
@@ -33,8 +34,10 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "roughjs": "^4.6.6",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.7.4",
     "styled-components": "^6.1.8",
+    "util-deprecate": "^1.0.2",
     "uuid": "^8.3.2",
     "uuidv4": "^5.0.1",
     "web-vitals": "^2.1.4"

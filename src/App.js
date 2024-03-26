@@ -15,6 +15,10 @@ import CanvasPage from "./components/canvas/CanvasPage";
 
 import Gsettings from "./components/canvas/GroupSettings/Gsettings";
 
+//KACPER WUZ HEER
+import Chat from './components/messaging/Chat';
+//KACPER ESCAPES
+
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 // import { io } from "socket.io-client";
@@ -24,6 +28,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
+
+import peer from "simple-peer";
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
@@ -70,6 +76,12 @@ const App = () => {
 			"my-custom-header": "abcd",
 		},
 	});
+
+	//KACPER WUZ HEER
+	socket.on('MsgConnection', () => {
+        console.log(`I'm connected with the back-end`);
+	});
+	//KACPER ESCAPES
 
 	socket.on("connect", () => {
 		console.log("Connected to Socket.io server");
@@ -143,6 +155,7 @@ const App = () => {
 						<Route exact path="/login" element={<Login />} />
 						<Route exact path="/register" element={<Register />} />
 						<Route exact path="/gsettings" element={<Gsettings />} />
+						<Route exact path="/chat" element={<Chat />} />
 						<Route
 							exact
 							path="/dashboard"

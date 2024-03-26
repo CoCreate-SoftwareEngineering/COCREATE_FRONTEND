@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { addRoom } from "../../../actions/profile";
-import { createRoom, getRoom } from "../../../actions/rooms";
+import { createRoom, getRoom, addMemberToRoom } from "../../../actions/rooms";
 
 import "./JoinRoomForm.css";
 
@@ -27,6 +27,7 @@ const JoinRoomForm = ({
 	addRoom,
 	socketJoinRoom,
 	getRoom,
+	addMemberToRoom,
 	// setRoomId,
 	// roomId,
 }) => {
@@ -62,6 +63,8 @@ const JoinRoomForm = ({
 		socketJoinRoom(roomId);
 		// socket.emit("userJoined", roomData);
 		addRoom(roomId);
+		console.log("call to add member");
+		addMemberToRoom(roomId);
 		getRoom(roomId);
 		console.log("Room form submit");
 		navigate(`/${roomId}`);
@@ -71,16 +74,6 @@ const JoinRoomForm = ({
 		e.preventDefault();
 		if (!roomName) return toast.dark("Please enter your name!");
 
-		// const roomData = {
-		// 	roomId,
-		// 	roomName: roomName,
-		// 	userId: uuid(),
-		// 	userName: "username",
-		// 	host: true,
-		// 	presenter: true,
-		// };
-
-		// socket.emit("userJoined", roomData);
 		setRoomId(roomId);
 		socketJoinRoom(roomId);
 
@@ -89,7 +82,10 @@ const JoinRoomForm = ({
 			roomId: roomId,
 			elements: [],
 		});
+
 		addRoom(roomId);
+		console.log("call to add member");
+		addMemberToRoom(roomId);
 		getRoom(roomId);
 		navigate(`/${roomId}`);
 	};
@@ -201,12 +197,16 @@ JoinRoomForm.propTypes = {
 	addRoom: PropTypes.func.isRequired,
 	isAuthenticated: PropTypes.bool,
 	getRoom: PropTypes.func.isRequired,
+	addMemberToRoom: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { createRoom, addRoom, getRoom })(
-	JoinRoomForm
-);
+export default connect(mapStateToProps, {
+	createRoom,
+	addRoom,
+	getRoom,
+	addMemberToRoom,
+})(JoinRoomForm);
