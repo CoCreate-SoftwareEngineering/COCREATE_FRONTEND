@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import "./Nav.css";
+import React, { useEffect, Fragment } from "react";
 import NotificationBox from "../notification_box/NotificationBox.js";
 import logoImg from "../../media/Co_Create_Logo_blue.png";
 import msgImg from "../../media/Msg_Icon.png";
@@ -12,7 +12,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { logout } from "../../actions/auth";
-
 
 const OurNav = ({ user, logout }) => {
 	//Lambda style of return, is more compact and cleaner
@@ -91,7 +90,7 @@ const OurNav = ({ user, logout }) => {
 									</h2>
 									<ul className="DropdownLinks">
 										<li className="Message">
-											<Link to="/chat">
+											<Link to="/home">
 												<img
 													className="ProfilePic"
 													src={userImg1}
@@ -101,7 +100,7 @@ const OurNav = ({ user, logout }) => {
 											</Link>
 										</li>
 										<li className="Message">
-											<Link to="/chat">
+											<Link to="/home">
 												<img
 													className="ProfilePic"
 													src={userImg1}
@@ -111,7 +110,7 @@ const OurNav = ({ user, logout }) => {
 											</Link>
 										</li>
 										<li className="Message">
-											<Link to="/chat">
+											<Link to="/home">
 												<img
 													className="ProfilePic"
 													src={userImg1}
@@ -121,7 +120,7 @@ const OurNav = ({ user, logout }) => {
 											</Link>
 										</li>
 										<li className="Message">
-											<Link to="/chat">
+											<Link to="/home">
 												<img
 													className="ProfilePic"
 													src={userImg1}
@@ -131,7 +130,7 @@ const OurNav = ({ user, logout }) => {
 											</Link>
 										</li>
 										<li className="Message">
-											<Link to="/chat">
+											<Link to="/home">
 												<img
 													className="ProfilePic"
 													src={userImg1}
