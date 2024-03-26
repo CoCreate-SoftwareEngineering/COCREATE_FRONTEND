@@ -1,4 +1,6 @@
 import './Canvas.js'
+import './IconButton.css'
+import Button from "react-bootstrap/Button";
 
 const IconButton = ( {image, alt, clicked} ) => {
     return (

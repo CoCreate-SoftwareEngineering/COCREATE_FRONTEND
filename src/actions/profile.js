@@ -16,6 +16,10 @@ import {
 	CREATE_ROOM_FAIL,
 	CREATE_PROFILE,
 	CREATE_PROFILE_ERROR,
+	ADD_MEMBER,
+	LEAVE_ROOM,
+	REMOVE_MEMBER,
+	// GET_ROOM_NAMES,
 } from "./types";
 
 import uuidv4 from "uuidv4";
@@ -145,80 +149,165 @@ export const deleteLocation = (locationId) => async (dispatch) => {
 };
 
 // Add Room to profile (on joining a room)
-export const addRoom =
-	({ roomName, roomId }) =>
-	async (dispatch) => {
-		console.log("ADDING ROOM ACTION");
-		const config = {
-			headers: {
-				"Content-Type": "application/json",
-			},
-		};
-
-		const body = JSON.stringify({
-			roomId: roomId,
-			roomName: roomName,
-		});
-
-		try {
-			const res = await axios.put(
-				"http://localhost:8000/api/profile/rooms",
-				body,
-				config
-			);
-			console.log("Room has been PUT");
-			console.log(res.data);
-			dispatch({
-				type: ADD_ROOM_SUCCESS,
-				payload: res.data,
-			});
-		} catch (err) {
-			// const errors = err.respone.data.errors;
-			console.log("Room PUT Fail");
-			dispatch({
-				type: ADD_ROOM_FAIL,
-				payload: { msg: err.response.statusText, status: err.response.status },
-			});
-		}
+export const addRoom = (roomId) => async (dispatch) => {
+	console.log("ADDING ROOM ACTION");
+	const config = {
+		headers: {
+			"Content-Type": "application/json",
+		},
 	};
+
+	const body = JSON.stringify({ roomId: roomId });
+
+	try {
+		const res = await axios.put(
+			"http://localhost:8000/api/profile/rooms",
+			body,
+			config
+		);
+		console.log("Room has been PUT");
+		console.log(res.data);
+		dispatch({
+			type: ADD_ROOM_SUCCESS,
+			payload: res.data,
+		});
+	} catch (err) {
+		// const errors = err.respone.data.errors;
+		console.log("Room PUT Fail");
+		dispatch({
+			type: ADD_ROOM_FAIL,
+			payload: { msg: err.response.statusText, status: err.response.status },
+		});
+	}
+};
+export const addMember = (roomId, email) => async (dispatch) => {
+	console.log("ADDING MEMBER ACTION");
+	const config = {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	};
+
+	const body = JSON.stringify({
+		roomId: roomId,
+		email: email,
+	});
+
+	try {
+		const res = await axios.put(
+			"http://localhost:8000/api/profile/rooms/addMember",
+			body,
+			config
+		);
+		dispatch({
+			type: ADD_MEMBER,
+			payload: res.data,
+		});
+	} catch (err) {
+		// const errors = err.respone.data.errors;
+		console.log("Member put Fail");
+		// dispatch({
+		// 	type: ADD_MEMBER_FAIL,
+		// 	payload: { msg: err.response.statusText, status: err.response.status },
+		// });
+	}
+};
+
+export const leaveRoom = (roomId) => async (dispatch) => {
+	console.log("Leaving Room action");
+	// const config = {
+	// 	headers: {
+	// 		"Content-Type": "application/json",
+	// 	},
+	// };
+
+	// const body = JSON.stringify({
+	// 	roomId: roomId,
+	// });
+
+	try {
+		const res = await axios.delete(
+			`http://localhost:8000/api/profile/rooms/leaveRoom/${roomId}`
+		);
+		dispatch({
+			type: LEAVE_ROOM,
+			payload: res.data.rooms,
+		});
+		dispatch({
+			type: REMOVE_MEMBER,
+			payload: res.data.members,
+		});
+	} catch (err) {
+		// const errors = err.respone.data.errors;
+		console.log("Member put Fail");
+		// dispatch({
+		// 	type: ADD_MEMBER_FAIL,
+		// 	payload: { msg: err.response.statusText, status: err.response.status },
+		// });
+	}
+};
 
 // Add Room to room database (on creating a room)
-export const createRoom =
-	({ roomName, roomId, elements }) =>
-	async (dispatch) => {
-		console.log("CREATE ROOM FUNCTION");
-		const config = {
-			headers: {
-				"Content-Type": "application/json",
-			},
-		};
-		console.log("trying");
+// export const createRoom =
+// 	({ roomName, roomId, elements }) =>
+// 	async (dispatch) => {
+// 		console.log("CREATE ROOM FUNCTION");
+// 		const config = {
+// 			headers: {
+// 				"Content-Type": "application/json",
+// 			},
+// 		};
+// 		console.log("trying");
 
-		const body = JSON.stringify({
-			roomId: roomId,
-			roomName: roomName,
-			elements: elements,
-		});
+// 		const body = JSON.stringify({
+// 			roomId: roomId,
+// 			roomName: roomName,
+// 			elements: elements,
+// 		});
 
-		try {
-			console.log("Sending ROOM");
-			const res = await axios.post(
-				"http://localhost:8000/api/rooms",
-				body,
-				config
-			);
-			console.log("Room has been POST");
-			console.log(res.data);
-			dispatch({
-				type: CREATE_ROOM_SUCCESS,
-				payload: res.data,
-			});
-		} catch (err) {
-			const errors = err.respone.data.errors;
-			console.log("Room POST Fail");
-			dispatch({
-				type: CREATE_ROOM_FAIL,
-				payload: { msg: err.response.statusText, status: err.response.status },
-			});
-		}
-	};
+// 		try {
+// 			console.log("Sending ROOM");
+// 			const res = await axios.post(
+// 				"http://localhost:8000/api/rooms",
+// 				body,
+// 				config
+// 			);
+// 			console.log("Room has been POST");
+// 			console.log(res.data);
+// 			dispatch({
+// 				type: CREATE_ROOM_SUCCESS,
+// 				payload: res.data,
+// 			});
+// 			console.log("Room created successfully");
+// 		} catch (err) {
+// 			const errors = err.respone.data.errors;
+// 			console.log("Room POST Fail");
+// 			dispatch({
+// 				type: CREATE_ROOM_FAIL,
+// 				payload: { msg: err.response.statusText, status: err.response.status },
+// 			});
+// 		}
+// 	};
+
+// export const getRoom =
+// 	({ roomId }) =>
+// 	async (dispatch) => {
+// 		try {
+// 			console.log("TRY ROOMID");
+// 			console.log(roomId);
+// 			if (typeof roomId != "undefined") {
+// 				const res = await axios.get(
+// 					`http://localhost:8000/api/rooms/${roomId}`
+// 				);
+// 				console.log("Get Elements: ");
+// 				console.log(res.data);
+// 				dispatch({
+// 					type: LOADING,
+// 					payload: res.data,
+// 				});
+// 				return res.data;
+// 			}
+// 		} catch (err) {
+// 			console.log("Failed get room elements");
+// 		}
+// 	};

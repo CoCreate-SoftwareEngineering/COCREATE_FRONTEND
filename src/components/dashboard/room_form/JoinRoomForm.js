@@ -14,9 +14,9 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { addRoom } from "../../../actions/profile";
-import { createRoom } from "../../../actions/profile";
+import { createRoom, getRoom, addMemberToRoom } from "../../../actions/rooms";
 
-import "./JoinRoomForm.css"
+import "./JoinRoomForm.css";
 
 const JoinRoomForm = ({
 	uuid,
@@ -25,33 +25,47 @@ const JoinRoomForm = ({
 	socket,
 	createRoom,
 	addRoom,
-	socketJoinRoom
+	socketJoinRoom,
+	getRoom,
+	addMemberToRoom,
+	// setRoomId,
+	// roomId,
 }) => {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-	const [roomId, setRoomId] = useState("");
 	const [roomName, setRoomName] = useState("");
 	const [joinName, setJoinName] = useState("");
 	const [joinRoomId, setJoinRoomId] = useState("");
+	const [localRoomId, setLocalRoomId] = useState("");
+	const [roomId, setRoomId] = useState("");
 
 	const navigate = useNavigate();
+
+	const handleGenerateId = () => {
+		const generatedUuid = uuid();
+		setLocalRoomId(generatedUuid);
+		setRoomId(generatedUuid);
+	};
 
 	const handleJoinSubmit = (e) => {
 		e.preventDefault();
 
-		const roomData = {
-			roomId,
-			roomName: roomName,
-			userId: uuid(),
-			userName: joinName,
-			host: false,
-			presenter: false,
-		};
+		// const roomData = {
+		// 	roomName: roomName,
+		// 	userId: uuid(),
+		// 	userName: joinName,
+		// 	host: false,
+		// 	presenter: false,
+		// };
 
-		socketJoinRoom(roomData);
+		setRoomId(roomId);
+		socketJoinRoom(roomId);
 		// socket.emit("userJoined", roomData);
-		addRoom({ roomId: roomId, roomName: "roomName" });
+		addRoom(roomId);
+		console.log("call to add member");
+		addMemberToRoom(roomId);
+		getRoom(roomId);
 		console.log("Room form submit");
 		navigate(`/${roomId}`);
 	};
@@ -60,23 +74,19 @@ const JoinRoomForm = ({
 		e.preventDefault();
 		if (!roomName) return toast.dark("Please enter your name!");
 
-		const roomData = {
-			roomId,
-			userId: uuid(),
-			userName: "username",
-			host: true,
-			presenter: true,
-		};
-
-		// socket.emit("userJoined", roomData);
-		socketJoinRoom(roomData);
+		setRoomId(roomId);
+		socketJoinRoom(roomId);
 
 		await createRoom({
 			roomName: roomName,
 			roomId: roomId,
 			elements: [],
 		});
-		addRoom({ roomId: roomId, roomName: roomName });
+
+		addRoom(roomId);
+		console.log("call to add member");
+		addMemberToRoom(roomId);
+		getRoom(roomId);
 		navigate(`/${roomId}`);
 	};
 
@@ -105,8 +115,8 @@ const JoinRoomForm = ({
 									<input
 										type="text"
 										className="form-control outline-0"
-										value={roomId}
-										onChange={(e) => setRoomId(e.target.value)}
+										value={localRoomId}
+										onChange={(e) => setLocalRoomId(e.target.value)}
 										placeholder="Room Id"
 										style={{
 											boxShadow: "none",
@@ -137,7 +147,7 @@ const JoinRoomForm = ({
 										type="text"
 										className="form-control border-0 outline-0"
 										placeholder="Room ID"
-										value={roomId}
+										value={localRoomId}
 										readOnly={true}
 										style={{
 											boxShadow: "none",
@@ -149,26 +159,25 @@ const JoinRoomForm = ({
 										<button
 											className="btn btn-outline-primary  border-0 btn-sm"
 											type="button"
-											onClick={() => setRoomId(uuid())}
+											onClick={() => {
+												handleGenerateId();
+											}}
 										>
 											Generate
-										</button>										
+										</button>
 									</div>
-									
 								</div>
 								<CopyToClipboard
-											text={roomId}
-											onCopy={() =>
-												toast.success("Room Id Copied To Clipboard!")
-											}
-										>
-											<button
-												className="btn btn-outline-dark border-0 btn-sm"
-												type="button"
-											>
-												Copy
-											</button>
-										</CopyToClipboard>
+									text={roomId}
+									onCopy={() => toast.success("Room Id Copied To Clipboard!")}
+								>
+									<button
+										className="btn btn-outline-dark border-0 btn-sm"
+										type="button"
+									>
+										Copy
+									</button>
+								</CopyToClipboard>
 								<div className="form-group mt-3">
 									<button type="submit" className="form-control btn btn-dark">
 										Create Room
@@ -187,10 +196,17 @@ JoinRoomForm.propTypes = {
 	createRoom: PropTypes.func.isRequired,
 	addRoom: PropTypes.func.isRequired,
 	isAuthenticated: PropTypes.bool,
+	getRoom: PropTypes.func.isRequired,
+	addMemberToRoom: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { createRoom, addRoom })(JoinRoomForm);
+export default connect(mapStateToProps, {
+	createRoom,
+	addRoom,
+	getRoom,
+	addMemberToRoom,
+})(JoinRoomForm);

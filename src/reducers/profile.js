@@ -12,13 +12,15 @@ import {
 	ADD_ROOM_FAIL,
 	CREATE_PROFILE,
 	CREATE_PROFILE_ERROR,
+	GET_ROOM_NAMES,
+	LEAVE_ROOM,
 } from "../actions/types";
 
 const initialState = {
 	profile: null,
 	loading: true,
 	error: {},
-	locationData: null,
+	roomNames: null,
 };
 
 export default function (state = initialState, action) {
@@ -62,6 +64,24 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				error: "payload",
+				loading: false,
+			};
+		case GET_ROOM_NAMES:
+			return {
+				...state,
+				roomNames: payload,
+				loading: false,
+			};
+		case LEAVE_ROOM:
+			return {
+				...state,
+				roomNames: payload,
+				loading: false,
+			};
+		case LEAVE_ROOM:
+			return {
+				...state,
+				roomNames: payload,
 				loading: false,
 			};
 		default:
