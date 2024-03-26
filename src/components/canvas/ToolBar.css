@@ -2,11 +2,15 @@
 	position: fixed;
      top: 80vh !important; /* align to the bottom */
      left: 50%; /* center horizontally */
-     transform: translateX(-50%) !important; /* adjust for the element width */
+     transform: translateY(100%) translateX(-50%)!important; /* hide the element below the viewport */
      background-color: #7cc0cb !important;
      height:20vh;
      width:100vw !important;
-     transition: transform 0.5s ease-in-out;
+     transition: transform 0.5s ease-in-out !important;
+}
+
+.tool-bar-page.show {
+  transform: translateY(0) translateX(-50%) !important; /* show the element */
 }
 
 .offcanvas-title{
