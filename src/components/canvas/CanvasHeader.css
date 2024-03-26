@@ -6,27 +6,21 @@
 }
 
 
-.menu-head, .file-button {
+.menu-head {
     padding: 10px;
-    border-radius: 35%;
+    border-radius: 2px;
     border: black 1px solid;
     position: relative;
-    /* box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.7), inset -1px -1px 2px rgba(0, 0, 0, 0.3); */
+    border-radius: 30%;
     transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for shadow and transform */
         
 }
 
 .menu-head:hover {
-    /* box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.7), inset -2px -2px 4px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2); */
-    background-color: #7cc0cb !important;
+    
     transform: translateY(-2px); /* Slightly raise the button on hover */
 }
 
-
-.file-button:hover {
-    box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.7), inset -2px -2px 4px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px); /* Slightly raise the button on hover */
-}
 
 
 /* .menu-head::before {
@@ -40,17 +34,16 @@
 } */
 
 
-/* .file-button {
-    padding-right: 10px;
-    border-radius: 100px;
-    
-    height: 30px;
-    width: 90px;
-    background-color: white !important;
-    transition: background-color 0.3s ease-in; 
+.file-button {
+    padding: 10px;
+    border-radius: 2px;
+    border: black 1px solid;
+    position: relative;
+    border-radius: 30%;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for shadow and transform */
 }
 
 .file-button:hover {
-    background-color: #7cc0cb !important;
-} */
+    background-color: #7cc0cb !important;    
+}
 
