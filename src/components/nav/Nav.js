@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Nav.css";
-import React, { useEffect, Fragment } from "react";
 import NotificationBox from "../notification_box/NotificationBox.js";
 import logoImg from "../../media/Co_Create_Logo_blue.png";
 import msgImg from "../../media/Msg_Icon.png";

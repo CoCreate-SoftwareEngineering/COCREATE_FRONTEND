@@ -173,11 +173,11 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 import settingsIcon from '../../media/button-images/icon_settings.png'
-import line from '../../media/button-images/icon_line.png'
-import rectangle from '../../media/button-images/icon_rectangle.png'
-import pencil from '../../media/button-images/icon_pencil.png'
-import pointer from '../../media/button-images/icon_pointer.png'
-import text from '../../media/button-images/icon_text.png'
+// import line from '../../media/button-images/icon_line.png'
+// import rectangle from '../../media/button-images/icon_rectangle.png'
+// import pencil from '../../media/button-images/icon_pencil.png'
+// import pointer from '../../media/button-images/icon_pointer.png'
+// import text from '../../media/button-images/icon_text.png'
 import { Link } from 'react-router-dom';
 import IconButton from './IconButton';
 import './GroupSettings/Gsettings.js';
@@ -325,7 +325,7 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
                         ))}
 				    <Button  className= "vbtn">Share File</Button>
 					</div>					
-					</div>
+					{/* </div> */}
 					<Button onClick={joinRoomVideo}>Join Video Call</Button>
 					{myStream && (
 						<video
