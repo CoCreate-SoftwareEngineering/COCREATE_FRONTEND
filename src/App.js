@@ -19,6 +19,7 @@ import Gsettings from "./components/canvas/GroupSettings/Gsettings";
 //KACPER WUZ HEER
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import Chat from './components/messaging/Chat';
+import FAQ from './components/dashboard/FAQ/faq'
 //KACPER ESCAPES
 
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -195,8 +196,9 @@ const App = () => {
 						<Route exact path="/login" element={<Login />} />
 						<Route exact path="/register" element={<Register />} />
 						<Route exact path="/gsettings" element={<Gsettings />} />
-						<Route path = "/profilepage" element={<ProfilePage/>}></Route>
+						<Route exact path = "/profilepage" element={<ProfilePage/>}></Route>
 						<Route exact path="/chat" element={<Chat />} />
+						<Route exact path="/faq" element={<FAQ />} />
 						<Route
 							exact
 							path="/dashboard"
