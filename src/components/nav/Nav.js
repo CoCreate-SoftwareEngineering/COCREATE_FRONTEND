@@ -7,7 +7,6 @@ import profileImg from "../../media/Darwizzy.jpg";
 import userImg1 from "../../media/ProfileImg1.jpg";
 import { Link } from "react-router-dom";
 import profile from "../../reducers/profile.js";
-import Button from "react-bootstrap/Button";
 
 import { auth } from '../auth/FireBase-config.js'
 
