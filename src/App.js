@@ -156,7 +156,7 @@ const App = () => {
 						<Route exact path="/login" element={<Login />} />
 						<Route exact path="/register" element={<Register />} />
 						<Route exact path="/gsettings" element={<Gsettings />} />
-						<Route path = "/profilepage" element={<ProfilePage/>}></Route>
+						<Route exact path = "/profilepage" element={<ProfilePage/>}></Route>
 						<Route exact path="/chat" element={<Chat />} />
 						<Route
 							exact
