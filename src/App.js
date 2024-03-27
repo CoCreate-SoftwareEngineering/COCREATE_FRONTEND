@@ -17,6 +17,7 @@ import Faq from "./components/main/Faq";
 import Gsettings from "./components/canvas/GroupSettings/Gsettings";
 
 //KACPER WUZ HEER
+import ProfilePage from './components/ProfilePage/ProfilePage';
 import Chat from './components/messaging/Chat';
 //KACPER ESCAPES
 
@@ -67,6 +68,12 @@ const App = () => {
 	const [elements, setElements] = useState([]);
 	const [roomId, setRoomId] = useState("");
 
+	const [peerSockets, setPeerSockets ] = useState([])
+
+	const addPeerSocket = (peerSocketId) => {
+		setPeerSockets((prevPeerSockets) => [...prevPeerSockets, peerSocketId]);
+	  };
+
 	const server = "http://localhost:8000";
 
 	const io = require("socket.io-client");
@@ -88,11 +95,32 @@ const App = () => {
 		console.log("Connected to Socket.io server");
 	});
 
+	socket.on("roomUsers", (socketIds) => {
+		//console.log("RECEIVED ROOM USERS")
+		console.log("my id: " + socket.id)
+		console.log("got list of people in: " + socketIds)
+
+		setPeerSockets(socketIds)
+		
+		// socketIds.forEach((id) => {
+		// 	addPeerSocket(id)
+		// })
+
+	})
+
+	useEffect(() => {
+		console.log("peerSockets updated to: " + peerSockets)
+	}, [peerSockets])
+
 	const socketJoinRoom = (roomId) => {
 		socket.emit("userJoined", roomId);
 		setRoomId(roomId);
 		console.log("Room Joined");
 	};
+
+	const callUser = (id) => {
+		console.log("calling user " + id)
+	}
 
 	const socketUpdateElements = (newElement) => {
 		console.log(newElement);
@@ -156,6 +184,7 @@ const App = () => {
 						<Route exact path="/login" element={<Login />} />
 						<Route exact path="/register" element={<Register />} />
 						<Route exact path="/gsettings" element={<Gsettings />} />
+						<Route path = "/profilepage" element={<ProfilePage/>}></Route>
 						<Route exact path="/chat" element={<Chat />} />
 						<Route
 							exact
@@ -184,6 +213,8 @@ const App = () => {
 										elements={elements}
 										setElements={setElements}
 										socketEmitElements={socketEmitElements}
+										peerSockets={peerSockets}
+										callUser={callUser}
 										// roomId={roomId}
 										socketDisconnect={socketDisconnect}
 										// undo={undo}

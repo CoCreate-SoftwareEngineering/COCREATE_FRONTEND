@@ -117,7 +117,8 @@ const Dashboard = ({
 												}}
 											>
 												<div className="item">
-												<p>{room}</p>
+													<p className="roomTitle">{room}</p>							
+
 												</div>
 											</Link>
 											))}

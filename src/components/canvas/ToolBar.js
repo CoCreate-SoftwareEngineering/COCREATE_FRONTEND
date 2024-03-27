@@ -189,12 +189,6 @@ const options = [
 const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 	const [show, setShow] = useState(false);
 
-	//Video chat state
-	const [myStream, setMyStream] = useState();
-	const [peerVideos, setPeerVideos] = useState([]);
-	const [connectionRefs, setConnections] = useState([]);
-
-	const myVideo = useRef();
 
 	const handleClose = () => setShow(false);
 	const toggleShow = () => setShow((s) => !s);
@@ -205,48 +199,6 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 		setNewValue(value);
 		handleToolChange(value);
 	}
-
-	useEffect(() => {
-		navigator.mediaDevices
-			.getUserMedia({ video: true, audio: true })
-			.then((stream) => {
-				setMyStream(stream);
-				myVideo.current.srcObject = stream;
-				addPeerVideo(stream);
-				addPeerVideo(stream);
-				addPeerVideo(stream);
-			});
-		console.log("Useeffect");
-	}, []);
-
-	const addPeerVideo = (videoRef) => {
-		setPeerVideos((prevUserVideos) => [...prevUserVideos, videoRef]);
-	};
-
-	const removePeerVideo = (userId) => {
-		const newVideos = peerVideos;
-		delete newVideos[userId];
-		setPeerVideos(newVideos);
-	};
-
-	const addConnectionRef = (connectionRef) => {
-		setConnections((prevConnections) => [...prevConnections, connectionRef]);
-	};
-
-	const destroyAllConnections = () => {
-		connectionRefs.forEach((connectionRef) => {
-			if (connectionRef && connectionRef.current) {
-				connectionRef.current.destroy();
-			}
-		});
-	};
-
-	// Example of removing a connection reference from the array
-	const removeConnectionRef = (userId) => {
-		const newRefs = connectionRefs;
-		delete connectionRefs[userId];
-		setConnections(newRefs);
-	};
 
 	const joinRoomVideo = () => {};
 
@@ -312,17 +264,6 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 							onChange={() => handleToolChange("text")}							
 						/>										
 						<label htmlFor="text">Text</label>
-						<Button onClick={joinRoomVideo} className= "vbtn"> Join Video Call</Button>
-					{myStream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
-					{peerVideos.map((videoSrc, index) => (
-                            <video key={index} playsInline ref={videoRef => {
-                                if (videoRef) {
-                                    videoRef.srcObject = videoSrc;
-                                }
-                            }} autoPlay style={{ width: "300px" }} />
-                        ))}
-					</div>					
-					{/* </div> KACPER WUZ HEER */}
 				</Offcanvas.Body>
 			</Offcanvas>
 		</>
