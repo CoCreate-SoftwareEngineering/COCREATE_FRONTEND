@@ -87,8 +87,12 @@ button:hover {
   word-wrap: break-word; /* For old browsers */
   overflow-wrap: anywhere; /* Latest syntax */
   max-width: 12ch; /* Set the maximum width to 12 characters */
-  color:white
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Prevents the text from wrapping to a new line */
 }
+
 
 .modal-footer-file {
   display: flex;

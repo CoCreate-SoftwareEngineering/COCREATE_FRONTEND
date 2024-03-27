@@ -40,7 +40,7 @@
     padding-right: 18px;
     padding-left: 18px;
     display: inline-block; 
-    max-width: 30%; 
+    max-width: 20%; 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

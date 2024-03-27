@@ -142,3 +142,9 @@ h2 {
 	vertical-align: middle;
 	
 } */
+
+@media screen and (max-width: 600px){
+	body {
+	  overflow: auto; 
+	}
+   }

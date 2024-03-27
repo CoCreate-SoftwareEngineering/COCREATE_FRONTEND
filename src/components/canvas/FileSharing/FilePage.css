@@ -2,7 +2,7 @@
     margin-top: auto;
     display: inline;
     position: absolute;        
-    border: none;
+    border: none;        
     background-position: center;
     background-size: cover;
     background-image: url('../../../../public/refresh.ico');    
