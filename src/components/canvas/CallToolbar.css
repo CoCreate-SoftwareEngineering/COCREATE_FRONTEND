@@ -39,32 +39,3 @@
 	font-weight: 800;
 	font-family: "Inter";
 }
-
-.msgs{
-	width: 20vw;
-	height: 10vh !important;
-}
-
-input[type="text"]{
-	padding: 2vw;
-	margin-bottom: 5px !important;
-}
-
-.send-msg{
-	margin: 20px 10px 10px 10px;
-}
-
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
-	background-color: white !important;
-}
-
-@media screen and (max-width: 600px){
-	.msgs{
-		width: 80vw;
-		height: 10vh !important;
-	}
-	
-	input[type="text"]{
-		padding: 10vw;
-	}
- }

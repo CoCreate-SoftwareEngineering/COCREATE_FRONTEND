@@ -8,6 +8,7 @@ import IconButton from "./IconButton";
 import "./GroupSettings/Gsettings.js";
 import "./CallToolbar.css";
 import TextField from '@mui/material/TextField';
+import ChatArea from "./ChatArea.js";
 
 const options = [
 	{
@@ -30,18 +31,6 @@ const CallToolbar = ({ name, peerSockets, callUser, ...props }) => {
 
     const myVideo = useRef();
 
-	useEffect(() => {
-        console.log("useEffect CallToolbar")
-		navigator.mediaDevices
-			.getUserMedia({ video: true, audio: true })
-			.then((stream) => {
-                console.log("myvideo: "+ myVideo.current)
-				setMyStream(stream);
-				console.log(stream)
-				myVideo.current.srcObject = stream;
-			});
-		console.log("Useeffect");
-	}, [myVideo.current]);
 
 	const joinRoomVideo = () => {};
 
@@ -57,20 +46,11 @@ const CallToolbar = ({ name, peerSockets, callUser, ...props }) => {
 				{...props}
 			>
 				<Offcanvas.Header closeButton>
-				<span className="numonline">Online</span>	<Offcanvas.Title>Calls</Offcanvas.Title>
+				<span className="numonline">{`Online: ${peerSockets.length}`}</span>	<Offcanvas.Title>Calls</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<div className="call-tool-menu">
-                        <Button onClick={() => {console.log("join video button")}}>Join Video Call</Button>
-                        {myStream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
-                        {peerSockets.map((socketId, index) => (
-                        <span key={index}>
-                            <Button onClick={() => callUser(socketId)}>{"Call " + socketId}</Button>
-                            {console.log("BING BONG " + socketId)}
-                        </span>
-                        ))}
-					<TextField name="mmsgs" label="Enter message" size="large" className="msgs"></TextField>
-					<Button className="send-msg">Send</Button>
+						<ChatArea/>
 					</div>
 				</Offcanvas.Body>
 			</Offcanvas>

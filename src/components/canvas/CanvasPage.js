@@ -24,6 +24,7 @@ const CanvasPage = ({
 	socketEmitElements,
 	peerSockets,
 	callUser,
+	sendRoomMessage,
 	// roomId,
 	socketDisconnect,
 	getRoom,
