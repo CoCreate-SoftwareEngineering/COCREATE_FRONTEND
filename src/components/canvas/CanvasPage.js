@@ -11,6 +11,7 @@ import Spinner from "../main/Spinner";
 import Canvas from "./Canvas";
 import Example from "./ToolBar";
 import { getRoom } from "../../actions/rooms";
+import CallToolbarWrapper from "./CallToolbar";
 
 const CanvasPage = ({
 	socket,
@@ -21,6 +22,10 @@ const CanvasPage = ({
 	elements,
 	setElements,
 	socketEmitElements,
+	peerSockets,
+	callUser,
+	sendRoomMessage,
+	messages,
 	// roomId,
 	socketDisconnect,
 	getRoom,
@@ -68,6 +73,7 @@ const CanvasPage = ({
 				setCurrentColour={setCurrentColour}
 				handleToolChange={handleToolChange}
 			/>
+			<CallToolbarWrapper peerSockets={peerSockets} callUser={callUser} sendRoomMessage={sendRoomMessage} messages={messages}/>
 			<Canvas
 				tool={tool}
 				handleToolChange={handleToolChange}

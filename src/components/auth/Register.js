@@ -15,6 +15,8 @@ import { setAlert } from "../../actions/alert";
 import { createProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
 import "./Register.css";
+import logoImg from "../../media/Co_Create_Logo_blue.png";
+
 
 const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 	const [formData, setFormData] = useState({
@@ -63,76 +65,88 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 	}
 
 	return (
-		<Container className="form-container">
-			<Form onSubmit={(e) => onSubmit(e)}>
-				<h1 className="register-form-title form-title">Sign Up</h1>
-				<Form.Group className="mb-3" controlId="formBasicName">
-					<Form.Label>First Name</Form.Label>
-					<Form.Control
-						type="text"
-						placeholder="First Name"
-						name="firstName"
-						value={firstName}
-						onChange={(e) => onChange(e)}
-					/>
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicName">
-					<Form.Label>Last Name</Form.Label>
-					<Form.Control
-						type="text"
-						placeholder="Last Name"
-						name="lastName"
-						value={lastName}
-						onChange={(e) => onChange(e)}
-					/>
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>Email address</Form.Label>
-					<Form.Control
-						type="email"
-						placeholder="Enter email"
-						name="email"
-						value={email}
-						onChange={(e) => onChange(e)}
-					/>
-					{/* <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text> */}
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicPassword">
-					<Form.Label>Password</Form.Label>
-					<Form.Control
-						type="password"
-						placeholder="Password"
-						name="password"
-						value={password}
-						onChange={(e) => onChange(e)}
-					/>
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicPassword">
-					<Form.Label>Confirm Password</Form.Label>
-					<Form.Control
-						type="password"
-						placeholder="Password"
-						name="passwordConfirmation"
-						value={passwordConfirmation}
-						onChange={(e) => onChange(e)}
-					/>
-				</Form.Group>
-				<Form.Group className="mb-3">
-					<Form.Text className="text-muted">Already have an account?</Form.Text>
-					<Form.Text className="text-muted">
-						<Link className="form-link" to="/login">
-							Log in
-						</Link>
-					</Form.Text>
-				</Form.Group>
-				<Button variant="primary" type="submit">
-					Sign Up
-				</Button>
-			</Form>
-		</Container>
+		<div className="register-main-container">
+			<div className="register-logo-left-container">
+				<img src={logoImg} className="logo" alt="logo"></img>
+			</div>
+			<div className="register-right-container">
+				<Container className="register-form-container">
+					<Form onSubmit={e => onSubmit(e)}>
+						<h1 className="register-form-title">Sign Up</h1>
+						<Form.Group className="register-form-group" controlId="formBasicFirstName">
+							<Form.Label className="register-form-label">First Name</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="First Name"
+								name="firstName"
+								value={firstName}
+								onChange={e => onChange(e)}
+								className="register-form-input"
+							/>
+						</Form.Group>
+						<Form.Group className="register-form-group" controlId="formBasicLastName">
+							<br />
+							<Form.Label className="register-form-label">Last Name</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Last Name"
+								name="lastName"
+								value={lastName}
+								onChange={e => onChange(e)}
+								className="register-form-input"
+							/>
+						</Form.Group>
+						<Form.Group className="register-form-group" controlId="formBasicEmail">
+							<br />
+							<Form.Label className="register-form-label">Email address</Form.Label>
+							<Form.Control
+								type="email"
+								placeholder="Enter email"
+								name="email"
+								value={email}
+								onChange={e => onChange(e)}
+								className="register-form-input"
+							/>
+						</Form.Group>
+						<Form.Group className="register-form-group" controlId="formBasicPassword">
+							<br />
+							<Form.Label className="register-form-label">Password</Form.Label>
+							<Form.Control
+								type="password"
+								placeholder="Password"
+								name="password"
+								value={password}
+								onChange={e => onChange(e)}
+								className="register-form-input"
+							/>
+						</Form.Group>
+						<Form.Group className="register-form-group" controlId="formBasicPasswordConfirmation">
+							<br />
+							<Form.Label className="register-form-label">Confirm Password</Form.Label>
+							<Form.Control
+								type="password"
+								placeholder="Confirm Password"
+								name="passwordConfirmation"
+								value={passwordConfirmation}
+								onChange={e => onChange(e)}
+								className="register-form-input"
+							/>
+						</Form.Group>
+						<Form.Group className="mb-3">
+							<Form.Text className="register-text-before-link">
+								<span>Already have an account? </span>
+								<Link className="register-form-link" to="/login">Log in</Link>
+							</Form.Text>
+						</Form.Group>
+						<Button variant="primary" type="submit" className="register-sign-in-button">
+							Sign Up
+						</Button>
+					</Form>
+				</Container>
+			</div>
+		</div>
 	);
+	
 };
 
 Register.propTypes = {

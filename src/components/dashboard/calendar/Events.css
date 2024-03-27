@@ -53,3 +53,9 @@ label{
 .tag:hover{
      cursor:pointer;
 }
+
+@media screen and (max-width: 600px){
+     .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root{
+          overflow:visible !important;
+     }
+}
