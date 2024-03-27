@@ -102,3 +102,26 @@
   .vbtn:hover {
     background-color: rgb(226, 133, 110) !important; /* change color on hover */
   }
+
+  @media screen and (max-width: 600px){
+    .tool-menu{
+      display: grid;
+      grid-template-columns:repeat(auto-fit, minmax(8vh, 1fr))
+    }
+    label{
+      font-size: 10pt;
+      padding: 10px 30px 10px 30px !important;
+    }
+    .tool-bar-page {
+         height:30vh !important;
+         top: 70vh !important; /* align to the bottom */
+    }
+    .vbtn{
+      font-size: 10pt;
+      width: fit-content;
+      max-height: 10vh;
+    }
+    .offcanvas-title{
+      margin-left: 45% !important;
+    }
+}
