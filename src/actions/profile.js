@@ -169,7 +169,7 @@ export const addRoom = (roomId) => async (dispatch) => {
 		console.log(res.data);
 		dispatch({
 			type: ADD_ROOM_SUCCESS,
-			payload: res.data,
+			payload: res.data.profile.roomIds,
 		});
 	} catch (err) {
 		// const errors = err.respone.data.errors;
@@ -226,7 +226,7 @@ export const leaveRoom = (roomId) => async (dispatch) => {
 	// });
 
 	try {
-		const res = await axios.delete(
+		const res = await axios.put(
 			`http://localhost:8000/api/profile/rooms/leaveRoom/${roomId}`
 		);
 		dispatch({

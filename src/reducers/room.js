@@ -60,6 +60,7 @@ export default function (state = initialState, action) {
 				roomLoading: false,
 			};
 		case RENAME_ROOM_SUCCESS:
+			console.log("RENAME ACTION");
 			return {
 				...state,
 				room: {

@@ -22,7 +22,7 @@ import ToggleableHeading from "./ToggleableHeading/ToggleableHeading.js";
 import "./Dashboard.css";
 
 import io from "socket.io-client";
-import EventCalendar from './calendar/EventCalendar.js';
+import EventCalendar from "./calendar/EventCalendar.js";
 
 const Dashboard = ({
 	getCurrentProfile,
@@ -58,7 +58,7 @@ const Dashboard = ({
 
 	useEffect(() => {
 		getAllRoomNames();
-	}, []);
+	}, [profile]);
 
 	const handleChooseRoom = (room) => {
 		console.log("0.INTIAL ROOM ID");
@@ -71,73 +71,71 @@ const Dashboard = ({
 		// console.log(roomId);
 	};
 
-
 	return profile && roomNames === null ? (
 		<Spinner />
 	) : (
 		<div className="body-flex-container">
 			<div className="content-wrapper">
-		<Fragment>
-			<Nav user={user} />
-
-			{profile == null ? (
-				<Fragment></Fragment>
-			) : (
 				<Fragment>
-					{/* {profile.rooms.map(
+					<Nav user={user} />
+
+					{profile == null ? (
+						<Fragment></Fragment>
+					) : (
+						<Fragment>
+							{/* {profile.rooms.map(
 						(room, index) => room && <li key={index}>{room.roomName}</li>
 					)} */}
-					<div className="content">
-						  <span> <EventCalendar/> </span>
-              <div className="row">
-							<ToggleableHeading
-								uuid={uuid}
-								setRoomJoined={setRoomJoined}
-								setUser={setUser}
-								socket={socket}
-								heading="Projects"
-								notiAmountCons={profile?.roomIds?.length ?? 0} // dynamically set notification amount
-								rowContent={
-									<div className="projects-container">
-										<JoinRoomForm
-											uuid={uuid}
-											setRoomJoined={setRoomJoined}
-											setUser={setUser}
-											socket={socket}
-											socketJoinRoom={socketJoinRoom}
-											// roomId={roomId}
-										/>
-										{/* add all projects in data structure to projects section */}
-                    {roomNames.map((room, index) => (
-											<Link
-												key={index}
-												to={`/${profile.roomIds[index]}`}
-												onClick={() => {
-													handleChooseRoom(profile.roomIds[index]);
-												}}
-											>
-												<div className="item">
-												<p>{room}</p>
-												</div>
-											</Link>
-											))}
-
-									</div>
-								}
-							/>
-						</div>
-					</div>
-					
+							<div className="content">
+								<span>
+									{" "}
+									<EventCalendar />{" "}
+								</span>
+								<div className="row">
+									<ToggleableHeading
+										uuid={uuid}
+										setRoomJoined={setRoomJoined}
+										setUser={setUser}
+										socket={socket}
+										heading="Projects"
+										notiAmountCons={profile?.roomIds?.length ?? 0} // dynamically set notification amount
+										rowContent={
+											<div className="projects-container">
+												<JoinRoomForm
+													uuid={uuid}
+													setRoomJoined={setRoomJoined}
+													setUser={setUser}
+													socket={socket}
+													socketJoinRoom={socketJoinRoom}
+													// roomId={roomId}
+												/>
+												{/* add all projects in data structure to projects section */}
+												{roomNames.map((room, index) => (
+													<Link
+														key={index}
+														to={`/${profile.roomIds[index]}`}
+														onClick={() => {
+															handleChooseRoom(profile.roomIds[index]);
+														}}
+													>
+														<div className="item">
+															<p>{room}</p>
+														</div>
+													</Link>
+												))}
+											</div>
+										}
+									/>
+								</div>
+							</div>
+						</Fragment>
+					)}
 				</Fragment>
-			)}
-		</Fragment>
-		
+			</div>
+			<div className="footer">
+				<Footer />
+			</div>
 		</div>
-		<div className="footer">			
-			<Footer />
-		</div>
-		</div>
-		
 	);
 };
 

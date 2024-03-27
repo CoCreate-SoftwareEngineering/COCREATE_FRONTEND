@@ -67,23 +67,27 @@ export default function (state = initialState, action) {
 				loading: false,
 			};
 		case GET_ROOM_NAMES:
+			console.log("GET ROOM NAME AT REDUCER");
+
 			return {
 				...state,
 				roomNames: payload,
+				// roomIds: payload,
 				loading: false,
 			};
 		case LEAVE_ROOM:
 			return {
 				...state,
-				roomNames: payload,
+				profile: { roomIds: payload },
+				roomNames: null,
 				loading: false,
 			};
-		case LEAVE_ROOM:
-			return {
-				...state,
-				roomNames: payload,
-				loading: false,
-			};
+		// case LEAVE_ROOM:
+		// 	return {
+		// 		...state,
+		// 		roomIds: payload,
+		// 		loading: false,
+		// 	};
 		default:
 			return state;
 	}
