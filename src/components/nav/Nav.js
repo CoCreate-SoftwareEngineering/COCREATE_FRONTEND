@@ -34,7 +34,7 @@ const OurNav = ({ user, logout }) => {
 						</Link>
 					</li>
 					<li>
-						<Link to="/profile">
+						<Link to="/profilepage">
 							<img
 								className="Userpic"
 								src={profileImg}
@@ -44,7 +44,7 @@ const OurNav = ({ user, logout }) => {
 						</Link>
 					</li>
 					<li>
-						<Link to="/profile">
+						<Link to="/profilepage">
 							<div className="Username">
 								{/* {user.firstName} {user.lastName} */}
 							</div>
