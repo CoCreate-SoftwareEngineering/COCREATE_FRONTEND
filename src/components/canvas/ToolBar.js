@@ -264,7 +264,9 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 							onChange={() => handleToolChange("text")}							
 						/>										
 						<label htmlFor="text">Text</label>
+						</div>
 				</Offcanvas.Body>
+
 			</Offcanvas>
 		</>
 	);

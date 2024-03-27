@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import IconButton from "./IconButton";
 import "./GroupSettings/Gsettings.js";
 import "./CallToolbar.css";
+import TextField from '@mui/material/TextField';
 
 const options = [
 	{
@@ -56,7 +57,7 @@ const CallToolbar = ({ name, peerSockets, callUser, ...props }) => {
 				{...props}
 			>
 				<Offcanvas.Header closeButton>
-					<Offcanvas.Title>Calls</Offcanvas.Title>
+				<span className="numonline">Online</span>	<Offcanvas.Title>Calls</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<div className="call-tool-menu">
@@ -68,35 +69,8 @@ const CallToolbar = ({ name, peerSockets, callUser, ...props }) => {
                             {console.log("BING BONG " + socketId)}
                         </span>
                         ))}
-                        {/* {peerVideos.map((videoSrc, index) => (
-                            <video key={index} playsInline ref={videoRef => {
-                                if (videoRef) {
-                                    videoRef.srcObject = videoSrc;
-                                }
-                            }} autoPlay style={{ width: "300px" }} />
-                        ))}
-                        {myStream && (
-						<video
-							playsInline
-							muted
-							ref={myVideo}
-							autoPlay
-							style={{ width: "300px" }}
-						/>
-					)}
-					{peerVideos.map((videoSrc, index) => (
-						<video
-							key={index}
-							playsInline
-							ref={(videoRef) => {
-								if (videoRef) {
-									videoRef.srcObject = videoSrc;
-								}
-							}}
-							autoPlay
-							style={{ width: "300px" }}
-						/>
-					))} */}
+					<TextField name="mmsgs" label="Enter message" size="large" className="msgs"></TextField>
+					<Button className="send-msg">Send</Button>
 					</div>
 				</Offcanvas.Body>
 			</Offcanvas>
