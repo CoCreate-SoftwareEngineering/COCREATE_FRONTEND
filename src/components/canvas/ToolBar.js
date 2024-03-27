@@ -217,18 +217,16 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 					<Offcanvas.Title>Tools</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
-					<div className="tool-menu">
-						<Link to='/gsettings'>           
+					
+					<div className="tool-menu">	
+					<Link to='/gsettings'>           
                         			<IconButton image={settingsIcon} />    
-                    		</Link>	
-						<Link to="/gsettings">
-							<IconButton image={settingsIcon} />
-						</Link>
+                    		</Link>
 						<input
 							type="color"
 							// value={color}
 							// onChange={}
-							style={{ margin: "10px" }}
+							//style={{ margin: "10px" }}
 						/>
 						<input
 							type="radio"
@@ -266,12 +264,6 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 							onChange={() => handleToolChange("text")}							
 						/>										
 						<label htmlFor="text">Text</label>
-						<Button onClick={joinRoomVideo} className= "vbtn"> Join Video Call</Button>
-				
-				    <Button  className= "vbtn">Share File</Button>
-					</div>					
-					{/* </div> KACPER WUZ HEER */}
-
 				</Offcanvas.Body>
 			</Offcanvas>
 		</>
