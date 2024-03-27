@@ -77,7 +77,7 @@ button:hover {
   padding-left: 10px;  
 }
 
-.modal-title-custom {
+.modal-title-file {
   margin: 0; /* Remove default margins */
   padding-right: 10px;
   font-family: 'calibri';
@@ -87,6 +87,7 @@ button:hover {
   word-wrap: break-word; /* For old browsers */
   overflow-wrap: anywhere; /* Latest syntax */
   max-width: 12ch; /* Set the maximum width to 12 characters */
+  color:white
 }
 
 .modal-footer-file {
