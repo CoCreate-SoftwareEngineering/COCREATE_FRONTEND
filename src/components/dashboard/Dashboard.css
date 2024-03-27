@@ -37,12 +37,21 @@ a {
 
 .row {
 	margin-bottom: 20px;
+	margin:10px;
 }
 
 h2 {
 	font-family: "Inter";
 	color: #333;
 	font-weight: 500;
+}
+
+.roomTitle{
+	font-weight: 700;
+	font-size:large !important;
+	color: rgb(226, 133, 110) !important;
+	max-width: 10vw;
+	margin: auto;
 }
 
 .item-container {
@@ -52,8 +61,8 @@ h2 {
 }
 
 .item {
-	width: 180px;
-	height: 100px;
+	width:12vw;
+	height: 15vh;
 	line-height: 50px;
 	background-color: white;
 	color: black;
@@ -104,6 +113,7 @@ h2 {
 	display: flex;
 	align-items: center;
 	padding: 20px 20px 0 20px;
+	margin: 10px;
 }
 
 .dropdown-arrow {
@@ -141,3 +151,9 @@ h2 {
 	text-align: center;
 	vertical-align: middle;
 }
+
+@media screen and (max-width: 600px){
+	body {
+	  overflow: auto; 
+	}
+   }

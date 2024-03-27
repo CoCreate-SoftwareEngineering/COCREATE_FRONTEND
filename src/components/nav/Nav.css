@@ -31,9 +31,11 @@
 }
 
 .Userpic {
-	border-radius: 50%;
+	object-fit: cover;
 	margin: auto;
 	margin-top: 20%;
+	padding: 2px;
+	border-radius: 50%;
 }
 
 .ProjectName {
@@ -48,7 +50,8 @@
 }
 
 .SearchBar input {
-	width: 250px;
+	
+	width: 15vw;
 	height: 33px;
 	font-size: 14pt;
 	font-family: "Inter";
@@ -184,18 +187,28 @@ ul {
 }
 
 .logoutbtn{
-	margin-top: 25px;
-	margin-right: 10px;
-	background-color: #2c4251 !important;
-	border-radius: 30px;
-	width: 100%;
-	height: 50%;	
-	font-size: 15px;
-	color: white;
+	margin-top: 20%;
+	background-color:#7cc0cb !important;
+	border-color: #7cc0cb !important;
+	--bs-btn-active-bg: #2c4251 !important;
+	border-radius: 3px;
 }
 
 .logoutbtn:hover{
-	background-color: #efe7e7 !important;
-	border-color: #2c4251 !important;
-	color: black;
+	background-color: #2c4251 !important;
+}
+
+@media screen and (max-width: 600px){
+	.Outside{
+		display: table-cell;
+		min-width: 100vw;
+	}
+
+	.SearchBar {
+		margin-right: 20px;
+	}
+	.SearchBar input{
+		width: 25vw;
+	}
+
 }

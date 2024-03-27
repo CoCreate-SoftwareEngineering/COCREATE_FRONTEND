@@ -35,7 +35,10 @@
      font-weight: 800;
      font-family: "Inter";     
    }
-   
+   .tool-bar-button:active {
+    transform: translateY(20%) translateX(-50%) !important; /* show the element */
+  }
+
    .tool-menu{
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(8vw, 1fr));
