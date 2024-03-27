@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth as firebaseAuth } from './FireBase-config'
@@ -30,29 +30,30 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 	const { firstName, lastName, email, password, passwordConfirmation } =
 		formData;
 
+	const alerts = useSelector(state => state.alert);
+
 	const onChange = (e) =>
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		if (password !== passwordConfirmation) {
+			// Use setAlert to handle this error
 			setAlert("Passwords do not match", "danger");
 		} else {
-
-			// link account to firebase
-			try{
-				const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password)
+			try {
+				const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password);
 				console.log("IMPORTANT: Firebase user registered", userCredential.user);
-								
+				// Proceed with registration
+				await register({ firstName, lastName, email, password });
+				createProfile();
 			} catch (error) {
-				console.log('Firebase registration error: ', error)
-				setAlert(error.message, 'danger')
+				// console.error('Firebase registration error: ', error);
+				setAlert(error.message, 'danger'); // Handle Firebase errors similarly
 			}
-			// Original register code
-			await register({ firstName, lastName, email, password });
-			createProfile();			
 		}
 	};
+		
 
 	// user already linked to firebase
 	if (isAuthenticated){
@@ -65,12 +66,19 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
 	}
 
 	return (
-		<div className="register-main-container">
+		<div className="register-main-container">				
 			<div className="register-logo-left-container">
 				<img src={logoImg} className="logo" alt="logo"></img>
 			</div>
 			<div className="register-right-container">
+
 				<Container className="register-form-container">
+					{/* alerts */}
+					{alerts.map(alert => (
+						<div key={alert.id} className={`alert alert-${alert.alertType}`}>
+							{alert.msg}
+						</div>
+					))}
 					<Form onSubmit={e => onSubmit(e)}>
 						<h1 className="register-form-title">Sign Up</h1>
 						<Form.Group className="register-form-group" controlId="formBasicFirstName">
