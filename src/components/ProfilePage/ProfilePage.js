@@ -26,10 +26,11 @@ const ProfilePage = ({
   
    return (
     <section style={{ backgroundColor: '#EFE7E7' }}>
-        <div className="container py-5" style={{ maxHeight: '100vh', overflowY: 'auto' }}>
-            <div className="row align-items-stretch"> {/* Added align-items-stretch class */}
-                <div className="col">
-                    <nav aria-label="breadcrumb" className="bg-light rounded-3 p-3 mb-4">
+    <div className="container py-5" style={{ maxHeight: '100vh', overflowY: 'auto' }}>
+        <div className="row align-items-stretch"> {/* Added align-items-stretch class */}
+            <div className="col">
+                <nav aria-label="breadcrumb" className="bg-light rounded-3 p-3 mb-4 d-flex justify-content-between align-items-center">
+                    <div>
                         <ol className="breadcrumb mb-0">
                             <li className="breadcrumb-item">
                                 <Link to="/dashboard">
@@ -38,9 +39,13 @@ const ProfilePage = ({
                             </li>
                             <li className="breadcrumb-item active inter-font" style={{ fontFamily: 'sans-serif' }} aria-current="page">User Profile</li>
                         </ol>
-                    </nav>
-                </div>
+                    </div>
+                    <div>
+                        <Link to="/dashboard" className="btn btn-link" style={{ color: '#343a40' }}>{"<< Back To Dashboard"}</Link>
+                    </div>
+                </nav>
             </div>
+        </div>
 
             <div className="row align-items-stretch"> {/* Added align-items-stretch class */}
                 <div className="col-lg-4">
