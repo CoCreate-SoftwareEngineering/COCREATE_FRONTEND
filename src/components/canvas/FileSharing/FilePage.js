@@ -147,12 +147,14 @@ const createGroupFolder = async () => {
   const navigateIntoFolder = (folderName) => {
     setPathStack(prevStack => [...prevStack, currentPath]);
     setCurrentPath(`${currentPath}/${folderName}`);
+    refreshContent()
   };
 
   const navigateBack = () => {
     const prevPath = pathStack.pop();
     setPathStack([...pathStack]);
     setCurrentPath(prevPath || initialPath);
+    refreshContent()
   };
 
   if (!show) {

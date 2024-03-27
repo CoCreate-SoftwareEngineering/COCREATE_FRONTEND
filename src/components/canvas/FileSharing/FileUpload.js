@@ -21,7 +21,7 @@ const FileUpload = ({onUploadSuccess, currentPath}) => {
         const files = e.target.files;
         if (files.length > 0) {
             setFile(files[0]);
-            setFileName(files[0].name); // Update the state with the new file name
+            setFileName(files[0].name); // Update the state with the new file name            
         } else {
             setFileName('Choose file'); // Revert to default text if no file is chosen
         }
@@ -55,6 +55,14 @@ const FileUpload = ({onUploadSuccess, currentPath}) => {
     };
 
 
+    const resetFileInput = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
+        setFile(null); // Clear the file from state
+        setFileName('Choose file'); // Reset the file name to the default message
+    };
+
     
     const handleUpload = async () => {
         if (!auth.currentUser) {
@@ -71,6 +79,7 @@ const FileUpload = ({onUploadSuccess, currentPath}) => {
                 await uploadBytes(fileRef, file);
                 console.log('File uploaded successfully');
                 setFileName('Choose File'); // Reset the file name after successful upload
+                resetFileInput(); // Reset the file input to clear the selected file
     
                  // Optionally trigger the refresh to show the newly uploaded file
                 if (onUploadSuccess) {
@@ -80,6 +89,8 @@ const FileUpload = ({onUploadSuccess, currentPath}) => {
             } catch (error) {
                 console.error('Error uploading file:', error);
             }
+        } else {
+            console.log('No file selected');
         }
     };
     
