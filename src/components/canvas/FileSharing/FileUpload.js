@@ -58,12 +58,12 @@ const FileUpload = ({onUploadSuccess, currentPath}) => {
 
     const resetFileInput = () => {
         if (fileInputRef.current) {
-            fileInputRef.current.value = "";
+            fileInputRef.current.value = ""; // This should clear the input
         }
         setFile(null); // Clear the file from state
         setFileName('Choose file'); // Reset the file name to the default message
     };
-
+    
     
     const handleUpload = async () => {
         if (!auth.currentUser) {
@@ -112,11 +112,13 @@ const FileUpload = ({onUploadSuccess, currentPath}) => {
             <button className='upload-button' onClick={handleUpload}>Upload File</button>
 
             <input
+                className="unique-text-input"
                 type="text"
                 placeholder="Folder Name"
                 value={folderName}
                 onChange={handleFolderNameChange}
-            />            
+            />
+       
             <button className='folder-button' onClick={createFolder}>Create Folder</button>
         </div>
     );

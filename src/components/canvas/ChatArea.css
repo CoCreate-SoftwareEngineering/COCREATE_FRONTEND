@@ -16,7 +16,7 @@
 	height: 10vh !important;
 }
 
-input[type="text"]{
+input[type="text"]:not(.unique-text-input):not(.unique-input-style):not(.register-form-input):not(.form-control.outline-0):not(.form-control){
 	padding: 2vw;
 	margin-bottom: 5px !important;
 }
@@ -41,7 +41,7 @@ input[type="text"]{
 		height: 10vh !important;
 	}
 	
-	input[type="text"]{
+	input[type="text"]:not(.unique-text-input):not(.unique-input-style):not(.register-form-input):not(.form-control.outline-0):not(.form-control){
 		padding: 10vw;
 	}
  }
