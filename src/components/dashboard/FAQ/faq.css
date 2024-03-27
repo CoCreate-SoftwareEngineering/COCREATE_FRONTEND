@@ -1,80 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Lato:wght@400;700&display=swap');
 
-
-.mainClass{
-    background-color: #2C4251;
-    margin:20px;
+.faq-section {
+    /* background-color: rgb(226, 133, 110); */
+    padding: 40px 20px;
+    margin: 0 auto;
+    max-width: 960px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     font-family: 'Lato', sans-serif;
 }
 
-.link-text{
-    font-size:12.5pt;
-    color:white;
+.faq-main {
+    color: white;
 }
 
-h1{
+.faq-container {
+    padding: 32px;
+    border-radius: 15px;
+    background: rgba(44, 62, 80, 0.9); /* Slightly transparent */
+}
+
+.faq-header h1 {
     text-align: center;
-    font-size: 25pt;
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    color: rgb(124, 192, 203);
+    font-size: 28pt;
+    color: rgb(255, 255, 255);
+    margin-bottom: 40px;
+    font-weight: 700;
 }
 
-.card-title {
-    font-size: 15pt;
-    color:#E2856E;
-    font-family: 'Lato', sans-serif;    
+.faq-item {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent for layering effect */
+    border-radius: 12px;    
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.2s; /* Smooth transition for hover effect */
 }
 
-h3{
-    font-size: 15pt;
-    color:#E2856E;
-    font-family: 'Lato', sans-serif;
+.faq-item:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-p{
-    font-size: 12.5pt;
-    color:white;
+.faq-item h3 {
+    font-size: 18pt;
+    color: wheat;
+    margin-bottom: 10px;
 }
 
-.section1{
-    background-color: #2C4251;
-    padding:40px;
-    text-align: start;
-    width: 100%;
+.faq-item p {
+    font-size: 14pt;
+    line-height: 1.6;
+    color: white !important;
 }
 
-.section2{
-    background-color: #2C4251;
-    padding:40px;
-    text-align: start;
-    width: 100%;
+.faq-link {
+    font-size: 14pt;
+    color: wheat;
+    display: inline-block;
+    text-decoration: underline;
+    margin-top: 15px;
 }
 
-.section3{
-    background-color: #2C4251;
-    padding:40px;
-    text-align: start;
-    width:100%;
-}
-
-.section4{
-    background-color: #2C4251;
-    padding:40px;
-    text-align: start;
-    width: 100%;
-}
-
-.section5{
-    background-color: #2C4251;
-    padding:40px;
-    text-align: start;
-    width: 100%;
-}
-
-.section6{
-    background-color: #2C4251;
-    padding:40px;
-    text-align: start;
-    width: 100%;
+.faq-link:hover {
+    color: #ffffff;
+    text-decoration: none;
 }
