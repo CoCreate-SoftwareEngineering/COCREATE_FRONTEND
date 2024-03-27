@@ -98,3 +98,20 @@ Events{
 .css-1rtg91x-MuiDateCalendar-root{
      height:auto !important;
 }
+
+@media screen and (max-width: 600px){
+	.cal{
+          bottom: 0;
+          top: 50%;
+          margin-top: 10vh;
+	}
+     .item{
+          height: 10vh;
+     }
+     .roomTitle{          
+          padding-left: 0 !important;
+     }
+     .dropdown{
+          float: right;
+     }
+}

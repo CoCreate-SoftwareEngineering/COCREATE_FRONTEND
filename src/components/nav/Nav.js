@@ -7,7 +7,7 @@ import profileImg from "../../media/Darwizzy.jpg";
 import userImg1 from "../../media/ProfileImg1.jpg";
 import { Link } from "react-router-dom";
 import profile from "../../reducers/profile.js";
-
+import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
@@ -63,14 +63,14 @@ const OurNav = ({ user, logout }) => {
 						</form>
 					</li>
 					<li>
-						<button
-							className=""
+						<Button
+							className="logoutbtn"
 							onClick={() => {
 								logout();
 							}}
 						>
 							Logout
-						</button>
+						</Button>
 					</li>
 					<li style={{ marginRight: 0, width: 50 }}>
 						<div className="dropdown">
