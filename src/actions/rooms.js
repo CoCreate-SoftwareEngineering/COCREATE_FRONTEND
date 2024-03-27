@@ -155,9 +155,10 @@ export const updateRoomName = (roomId, rename) => async (dispatch) => {
 			body,
 			config
 		);
+		console.log("Dispatching rename");
 		dispatch({
 			type: RENAME_ROOM_SUCCESS,
-			payload: rename,
+			payload: res.data,
 		});
 		console.log("Room created successfully");
 	} catch (err) {
@@ -184,7 +185,7 @@ export const getAllRoomNames = () => async (dispatch) => {
 		console.log("ERROR GETTING ROOM NAMES");
 	}
 };
-export const addMemberToRoom = (roomId) => async (dispatch) => {
+export const addMemberToRoom = (roomId, email) => async (dispatch) => {
 	console.log("ADDING MEMBER");
 
 	const config = {
@@ -196,6 +197,7 @@ export const addMemberToRoom = (roomId) => async (dispatch) => {
 
 	const body = JSON.stringify({
 		roomId: roomId,
+		email: email,
 	});
 	try {
 		console.log("ADDING MEMBER");

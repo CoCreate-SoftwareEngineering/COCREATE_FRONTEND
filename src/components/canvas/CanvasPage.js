@@ -35,11 +35,16 @@ const CanvasPage = ({
 	// redo,
 }) => {
 	const [tool, setTool] = useState("line");
+	const [currentColour, setCurrentColour] = useState("#000000");
 	// const [room, setRoom] = useState(null);
 
 	useEffect(() => {
 		getCurrentProfile();
 	}, [loading]);
+
+	// useEffect(() => {
+	// 	getRoom();
+	// }, [room.roomName]);
 
 	useEffect(() => {
 		// console.log("CP Room Id");
@@ -62,9 +67,13 @@ const CanvasPage = ({
 		<Fragment>
 			{/* <Container className="container"> */}
 			<CanvasPageHeader />
-			<Example tool={tool} handleToolChange={handleToolChange} />
+			<Example
+				tool={tool}
+				currentColour={currentColour}
+				setCurrentColour={setCurrentColour}
+				handleToolChange={handleToolChange}
+			/>
 			<CallToolbarWrapper peerSockets={peerSockets} callUser={callUser} sendRoomMessage={sendRoomMessage} messages={messages}/>
-			<p1>test</p1>
 			<Canvas
 				tool={tool}
 				handleToolChange={handleToolChange}
@@ -74,6 +83,8 @@ const CanvasPage = ({
 				setElements={setElements}
 				socketEmitElements={socketEmitElements}
 				socketDisconnect={socketDisconnect}
+				setCurrentColour={setCurrentColour}
+				currentColour={currentColour}
 
 				// useHistory={useHistory}
 				// undo={undo}

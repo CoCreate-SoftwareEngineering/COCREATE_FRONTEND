@@ -171,12 +171,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import settingsIcon from '../../media/button-images/icon_settings.png'
-import { Link } from 'react-router-dom';
-import IconButton from './IconButton';
-import './GroupSettings/Gsettings.js';
-import './ToolBar.css';
-
+import settingsIcon from "../../media/button-images/icon_settings.png";
+import { Link } from "react-router-dom";
+import IconButton from "./IconButton";
+import "./GroupSettings/Gsettings.js";
+import "./ToolBar.css";
 
 const options = [
 	{
@@ -186,7 +185,14 @@ const options = [
 	},
 ];
 
-const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
+const ToolBar = ({
+	handleToolChange,
+	tool,
+	name,
+	currentColour,
+	setCurrentColour,
+	...props
+}) => {
 	const [show, setShow] = useState(false);
 
 
@@ -200,7 +206,10 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 		handleToolChange(value);
 	}
 
-	const joinRoomVideo = () => {};
+	const handleChangeColour = (e) => {
+		console.log("HANDLE CHANGE COLOUR: " + e.target.value);
+		setCurrentColour(e.target.value);
+	};
 
 	return (
 		<>
@@ -217,15 +226,17 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 					<Offcanvas.Title>Tools</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
-					
-					<div className="tool-menu">	
-					<Link to='/gsettings'>           
-                        			<IconButton image={settingsIcon} />    
-                    		</Link>
+					<div className="tool-menu">
+						<Link to="/gsettings">
+							<IconButton image={settingsIcon} />
+						</Link>
 						<input
 							type="color"
-							// value={color}
-							// onChange={}
+							value={currentColour}
+							onChange={(e) => {
+								console.log("Colour Changed");
+								handleChangeColour(e);
+							}}
 							//style={{ margin: "10px" }}
 						/>
 						<input
@@ -238,31 +249,39 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 						<label htmlFor="selection">Selection</label>
 						<input
 							type="radio"
+							id="delete"
+							checked={tool === "delete"}
+							value={"delete"}
+							onChange={() => handleToolChange("delete")}
+						/>
+						<label htmlFor="delete">Delete</label>
+						<input
+							type="radio"
 							id="line"
 							checked={tool === "line"}
 							onChange={() => handleToolChange("line")}
-						/>						
+						/>
 						<label htmlFor="line">Line</label>
 						<input
 							type="radio"
 							id="rectangle"
 							checked={tool === "rectangle"}
 							onChange={() => handleToolChange("rectangle")}
-						/>							
-						<label htmlFor="rectangle">Rectangle</label>						
+						/>
+						<label htmlFor="rectangle">Rectangle</label>
 						<input
 							type="radio"
 							id="pencil"
 							checked={tool === "pencil"}
 							onChange={() => handleToolChange("pencil")}
-						/>						
-						<label htmlFor="pencil">Pencil</label>							
+						/>
+						<label htmlFor="pencil">Pencil</label>
 						<input
 							type="radio"
 							id="text"
 							checked={tool === "text"}
-							onChange={() => handleToolChange("text")}							
-						/>										
+							onChange={() => handleToolChange("text")}
+						/>
 						<label htmlFor="text">Text</label>
 						</div>
 				</Offcanvas.Body>
@@ -272,7 +291,12 @@ const ToolBar = ({ handleToolChange, tool, name, ...props }) => {
 	);
 };
 
-const Example = ({ tool, handleToolChange }) => {
+const Example = ({
+	tool,
+	handleToolChange,
+	currentColour,
+	setCurrentColour,
+}) => {
 	return (
 		<>
 			{options.map((props, idx) => (
@@ -282,6 +306,8 @@ const Example = ({ tool, handleToolChange }) => {
 					key={idx}
 					{...props}
 					placement={"end"}
+					setCurrentColour={setCurrentColour}
+					currentColour={currentColour}
 				/>
 			))}
 		</>

@@ -22,18 +22,22 @@ const CanvasPageHeader = ({
 		getCurrentProfile();
 	}, []);
 
+	// useEffect(() => {
+	// 	getRoom();
+	// });
+
 	const [showFilesModal, setShowFilesModal] = useState(false);
 
 	const handleFilesModalShow = () => {
 		console.log("Opening Files Modal");
 		setShowFilesModal(true);
-	  };
-	  
-	  // Debug: Log when modal is being closed to track unexpected triggers
-	  const handleFilesModalClose = () => {
+	};
+
+	// Debug: Log when modal is being closed to track unexpected triggers
+	const handleFilesModalClose = () => {
 		console.log("Closing Files Modal");
 		setShowFilesModal(false);
-	  };
+	};
 
 	return (
 		<header className="canvas-header flex text-white">
@@ -57,7 +61,6 @@ const CanvasPageHeader = ({
 				<button className="file-button" onClick={handleFilesModalShow}>Files
 				<FilesList show = {showFilesModal} onClose={handleFilesModalClose} roomId={room.roomId} roomName={room.roomName} /></button>
 			</div>
-
 		</header>
 	);
 };

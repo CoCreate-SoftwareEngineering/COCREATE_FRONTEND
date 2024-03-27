@@ -20,6 +20,8 @@ import {
 	getRoom,
 	updateRoomName,
 	addMemberToRoomFromSettings,
+	getAllRoomNames,
+	clearRoom,
 } from "../../../actions/rooms";
 import { addMember, leaveRoom } from "../../../actions/profile";
 
@@ -30,6 +32,7 @@ const Gsettings = ({
 	addMember,
 	addMemberToRoomFromSettings,
 	leaveRoom,
+	clearRoom,
 }) => {
 	const [isRemoveVisible] = useState(true);
 	const [open, setOpen] = useState(false);
@@ -58,25 +61,27 @@ const Gsettings = ({
 		}
 	};
 
-	const handleRename = (e) => {
+	const handleRename = async (e) => {
 		e.preventDefault();
 		console.log("HANDLE RENAME");
 		console.log(rename);
-		updateRoomName(room.roomId, rename);
+		await updateRoomName(room.roomId, rename);
 		// setRename("");
 		getRoom(room.roomId);
 	};
 
-	const handleLeaveRoom = (e) => {
+	const handleLeaveRoom = async (e) => {
 		e.preventDefault();
 		console.log("Leaving room");
-		leaveRoom(room.roomId);
+		await leaveRoom(room.roomId);
+		getAllRoomNames();
+		clearRoom();
 		// navigate("/dashboard");
 	};
 	return (
 		<div className="section">
 			<button className="closebtn">
-				<Link to="/canvas">
+				<Link to={`/${room.roomId}`}>
 					<h3>x</h3>
 				</Link>
 			</button>
@@ -309,6 +314,7 @@ Gsettings.propTypes = {
 	addMember: PropTypes.func.isRequired,
 	addMemberToRoomFromSettings: PropTypes.func.isRequired,
 	leaveRoom: PropTypes.func.isRequired,
+	clearRoom: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -323,4 +329,5 @@ export default connect(mapStateToProps, {
 	addMember,
 	addMemberToRoomFromSettings,
 	leaveRoom,
+	clearRoom,
 })(Gsettings);

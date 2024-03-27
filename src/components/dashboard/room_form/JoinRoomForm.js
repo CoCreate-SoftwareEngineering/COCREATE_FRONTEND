@@ -28,6 +28,7 @@ const JoinRoomForm = ({
 	socketJoinRoom,
 	getRoom,
 	addMemberToRoom,
+	user,
 	// setRoomId,
 	// roomId,
 }) => {
@@ -64,7 +65,7 @@ const JoinRoomForm = ({
 		// socket.emit("userJoined", roomData);
 		addRoom(roomId);
 		console.log("call to add member");
-		addMemberToRoom(roomId);
+		addMemberToRoom(roomId, user.email);
 		getRoom(roomId);
 		console.log("Room form submit");
 		navigate(`/${roomId}`);
@@ -85,7 +86,7 @@ const JoinRoomForm = ({
 
 		addRoom(roomId);
 		console.log("call to add member");
-		addMemberToRoom(roomId);
+		addMemberToRoom(roomId, user.email);
 		getRoom(roomId);
 		navigate(`/${roomId}`);
 	};
@@ -198,10 +199,12 @@ JoinRoomForm.propTypes = {
 	isAuthenticated: PropTypes.bool,
 	getRoom: PropTypes.func.isRequired,
 	addMemberToRoom: PropTypes.func.isRequired,
+	user: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
+	user: state.auth.user,
 });
 
 export default connect(mapStateToProps, {
