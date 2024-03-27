@@ -17,6 +17,7 @@ import Faq from "./components/main/Faq";
 import Gsettings from "./components/canvas/GroupSettings/Gsettings";
 
 //KACPER WUZ HEER
+import ProfilePage from './components/ProfilePage/ProfilePage';
 import Chat from './components/messaging/Chat';
 //KACPER ESCAPES
 
@@ -156,6 +157,7 @@ const App = () => {
 						<Route exact path="/login" element={<Login />} />
 						<Route exact path="/register" element={<Register />} />
 						<Route exact path="/gsettings" element={<Gsettings />} />
+						<Route path = "/profilepage" element={<ProfilePage/>}></Route>
 						<Route exact path="/chat" element={<Chat />} />
 						<Route
 							exact
