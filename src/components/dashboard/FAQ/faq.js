@@ -100,6 +100,20 @@ const Faq = () => {
                         </div>
                     </Col>
                 </Row>
+
+                {/* Section 8 */}
+                <Row className="border-0">
+                    <Col>
+                        <div className="card mb-4 border-0" style={{ backgroundColor: '#2C4251'}}>
+                            <div className="card-body">
+                                <h3 className="card-title">User Data</h3>
+                                <p className="card-text">Want to add an event to the calendar! We know how busy life can get so we've made it easier than ever to add events to the calendar to keep track of important dates and deadlines.</p>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
+
+                
             </Container>
         </div>
         </section>

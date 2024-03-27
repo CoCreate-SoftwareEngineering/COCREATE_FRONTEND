@@ -37,7 +37,7 @@ const Login = ({ login, isAuthenticated }) => {
 			// If the user does not exist, create their account
 			if(error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential'){
 				try {
-					const newUserCredential = await createUserWithEmailAndPassword(auth, email, password);
+					const newUserCredential = await createUserWithEmailAndPassword(auth, email, password);					
 					console.log("NEW USER MADE: ", newUserCredential.user)
 				}catch (registrationError){
 					console.error("REGISTER ERROR: ", registrationError.message)
