@@ -8,11 +8,15 @@ import userImg1 from "../../media/ProfileImg1.jpg";
 import { Link } from "react-router-dom";
 import profile from "../../reducers/profile.js";
 import Button from "react-bootstrap/Button";
+
+import { auth } from '../auth/FireBase-config.js'
+
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { logout } from "../../actions/auth";
-
+import { signOut } from "firebase/auth";
+import Button from "react-bootstrap/Button";
 
 const OurNav = ({ user, logout }) => {
 	//Lambda style of return, is more compact and cleaner
@@ -65,8 +69,11 @@ const OurNav = ({ user, logout }) => {
 					<li>
 						<Button
 							className="logoutbtn"
-							onClick={() => {
+
+							onClick={async () => {
 								logout();
+								// disconnect from firebase
+								await signOut(auth);
 							}}
 						>
 							Logout

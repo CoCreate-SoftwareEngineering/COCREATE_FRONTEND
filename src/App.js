@@ -12,6 +12,7 @@ import Alert from "./components/main/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import CanvasPage from "./components/canvas/CanvasPage";
+import Faq from "./components/main/Faq";
 
 import Gsettings from "./components/canvas/GroupSettings/Gsettings";
 
