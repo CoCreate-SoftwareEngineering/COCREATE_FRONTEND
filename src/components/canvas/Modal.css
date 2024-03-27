@@ -78,15 +78,14 @@ button:hover {
 }
 
 .modal-title-file {
-  margin: 0; /* Remove default margins */
-  padding-right: 10px;
+  margin: 0; /* Remove default margins */  
   font-family: 'calibri';
   font-size: 35px;
   padding-bottom: 35px;
-  padding-right: 55px;
+  padding-right: 40px;
   word-wrap: break-word; /* For old browsers */
   overflow-wrap: anywhere; /* Latest syntax */
-  max-width: 12ch; /* Set the maximum width to 12 characters */
+  max-width: 10ch; /* Set the maximum width to 12 characters */
   color: white;
   overflow: hidden;
   text-overflow: ellipsis;

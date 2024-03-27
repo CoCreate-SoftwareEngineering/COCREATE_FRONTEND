@@ -93,13 +93,19 @@ p{
 }
 
 
-/* Styling for the input */
-#uniqueInput, .unique-input-style {    
-    /* border: 2px solid #E2856E;  */
-    background-color: white; 
-    border-radius: 20px;
-    color: #2C4251; 
+
+.unique-input-style {
+    /* Specific styles for inputs with .unique-input-style */
+    box-sizing: border-box;
+    font-size: 14px; 
+    padding: 8px; 
+    border-radius: 25px; 
+    background-color: #f8f9fa; 
+    color: #495057; 
+    margin: 5px 0; 
+    width: 100%; 
 }
+
 
 /* Styling for the label */
 #uniqueLabel, .unique-label-style {    

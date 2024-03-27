@@ -81,15 +81,14 @@ const Login = ({ login, isAuthenticated }) => {
 					<label id ="uniqueLabel" class ="unique-label-style">Username</label>
 
 					<input
-						id = "uniqueInput"
-						className="login-input"
-						type="text"
-						class="input-box unique-input-style"
-						placeholder="email"
-						value={email}
-						name="email"
-						onChange={(e) => onChange(e)}
-					/>
+					id="uniqueInput"
+					className="login-input input-box unique-input-style"
+					type="text"
+					placeholder="email"
+					value={email}
+					name="email"
+					onChange={(e) => onChange(e)}
+				/>
 					<br />
 					<br />
 					<br />
