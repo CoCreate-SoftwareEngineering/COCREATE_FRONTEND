@@ -8,7 +8,7 @@ const Faq = () => {
       <div className='faq-main'>
         <div className="faq-container">
           <div className="faq-header">
-          <Link to="/dashboard" className="btn btn-primary">FAQ</Link>
+          <Link to="/dashboard" className="btn btn-primary">Dashboard</Link>
             <h1>User Guide:</h1>
           </div>
 
