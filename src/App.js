@@ -85,6 +85,10 @@ const App = () => {
 		},
 	});
 
+	const sendRoomMessage = (message) => {
+		socket.emit("chatMessage", message)
+	}
+
 	//KACPER WUZ HEER
 	socket.on('MsgConnection', () => {
         console.log(`I'm connected with the back-end`);
@@ -215,6 +219,7 @@ const App = () => {
 										socketEmitElements={socketEmitElements}
 										peerSockets={peerSockets}
 										callUser={callUser}
+										sendRoomMessage={sendRoomMessage}
 										// roomId={roomId}
 										socketDisconnect={socketDisconnect}
 										// undo={undo}
