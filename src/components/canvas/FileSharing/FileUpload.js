@@ -45,6 +45,7 @@ const FileUpload = ({onUploadSuccess, currentPath}) => {
                 await uploadBytes(ref(storage, folderPath), new Blob(["Placeholder for folder creation"], { type: 'text/plain' }));
                 console.log('Folder created successfully');
                 setFolderName(""); // Clear the folder name input field
+                
                 onUploadSuccess && onUploadSuccess();
             } catch (error) {
                 console.error('Error creating folder:', error);
@@ -81,7 +82,7 @@ const FileUpload = ({onUploadSuccess, currentPath}) => {
                 setFileName('Choose File'); // Reset the file name after successful upload
                 resetFileInput(); // Reset the file input to clear the selected file
     
-                 // Optionally trigger the refresh to show the newly uploaded file
+                 
                 if (onUploadSuccess) {
                     onUploadSuccess();
                 }

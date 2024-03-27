@@ -217,7 +217,7 @@ select {
 }
 .profile {
 	align-items: center;
-	flex: 20%;
+	/* flex: 20%; */
 	grid-column: auto;
 }
 .profile-img {

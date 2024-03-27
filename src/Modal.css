@@ -104,7 +104,7 @@ button:hover {
 /* for folders and files */
 
 .content-file, .content-folder {
-  border-bottom: 1px solid #ccc; /* Soft grey line */
+  border-bottom: 1px solid #ccc; /* Soft grey line */  
   padding-bottom: 0.5em; /* Adds some space between the content and the line */
   margin-bottom: 0.5em; /* Adds some space after the line to the next item */
   padding-top: 0.5em;
