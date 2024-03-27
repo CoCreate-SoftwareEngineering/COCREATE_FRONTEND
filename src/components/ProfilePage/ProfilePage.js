@@ -3,8 +3,15 @@ import { Link } from 'react-router-dom'
 import logoImg from "../../media/Co_Create_Logo_blue.png";
 import './ProfilePage.css'
 import React, { useState } from 'react';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getCurrentProfile } from "../../actions/profile";
 
-const ProfilePage = () => {
+const ProfilePage = ({
+  getCurrentProfile,
+  auth: { user },
+  profile: { profile, loading}
+}) => {
   
    // State to track the width value
    const [width, setWidth] = useState(80); // Set initial width value to 80
@@ -42,10 +49,10 @@ const ProfilePage = () => {
                             <div className="d-flex justify-content-center">
                                 <img src={profileImg} alt="avatar" className="rounded-circle img-fluid" style={{ width: '150px' }} />
                             </div>
-                            <h5 className="my-3" style={{ fontFamily: 'Inter, sans-serif' }}>Darwin Nunez</h5>
+                            <h5 className="my-3" style={{ fontFamily: 'Inter, sans-serif' }}>{`${user.firstName} ${user.lastName}`}</h5>
                             <p className="text-muted mb-4"></p>
                             <div className="d-flex justify-content-center mb-2">
-                                <button type="button" className="btn btn-outline-primary ms-1">Check User Details</button>
+                                {/* <button type="button" className="btn btn-outline-primary ms-1">Check User Details</button> */}
                                 <button type="button" className="btn btn-danger ms-1" style={{ fontWeight: 'bold', color: 'white' }}>DELETE ACCOUNT</button>
                             </div>
                         </div>
@@ -66,7 +73,7 @@ const ProfilePage = () => {
                         <p className="mb-0">First Name</p>
                       </div>
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">Darwin</p>
+                        <p className="text-muted mb-0">{user.firstName}</p>
                       </div>
                     </div>
 
@@ -75,7 +82,7 @@ const ProfilePage = () => {
                         <p className="mb-0">Last Name</p>
                       </div>
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">Nunez</p>
+                        <p className="text-muted mb-0">{user.lastName}</p>
                       </div>
                     </div>
                     
@@ -84,7 +91,7 @@ const ProfilePage = () => {
                         <p className="mb-0">Email</p>
                       </div>
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">Darwin@Nunez.com</p>
+                        <p className="text-muted mb-0">{user.email}</p>
                       </div>
                     </div>
 
@@ -97,4 +104,18 @@ const ProfilePage = () => {
     )
 }
 
-export default ProfilePage;
+ProfilePage.propTypes = {
+	getCurrentProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+	profile: PropTypes.object.isRequired,
+};
+
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+	profile: state.profile
+});
+
+export default connect(mapStateToProps, { getCurrentProfile })(
+	ProfilePage
+);
