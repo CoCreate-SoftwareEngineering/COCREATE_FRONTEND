@@ -17,7 +17,7 @@ import { logout } from "../../actions/auth";
 import { signOut } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 
-const OurNav = ({ user, logout }) => {
+const OurNav = ({ user, logout, onSearchChange }) => {
 	//Lambda style of return, is more compact and cleaner
 	return (
 		<div className="Outside">
@@ -62,6 +62,7 @@ const OurNav = ({ user, logout }) => {
 								type="search"
 								placeholder="Search"
 								aria-label="Search"
+								onChange={(e) => onSearchChange(e.target.value)}
 							></input>
 						</form>
 					</li>
