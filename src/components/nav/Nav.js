@@ -15,9 +15,9 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { logout } from "../../actions/auth";
 import { signOut } from "firebase/auth";
+import Button from "react-bootstrap/Button";
 
-
-const OurNav = ({ user, logout }) => {
+const OurNav = ({ user, logout, onSearchChange }) => {
 	//Lambda style of return, is more compact and cleaner
 	return (
 		<div className="Outside">
@@ -62,12 +62,14 @@ const OurNav = ({ user, logout }) => {
 								type="search"
 								placeholder="Search"
 								aria-label="Search"
+								onChange={(e) => onSearchChange(e.target.value)}
 							></input>
 						</form>
 					</li>
 					<li>
-						<button
-							className=""
+						<Button
+							className="logoutbtn"
+
 							onClick={async () => {
 								logout();
 								// disconnect from firebase
@@ -75,7 +77,7 @@ const OurNav = ({ user, logout }) => {
 							}}
 						>
 							Logout
-						</button>
+						</Button>
 					</li>
 					<li style={{ marginRight: 0, width: 50 }}>
 						<div className="dropdown">

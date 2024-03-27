@@ -11,6 +11,7 @@ import Spinner from "../main/Spinner";
 import Canvas from "./Canvas";
 import Example from "./ToolBar";
 import { getRoom } from "../../actions/rooms";
+import CallToolbarWrapper from "./CallToolbar";
 
 const CanvasPage = ({
 	socket,
@@ -21,6 +22,10 @@ const CanvasPage = ({
 	elements,
 	setElements,
 	socketEmitElements,
+	peerSockets,
+	callUser,
+	sendRoomMessage,
+	messages,
 	// roomId,
 	socketDisconnect,
 	getRoom,
@@ -30,11 +35,16 @@ const CanvasPage = ({
 	// redo,
 }) => {
 	const [tool, setTool] = useState("line");
+	const [currentColour, setCurrentColour] = useState("#000000");
 	// const [room, setRoom] = useState(null);
 
 	useEffect(() => {
 		getCurrentProfile();
 	}, [loading]);
+
+	// useEffect(() => {
+	// 	getRoom();
+	// }, [room.roomName]);
 
 	useEffect(() => {
 		// console.log("CP Room Id");
@@ -57,7 +67,13 @@ const CanvasPage = ({
 		<Fragment>
 			{/* <Container className="container"> */}
 			<CanvasPageHeader />
-			<Example tool={tool} handleToolChange={handleToolChange} />
+			<Example
+				tool={tool}
+				currentColour={currentColour}
+				setCurrentColour={setCurrentColour}
+				handleToolChange={handleToolChange}
+			/>
+			<CallToolbarWrapper peerSockets={peerSockets} callUser={callUser} sendRoomMessage={sendRoomMessage} messages={messages}/>
 			<Canvas
 				tool={tool}
 				handleToolChange={handleToolChange}
@@ -67,6 +83,8 @@ const CanvasPage = ({
 				setElements={setElements}
 				socketEmitElements={socketEmitElements}
 				socketDisconnect={socketDisconnect}
+				setCurrentColour={setCurrentColour}
+				currentColour={currentColour}
 
 				// useHistory={useHistory}
 				// undo={undo}

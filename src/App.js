@@ -12,6 +12,7 @@ import Alert from "./components/main/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import CanvasPage from "./components/canvas/CanvasPage";
+import Faq from "./components/main/Faq";
 
 import Gsettings from "./components/canvas/GroupSettings/Gsettings";
 
@@ -32,6 +33,7 @@ import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 
 import peer from "simple-peer";
+import room from "./reducers/room";
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
@@ -68,6 +70,14 @@ const App = () => {
 	const [elements, setElements] = useState([]);
 	const [roomId, setRoomId] = useState("");
 
+	const [ messages, setMessages] = useState([])
+
+	const [peerSockets, setPeerSockets ] = useState([])
+
+	const addPeerSocket = (peerSocketId) => {
+		setPeerSockets((prevPeerSockets) => [...prevPeerSockets, peerSocketId]);
+	  };
+
 	const server = "http://localhost:8000";
 
 	const io = require("socket.io-client");
@@ -79,6 +89,14 @@ const App = () => {
 		},
 	});
 
+	const sendRoomMessage = (message) => {
+		socket.emit("chatMessage", {message: message, room: roomId})
+	}
+
+	socket.on("chatMessage", (message) => {
+		setMessages((prevMessages) => [...prevMessages, message]);
+	})
+
 	//KACPER WUZ HEER
 	socket.on('MsgConnection', () => {
         console.log(`I'm connected with the back-end`);
@@ -89,11 +107,32 @@ const App = () => {
 		console.log("Connected to Socket.io server");
 	});
 
+	socket.on("roomUsers", (socketIds) => {
+		//console.log("RECEIVED ROOM USERS")
+		console.log("my id: " + socket.id)
+		console.log("got list of people in: " + socketIds)
+
+		setPeerSockets(socketIds)
+		
+		// socketIds.forEach((id) => {
+		// 	addPeerSocket(id)
+		// })
+
+	})
+
+	useEffect(() => {
+		console.log("peerSockets updated to: " + peerSockets)
+	}, [peerSockets])
+
 	const socketJoinRoom = (roomId) => {
 		socket.emit("userJoined", roomId);
 		setRoomId(roomId);
 		console.log("Room Joined");
 	};
+
+	const callUser = (id) => {
+		console.log("calling user " + id)
+	}
 
 	const socketUpdateElements = (newElement) => {
 		console.log(newElement);
@@ -187,6 +226,10 @@ const App = () => {
 										elements={elements}
 										setElements={setElements}
 										socketEmitElements={socketEmitElements}
+										peerSockets={peerSockets}
+										callUser={callUser}
+										sendRoomMessage={sendRoomMessage}
+										messages={messages}
 										// roomId={roomId}
 										socketDisconnect={socketDisconnect}
 										// undo={undo}

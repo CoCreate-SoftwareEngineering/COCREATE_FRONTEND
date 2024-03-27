@@ -23,6 +23,20 @@ h1{
     font-size: 12.5pt;
 }
 
+.logo {
+    height: 33%;
+    display: inline-block;
+    margin-top: 40%;
+}
+
+
+.logo-left-container {
+    background-color: rgb(124, 192, 203);
+    width:50%;
+    height: 150vh;
+    text-align: center;
+    float:left;
+}
 
 
 p{
@@ -36,11 +50,12 @@ p{
 }
 
 .form-container{
-    float:left;
-    padding:45px;
+    float:left;    
+    padding-left: 150px;
+    padding-right: 150px;    
     /*margin:25px;*/
-    margin-left:100px;
-    margin-top: 100px;
+    /* margin-left:40px; */
+    margin-top: 70px;
     text-align: center;
     font-family: 'Lato', sans-serif;
     font-size: 15pt;
@@ -49,6 +64,101 @@ p{
     color:#7CC0CB;
     font-family: 'Lato';
 }
+
+.form-container .register__label {
+    color: #7CC0CB;
+    font-size: 14pt;
+    white-space: nowrap;    
+    text-align: left; /* Ensures all labels within the form align to the left */
+}
+
+
+/* Define CSS variables for consistent styling and easier maintenance */
+:root {
+    --form-bg-color: #2C4251;
+    --button-bg-color: #7CC0CB;
+    --button-text-color: white;
+    --link-color: #E2856E;
+    --input-focus-border-color: #E2856E;
+    --text-color-primary: #7CC0CB;
+    --font-family-primary: 'Lato', sans-serif;
+    --font-family-secondary: 'Inter', sans-serif;
+}
+
+.register-main-container {
+    display: flex;
+    width: 80%;
+    
+}
+
+.register-logo-left-container {
+    background-color: rgb(124, 192, 203);
+    width: 100%;
+    height: 150vh;
+    text-align: center;
+    float: left;
+}
+
+.register-right-container {
+    width: 70%;
+    /* float: left; */
+    padding-left: 100px;
+}
+
+.register-form-container {
+    padding: 40px 150px;
+    margin-top: 100px;
+    text-align: center;
+    font-family: var(--font-family-primary);
+    font-size: 15pt;
+    border-radius: 15px;
+    background-color: var(--form-bg-color);
+    color: var(--text-color-primary);
+}
+
+.register-form-input {
+    width: 350px;
+    border-radius: 20px;
+    background-color: white;
+    color: #2C4251;
+    border: 2px solid var(--input-focus-border-color);
+    border-color: transparent;
+}
+
+.register-form-label {
+    color: var(--text-color-primary);
+    font-size: 14pt;
+}
+
+.register-form-label:hover {
+    background-color: transparent;
+    cursor: default;
+}
+
+.register-sign-in-button {
+    border-radius: 15px;
+    margin-top: 15px;
+    padding: 15px;
+    font-family: var(--font-family-primary);
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    font-size: 12.5pt;
+}
+
+.register-text-before-link, .register-form-link {
+    font-size: 12.5pt;
+    color: var(--link-color);
+}
+
+.register-form-link {
+    font-weight: bold;
+}
+
+/* Additional styles to ensure specificity and prevent unwanted inheritance */
+.register-form-group { margin-bottom: 15px; }
+.register-form-title { margin-bottom: 15px; }
+
+
 
 .logo {
     height: 33%;
@@ -65,4 +175,54 @@ p{
     background-color: #7CC0CB;
     color: white;
     font-size:12.5pt;
+}
+
+.text-before-link{
+    font-size:12.5pt;
+    color: #E2856E !important; 
+}
+
+
+.register__field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns items to the start of the container */
+}
+
+
+
+.register__input {
+    width: 350px;
+    background-color: white;
+    border-radius: 20px;
+    color: #2C4251;
+    height: 40px;
+}
+
+.register__label {
+    color: #7CC0CB;
+    font-size: 14pt;
+    white-space: nowrap;
+    text-align: left;    
+}
+
+.register__label:hover {
+    background-color: transparent;
+    cursor: default;
+}
+
+.register__button {
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    font-family: 'Lato', sans-serif;
+    background-color: #7CC0CB;
+    color: white;
+    font-size: 12.5pt;
+}
+
+.register__link, .register__text-before-link {
+    font-size: 12.5pt;
+    color: #E2856E !important;
 }

@@ -15,6 +15,7 @@ const FilesList = ({ onClose, show, clickedFiles, onUploadSuccess, roomId, roomN
   const [folderExists, setFolderExists] = useState(false);
   const [folderName, setFolderName] = useState(''); // For storing the folder name
   
+  
   // get url "gives /project"
   let location = useLocation();
   // sets initial path to group url
@@ -133,11 +134,11 @@ const createGroupFolder = async () => {
     setMarkedFiles([]);
   };
 
+  
   // give all files marked for deletion
   const handleClickedFilesChange = (updatedClickedFiles) => {
     setMarkedFiles(updatedClickedFiles);
   };
-
 
   
   const refreshContent = () => {
@@ -147,12 +148,14 @@ const createGroupFolder = async () => {
   const navigateIntoFolder = (folderName) => {
     setPathStack(prevStack => [...prevStack, currentPath]);
     setCurrentPath(`${currentPath}/${folderName}`);
+    refreshContent()
   };
 
   const navigateBack = () => {
     const prevPath = pathStack.pop();
     setPathStack([...pathStack]);
     setCurrentPath(prevPath || initialPath);
+    refreshContent()
   };
 
   if (!show) {
@@ -191,16 +194,15 @@ const createGroupFolder = async () => {
         <div className="modal-footer-file">          
           {currentPath !== initialPath && (
             <button onClick={navigateBack} style={{ marginRight: 'auto', height: '30px', width: '85px', fontSize: '18px' }}>Back</button>
-          )}
-          
-          {/* If a file is marked for deletion */}
-          {markedFiles.length > 0 ? (
+          )}          
+          {/* If a file is marked for deletion */}          
+          {markedFiles.length > 0 ? (            
             <button
               style={{ height: '30px', width: '85px', fontSize: '18px', marginRight: '10px' }}
               onClick={(e) => {
                 e.stopPropagation(); // Prevent the modal from closing if necessary
                 deleteFiles();
-              }}
+              }}              
             >
               Delete
             </button>

@@ -196,7 +196,6 @@ select {
 
 .canvas-header {
 	align-items: center;
-	padding: 1.5em;
 	margin: auto;
 	color: white;
 	grid-template-columns: auto auto auto;
@@ -217,7 +216,7 @@ select {
 }
 .profile {
 	align-items: center;
-	flex: 20%;
+	/* flex: 20%; */
 	grid-column: auto;
 }
 .profile-img {
@@ -490,4 +489,10 @@ h2 {
 }
 .add-text {
 	margin-right: 0.5em;
+}
+
+@media screen and (max-width: 600px){
+	img{
+		max-width: none;
+	}  
 }

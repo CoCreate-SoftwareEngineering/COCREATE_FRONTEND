@@ -78,41 +78,52 @@ const Login = ({ login, isAuthenticated }) => {
 				<h1>Login</h1>
 				<br />
 				<form onSubmit={(e) => onSubmit(e)}>
-					<label>Username</label>
-					<br />
+					<label id ="uniqueLabel" class ="unique-label-style">Username</label>
+
 					<input
-						className="login-input"
-						type="text"
-						class="user"
-						placeholder="email"
-						value={email}
-						name="email"
-						onChange={(e) => onChange(e)}
-					/>
+					id="uniqueInput"
+					className="login-input input-box unique-input-style"
+					type="text"
+					placeholder="email"
+					value={email}
+					name="email"
+					onChange={(e) => onChange(e)}
+				/>
 					<br />
-					<label>Password</label>
 					<br />
+					<br />
+					<br />
+					<br />
+					
+					<label id ="uniqueLabel" class ="unique-label-style">Password</label>
+					
 					<input
+						id = "uniqueInput"
 						className="login-input"
 						type="password"
-						class="pass"
+						class="input-box unique-input-style"
 						name="password"
 						value={password}
 						placeholder="*********"
 						onChange={(e) => onChange(e)}
 					/>
 					<br />
+					<br />
+					<br />
+
 					<p className="text-before-link">
 						Forgotten password?{" "}
 						{/* <Link className="link" to="/login">Reset password here</Link>*/}{" "}
 					</p>
+					
 					<button className="login-button" type="submit">
 						Submit
 					</button>
 				</form>
+				
 				<p className="text-before-link">
 					New to CoCreate?{" "}
-					{/*<Link className="link" to="/register">Register</Link>*/}{" "}
+					<Link className="link" to="/register">Register</Link>
 				</p>
 			</div>
 		</div>

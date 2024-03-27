@@ -1,0 +1,49 @@
+
+
+.h2-header {
+    color: wheat;
+    
+}
+
+
+.menu-head {
+    padding: 10px;
+    border-radius: 2px;
+    border: black 1px solid;
+    position: relative;
+    border-radius: 30%;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for shadow and transform */
+        
+}
+
+.menu-head:hover {
+    
+    transform: translateY(-2px); /* Slightly raise the button on hover */
+}
+
+
+
+/* .menu-head::before {
+    content: ""; 
+    position: absolute; 
+    top: 10px; 
+    left: 10px; 
+    width: 20px; 
+    height: 20px; 
+    background-color: black; 
+} */
+
+
+.file-button {
+    padding: 10px;
+    border-radius: 2px;
+    border: black 1px solid;
+    position: relative;
+    border-radius: 30%;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for shadow and transform */
+}
+
+.file-button:hover {
+    background-color: #7cc0cb !important;    
+}
+

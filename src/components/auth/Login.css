@@ -7,6 +7,9 @@ html, body {
     padding: 0;
 }
 
+Link{
+    float:right;
+}
 h1{
     font-family: 'Lato', sans-serif;
     font-weight: bold;
@@ -36,7 +39,7 @@ p{
 
 .right-container{
     float:left;
-    padding:45px;
+    padding:125px;
     margin-top:100px;
     margin-left:100px;
     text-align: center;
@@ -48,7 +51,7 @@ p{
     font-family: 'Lato';
 }
 
-label {
+.label {
     font-family: 'Lato', sans-serif;
     color:white;
     margin-top: 5px;
@@ -57,6 +60,8 @@ label {
     margin-right: 5px;
     border: 12px 25px;
 }
+
+
 
 /*input{
     font-family: 'Lato',sans-serif;
@@ -87,6 +92,33 @@ label {
     margin-top: 40%;
 }
 
+
+
+.unique-input-style {
+    /* Specific styles for inputs with .unique-input-style */
+    box-sizing: border-box;
+    font-size: 14px; 
+    padding: 8px; 
+    border-radius: 25px; 
+    background-color: #f8f9fa; 
+    color: #495057; 
+    margin: 5px 0; 
+    width: 100%; 
+}
+
+
+/* Styling for the label */
+#uniqueLabel, .unique-label-style {    
+    color: #7CC0CB; 
+    font-size: 14pt; 
+}
+
+#uniqueLabel:hover, .unique-label-style:hover {
+    background-color: transparent;
+    cursor: default;
+}
+
+
 .user{
     font-size: 15pt;
     border-radius: 15px;
@@ -95,7 +127,7 @@ label {
     margin-top: 25px ;
     margin-bottom: 25px;
     margin-left: 25px;
-    margin-right: 25px;
+    margin-right: 25px;    
 }
 
 .pass{
@@ -121,4 +153,5 @@ label {
 
 .text-before-link{
     font-size:12.5pt;
+    color: #E2856E !important; 
 }

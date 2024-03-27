@@ -2,15 +2,21 @@
 	position: fixed;
      top: 80vh !important; /* align to the bottom */
      left: 50%; /* center horizontally */
-     transform: translateX(-50%) !important; /* adjust for the element width */
+     transform: translateY(100%) translateX(-50%)!important; /* hide the element below the viewport */
      background-color: #7cc0cb !important;
      height:20vh;
      width:100vw !important;
+     transition: transform 0.5s ease-in-out !important;
+}
+
+.tool-bar-page.show {
+  transform: translateY(0) translateX(-50%) !important; /* show the element */
 }
 
 .offcanvas-title{
   color: white !important;
   font-weight: 600;
+  margin-left:50%;
 }
 
 .tool-bar-button {
@@ -27,9 +33,12 @@
      border-color: rgb(124, 192, 203) !important;
      font-size: 40px;
      font-weight: 800;
-     font-family: "Inter";
+     font-family: "Inter";     
    }
-   
+   .tool-bar-button:active {
+    transform: translateY(20%) translateX(-50%) !important; /* show the element */
+  }
+
    .tool-menu{
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(8vw, 1fr));
@@ -49,6 +58,11 @@
   opacity: 0;
   width: 0;
   height: 0;
+   }
+
+   input[type="color"]{
+      width: 30px;
+      height: 30px;
    }
 
    label{
@@ -88,3 +102,26 @@
   .vbtn:hover {
     background-color: rgb(226, 133, 110) !important; /* change color on hover */
   }
+
+  @media screen and (max-width: 600px){
+    .tool-menu{
+      display: grid;
+      grid-template-columns:repeat(auto-fit, minmax(8vh, 1fr))
+    }
+    label{
+      font-size: 10pt;
+      padding: 10px 30px 10px 30px !important;
+    }
+    .tool-bar-page {
+         height:30vh !important;
+         top: 70vh !important; /* align to the bottom */
+    }
+    .vbtn{
+      font-size: 10pt;
+      width: fit-content;
+      max-height: 10vh;
+    }
+    .offcanvas-title{
+      margin-left: 45% !important;
+    }
+}

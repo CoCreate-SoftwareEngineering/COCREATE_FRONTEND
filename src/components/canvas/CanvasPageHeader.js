@@ -6,6 +6,7 @@ import { getCurrentProfile } from "../../actions/profile";
 import { logout } from "../../actions/auth";
 import profilePicture from "../../person-icon.jpg";
 import FilesList from "./FileSharing/FilePage";
+import './CanvasHeader.css'
 
 // import logo from "../../../public/person-icon.jpg"
 
@@ -21,18 +22,22 @@ const CanvasPageHeader = ({
 		getCurrentProfile();
 	}, []);
 
+	// useEffect(() => {
+	// 	getRoom();
+	// });
+
 	const [showFilesModal, setShowFilesModal] = useState(false);
 
 	const handleFilesModalShow = () => {
 		console.log("Opening Files Modal");
 		setShowFilesModal(true);
-	  };
-	  
-	  // Debug: Log when modal is being closed to track unexpected triggers
-	  const handleFilesModalClose = () => {
+	};
+
+	// Debug: Log when modal is being closed to track unexpected triggers
+	const handleFilesModalClose = () => {
 		console.log("Closing Files Modal");
 		setShowFilesModal(false);
-	  };
+	};
 
 	return (
 		<header className="canvas-header flex text-white">
@@ -44,19 +49,18 @@ const CanvasPageHeader = ({
 				</h2>
 			</div>
 			<div className="title">
-				<h2 className="" style={{ color: "white" }}>
+				<h2 className="h2-header">
 					{room.roomName}					
 				</h2>
 			</div>
-			<div className="menu">
+			<div className="menu-head">
 				<Link to="/dashboard">Dashboard</Link>
 			</div>
 
 			<div>
-				<button onClick={handleFilesModalShow}>Files</button>
-				<FilesList show = {showFilesModal} onClose={handleFilesModalClose} roomId={room.roomId} roomName={room.roomName} />
+				<button className="file-button" onClick={handleFilesModalShow}>Files
+				<FilesList show = {showFilesModal} onClose={handleFilesModalClose} roomId={room.roomId} roomName={room.roomName} /></button>
 			</div>
-
 		</header>
 	);
 };

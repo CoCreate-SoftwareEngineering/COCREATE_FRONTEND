@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
+
+.mainClass{
+    background-color: #2C4251;
+    margin:20px;
+    font-family: 'Lato', sans-serif;
+}
+
+h1{
+    text-align: center;
+    font-size: 25pt;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    color: rgb(124, 192, 203);
+}
+
+h3{
+    font-size: 15pt;
+    color:#E2856E;
+    font-family: 'Lato', sans-serif;
+}
+
+p{
+    font-size: 12.5pt;
+    color:white;
+}
+
+.section1{
+    background-color: #2C4251;
+    padding:40px;
+    text-align: left;
+    width:100%
+}
+
+.section2{
+    background-color: #2C4251;
+    padding:40px;
+    text-align: right;
+    width:100%
+}
+
+.section3{
+    background-color: #2C4251;
+    padding:40px;
+    text-align: start;
+    width:100%;
+}
+
+.section4{
+    background-color: #2C4251;
+    padding:40px;
+    text-align:end ;
+    width:100%;
+}
+
+.section5{
+    background-color: #2C4251;
+    padding:40px;
+    text-align: start;
+    width: 100%;
+}
+
+.section6{
+    background-color: #2C4251;
+    padding:40px;
+    text-align: end;
+    width: 100%;
+}

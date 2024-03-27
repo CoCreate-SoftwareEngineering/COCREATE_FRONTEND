@@ -10,19 +10,21 @@ import { getRoom, dataBase_saveElements } from "../../actions/rooms";
 
 const generator = rough.generator();
 
-const createElement = (id, x1, y1, x2, y2, type) => {
+const createElement = (id, x1, y1, x2, y2, type, colour) => {
+	const options = { stroke: colour };
 	switch (type) {
 		case "line":
 		case "rectangle":
 			const roughElement =
 				type === "line"
-					? generator.line(x1, y1, x2, y2)
-					: generator.rectangle(x1, y1, x2 - x1, y2 - y1);
-			return { id, x1, y1, x2, y2, type, roughElement };
+					? generator.line(x1, y1, x2, y2, options)
+					: generator.rectangle(x1, y1, x2 - x1, y2 - y1, options);
+			console.log(colour);
+			return { id, x1, y1, x2, y2, type, roughElement, colour };
 		case "pencil":
-			return { id, type, points: [{ x: x1, y: y1 }] };
+			return { id, type, points: [{ x: x1, y: y1 }], colour };
 		case "text":
-			return { id, type, x1, y1, x2, y2, text: "" };
+			return { id, type, x1, y1, x2, y2, text: "", colour };
 		default:
 			throw new Error(`Type not recognised: ${type}`);
 	}
@@ -178,13 +180,17 @@ const drawElement = (roughCanvas, context, element) => {
 	switch (element.type) {
 		case "line":
 		case "rectangle":
+			console.log("Drawing element: " + element.colour);
+			context.strokeStyle = element.colour;
 			roughCanvas.draw(element.roughElement);
 			break;
 		case "pencil":
+			context.fillStyle = element.colour;
 			const stroke = getSvgPathFromStroke(getStroke(element.points));
 			context.fill(new Path2D(stroke));
 			break;
 		case "text":
+			context.fillStyle = element.colour;
 			context.textBaseline = "top";
 			context.font = "24px sans-serif";
 			context.fillText(element.text, element.x1, element.y1);
@@ -233,6 +239,8 @@ const Canvas = ({
 	socketDisconnect,
 	room: { roomLoading, room },
 	dataBase_saveElements,
+	currentColour,
+
 	// undo,
 	// redo,
 	// useHistory,
@@ -323,13 +331,13 @@ const Canvas = ({
 		}
 	}, [action, selectedElement]);
 
-	const updateElement = (id, x1, y1, x2, y2, type, options) => {
+	const updateElement = (id, x1, y1, x2, y2, type, colour, options) => {
 		const elementsCopy = [...elements];
 
 		switch (type) {
 			case "line":
 			case "rectangle":
-				elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
+				elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, colour);
 				break;
 			case "pencil":
 				elementsCopy[id].points = [
@@ -344,7 +352,15 @@ const Canvas = ({
 					.measureText(options.text).width;
 				const textHeight = 24;
 				elementsCopy[id] = {
-					...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type),
+					...createElement(
+						id,
+						x1,
+						y1,
+						x1 + textWidth,
+						y1 + textHeight,
+						type,
+						colour
+					),
 					text: options.text,
 				};
 				break;
@@ -392,6 +408,14 @@ const Canvas = ({
 					setAction("resizing");
 				}
 			}
+		}
+		if (tool === "delete") {
+			const element = getElementAtPosition(clientX, clientY, elements);
+			if (element) {
+				// Remove the selected element from the elements array
+				setElements(elements.filter((el) => el.id !== element.id));
+			}
+			return; // Stop further processing
 		} else {
 			const id = elements.length;
 			const element = createElement(
@@ -400,8 +424,11 @@ const Canvas = ({
 				clientY,
 				clientX,
 				clientY,
-				tool
+				tool,
+				currentColour
 			);
+			console.log("Colour on mouse down: " + currentColour);
+
 			setElements((prevState) => [...prevState, element]);
 			setSelectedElement(element);
 
@@ -432,7 +459,7 @@ const Canvas = ({
 		if (action === "drawing") {
 			const index = elements.length - 1;
 			const { x1, y1 } = elements[index];
-			updateElement(index, x1, y1, clientX, clientY, tool);
+			updateElement(index, x1, y1, clientX, clientY, tool, currentColour);
 		} else if (action === "moving") {
 			if (selectedElement.type === "pencil") {
 				const newPoints = selectedElement.points.map((_, index) => ({
@@ -459,6 +486,7 @@ const Canvas = ({
 					newX1 + width,
 					newY1 + height,
 					type,
+					currentColour,
 					options
 				);
 			}
@@ -470,7 +498,7 @@ const Canvas = ({
 				position,
 				coordinates
 			);
-			updateElement(id, x1, y1, x2, y2, type);
+			updateElement(id, x1, y1, x2, y2, type, currentColour);
 		}
 	};
 
@@ -493,7 +521,7 @@ const Canvas = ({
 				adjustmentRequired(type)
 			) {
 				const { x1, y1, x2, y2 } = adjustElementCoordinates(elements[index]);
-				updateElement(id, x1, y1, x2, y2, type);
+				updateElement(id, x1, y1, x2, y2, type, currentColour);
 			}
 		}
 
@@ -508,10 +536,12 @@ const Canvas = ({
 	};
 
 	const handleBlur = (event) => {
-		const { id, x1, y1, type } = selectedElement;
+		const { id, x1, y1, type, colour } = selectedElement;
 		setAction("none");
 		setSelectedElement(null);
-		updateElement(id, x1, y1, null, null, type, { text: event.target.value });
+		updateElement(id, x1, y1, null, null, type, currentColour, {
+			text: event.target.value,
+		});
 	};
 
 	return (
@@ -538,6 +568,7 @@ const Canvas = ({
 						whiteSpace: "pre",
 						background: "transparent",
 						zIndex: 2,
+						colour: currentColour,
 					}}
 				/>
 			) : null}
