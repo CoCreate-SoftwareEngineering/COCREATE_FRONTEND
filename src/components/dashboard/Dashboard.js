@@ -84,9 +84,14 @@ const Dashboard = ({
 		room.toLowerCase().includes(searchQuery.toLowerCase())
 	  ) : [];
 
-	return profile && roomNames === null ? (
-		<Spinner />
-	  ) : (
+	  if(loading || !profile) {
+		return <Spinner />
+	  }
+
+	// handle case where profile exists but has no roomIds
+	const roomIds = profile.roomIds || [];
+
+	return (
 		<div className="body-flex-container">
 		  <div className="content-wrapper">
 			<Fragment>
