@@ -17,7 +17,7 @@ const AuthComponent = ({ onClose, show }) => {
             setPassword('');
             onClose();
         } catch (error) {
-            console.error('Login error:', error.message);
+            // console.error('Login error:', error.message);
             // If sign-in fails because the user does not exist, try to register the user
             if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
                 try {
@@ -29,7 +29,7 @@ const AuthComponent = ({ onClose, show }) => {
                     setPassword('');
                     onClose();
                 } catch (registrationError) {
-                    console.error('Registration error:', registrationError.message);
+                    // console.error('Registration error:', registrationError.message);
                 }
             }
         }
@@ -41,7 +41,7 @@ const AuthComponent = ({ onClose, show }) => {
             console.log('User logged out successfully');
             onClose(); // Optionally close the modal on logout
         } catch (logoutError) {
-            console.error('Logout error:', logoutError.message);
+            // console.error('Logout error:', logoutError.message);
         }
     };
 

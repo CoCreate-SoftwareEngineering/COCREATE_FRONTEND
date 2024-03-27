@@ -76,17 +76,20 @@ export const register =
 			// await axios.post("http://localhost:8000/api/profile", config);
 
 			dispatch(loadUser());
-		} catch (err) {
-			const errors = err.response.data.errors;
-
+		} // In your registration action
+		catch (err) {
+			const errors = err.response.data.errors || [{ msg: 'An unexpected error occurred.' }];
+		
 			if (errors) {
 				errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
 			}
-
-			dispatch({ type: REGISTER_FAIL });
+		
+			dispatch({
+				type: REGISTER_FAIL,
+				payload: { msg: errors.map(error => error.msg).join(', '), status: err.response.status }
+			});
 		}
-		try {
-		} catch (err) {}
+		
 	};
 
 // Login User

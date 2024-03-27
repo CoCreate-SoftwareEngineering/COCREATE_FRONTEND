@@ -5,7 +5,7 @@ import axios from "axios";
 // import Button from 'react-bootstrap/Button'
 // import Container from 'react-bootstrap/Container'
 
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
 
@@ -22,6 +22,9 @@ const Login = ({ login, isAuthenticated }) => {
 	});
 
 	const { email, password } = formData;
+
+	const alerts = useSelector(state => state.alert); // Access redux alert state
+
 
 	const onChange = (e) =>
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,10 +74,18 @@ const Login = ({ login, isAuthenticated }) => {
 
 	return (
 		<div className="main-container">
+
+			{/* display alerts */}			
 			<div className="logo-left-container">
 				<img src={logoImg} class="logo"></img>
 			</div>
 			<div className="right-container">
+
+			{alerts.map(alert => (
+                <div key={alert.id} className={`alert alert-${alert.alertType}`}>
+                    {alert.msg}
+                </div>
+            ))}
 				<h1>Login</h1>
 				<br />
 				<form onSubmit={(e) => onSubmit(e)}>
