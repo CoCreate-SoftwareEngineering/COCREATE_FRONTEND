@@ -80,9 +80,9 @@ const Dashboard = ({
 	};
 
 	// Filter rooms based on search query
-	const filteredRooms = roomNames.filter(room =>
+	const filteredRooms = roomNames ? roomNames.filter(room =>
 		room.toLowerCase().includes(searchQuery.toLowerCase())
-	);
+	  ) : [];
 
 	return profile && roomNames === null ? (
 		<Spinner />
