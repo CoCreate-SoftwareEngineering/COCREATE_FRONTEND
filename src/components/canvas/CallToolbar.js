@@ -18,7 +18,7 @@ const options = [
 	},
 ];
 
-const CallToolbar = ({ name, peerSockets, callUser, ...props }) => {
+const CallToolbar = ({ name, peerSockets, callUser, sendRoomMessage, messages, ...props }) => {
 
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
@@ -50,7 +50,7 @@ const CallToolbar = ({ name, peerSockets, callUser, ...props }) => {
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<div className="call-tool-menu">
-						<ChatArea/>
+						<ChatArea sendRoomMessage={sendRoomMessage} messages={messages}/>
 					</div>
 				</Offcanvas.Body>
 			</Offcanvas>
@@ -58,7 +58,7 @@ const CallToolbar = ({ name, peerSockets, callUser, ...props }) => {
 	);
 };
 
-const CallToolbarWrapper = ({ tool, handleToolChange, peerSockets, callUser }) => {
+const CallToolbarWrapper = ({ tool, handleToolChange, peerSockets, callUser, sendRoomMessage, messages }) => {
 	return (
 		<>
 			{options.map((props, idx) => (
@@ -67,6 +67,8 @@ const CallToolbarWrapper = ({ tool, handleToolChange, peerSockets, callUser }) =
 					handleToolChange={handleToolChange}
                     peerSockets={peerSockets}
                     callUser={callUser}
+					sendRoomMessage={sendRoomMessage}
+					messages={messages}
 					key={idx}
 					{...props}
 					placement={"end"}

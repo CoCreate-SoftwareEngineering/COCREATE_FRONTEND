@@ -32,6 +32,7 @@ import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 
 import peer from "simple-peer";
+import room from "./reducers/room";
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
@@ -68,6 +69,8 @@ const App = () => {
 	const [elements, setElements] = useState([]);
 	const [roomId, setRoomId] = useState("");
 
+	const [ messages, setMessages] = useState([])
+
 	const [peerSockets, setPeerSockets ] = useState([])
 
 	const addPeerSocket = (peerSocketId) => {
@@ -86,8 +89,12 @@ const App = () => {
 	});
 
 	const sendRoomMessage = (message) => {
-		socket.emit("chatMessage", message)
+		socket.emit("chatMessage", {message: message, room: roomId})
 	}
+
+	socket.on("chatMessage", (message) => {
+		setMessages((prevMessages) => [...prevMessages, message]);
+	})
 
 	//KACPER WUZ HEER
 	socket.on('MsgConnection', () => {
@@ -220,6 +227,7 @@ const App = () => {
 										peerSockets={peerSockets}
 										callUser={callUser}
 										sendRoomMessage={sendRoomMessage}
+										messages={messages}
 										// roomId={roomId}
 										socketDisconnect={socketDisconnect}
 										// undo={undo}
