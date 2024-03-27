@@ -33,7 +33,7 @@ const ContentView = ({ currentPath, navigateIntoFolder, navigateBack, refreshTri
         return () => {
             unsubscribe();
         };
-    }, [refreshTrigger]);    
+    }, [currentPath, refreshTrigger]);    
 
     const handleFileClick = (filePath, name) => {
         setClickedFiles(prevFiles => {
@@ -50,6 +50,8 @@ const ContentView = ({ currentPath, navigateIntoFolder, navigateBack, refreshTri
             return updatedFiles;
         });
     };
+    
+    
 
     const fetchFilesAndFolders = async () => {
         setLoading(true);
@@ -138,7 +140,7 @@ const ContentView = ({ currentPath, navigateIntoFolder, navigateBack, refreshTri
       <>
         {folders.map((folder, index) => (            
             <div key={`folder-${index}`} className='content-folder' style={{ cursor: 'pointer' }}>                
-                <div onClick={() => navigateIntoFolder(folder.name)}>
+                <div style={{paddingLeft: '10px'}} onClick={() => navigateIntoFolder(folder.name)}>
                 
                     <img src="folder.png" alt="Folder" />
                     <span className='folder-name'>{folder.name}</span>
@@ -159,7 +161,7 @@ const ContentView = ({ currentPath, navigateIntoFolder, navigateBack, refreshTri
 
           const iconPath = fileIcons[ext] || 'default.png';
           return (
-              <div key={index} className='content-file'>
+              <div  style={{paddingLeft: '10px'}} key={index} className='content-file'>
                   <span>
                       <img src={iconPath} alt={ext} style={{ marginRight: '10px' }} />
                       <a href={file.url} target="_blank" rel="noopener noreferrer">{file.name}</a>
